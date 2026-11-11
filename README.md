@@ -299,12 +299,3 @@ Screenshots show the current development source running with a fictional profile
 ---
 
 <br>
-
-<p align="center">
-  <a href="https://ko-fi.com/abd442">
-    <picture>
-      <source media="(max-width: 600px)" srcset="assets/support-a14-kofi-banner-mobile.png">
-      <img src="assets/support-a14-kofi-banner.png" alt="Enjoying A14 Pomodoro? If you find it useful and would like to show a little appreciation, you can buy me a coffee on Ko-fi. It’s completely optional." width="620">
-    </picture>
-  </a>
-</p>
