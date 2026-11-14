@@ -30,7 +30,7 @@ For local inspector workflows use `npm run build:qa`, never the public installer
 
 ## Generated application inputs
 
-`node scripts/generate-themes.mjs` regenerates 26 theme seeds and legacy migration from the included docs/design/theme-system-2026/tools/ and tokens/ sources. `node scripts/generate-ipc-schema.cjs` regenerates the IPC contract. `node scripts/prepare-legal.cjs --check` checks runtime notices. No Learn content or statistical algorithm is regenerated from private evidence.
+`node scripts/generate-themes.mjs` regenerates 29 theme seeds and legacy migration from the included docs/design/theme-system-2026/tools/ and tokens/ sources. `node scripts/generate-ipc-schema.cjs` regenerates the IPC contract. `node scripts/prepare-legal.cjs --check` checks runtime notices. No Learn content or statistical algorithm is regenerated from private evidence.
 
 ## Dependency source provision
 

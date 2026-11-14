@@ -335,7 +335,9 @@ export function paletteFor(a: Appearance, systemPrefersDark: boolean): Palette {
     bg: t['bg.canvas'], surface: t['surface.base'], surface2: t['bg.sunken'], border: t['border.default'], text: t['text.primary'], muted: t['text.secondary'],
     writingBg: t['surface.writing'], writingText: t['text.writing'], onAccent: t['text.onAccent'],
     focus: t['stage.focus'], recall: t['stage.recall'], rest: t['stage.rest'], overtime: t['stage.overtime'],
-    line: a.linePalette === 'custom' ? a.lineCustom : preset[mode]
+    line: a.linePalette === 'custom' ? a.lineCustom : themeById(mode === 'dark' ? a.darkTheme : a.lightTheme)?.chart.chroma === 0
+      ? {focus:t['stage.focus'],distracted:t['timeline.distracted'],detected:t['timeline.detected'],idle:t['timeline.idle']}
+      : preset[mode]
   }
 }
 

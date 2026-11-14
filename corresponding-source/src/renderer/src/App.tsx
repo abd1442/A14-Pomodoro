@@ -92,7 +92,7 @@ export function App(): React.JSX.Element {
     lastStage.current = state.stage
   }, [state.stage, state.sitting, showBetween, setTab,quick])
 
-  if (!loaded) return <div role="status" className="h-viewport p-8">{uiText('Loading…')}</div>
+  if (!loaded) return <div role="status" className="h-full p-8">{uiText('Loading…')}</div>
 
   let content: React.ReactNode
   if (state.recovery) content = <RecoveryScreen prompt={state.recovery} />
@@ -111,7 +111,7 @@ export function App(): React.JSX.Element {
   const inStage = !!(state.recovery || state.stage==='recall'||!quick&&(state.running || state.stage === 'rest' || (between && sittingOpen)))
 
   return (
-    <div className="flex h-viewport">
+    <div className="flex h-full">
       <StarterGuide/>
       {quick&&quickSwitch&&state.running&&<SwitchDialog currentId={state.running.itemId} onClose={()=>setQuickSwitch(false)}/>}
       {!inStage && <Sidebar />}

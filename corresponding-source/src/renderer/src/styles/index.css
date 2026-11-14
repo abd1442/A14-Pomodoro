@@ -166,6 +166,37 @@ html {
   height: calc(100vh / var(--tf-zoom, 1));
 }
 
+.app-window-frame { display: flex; flex-direction: column; overflow: hidden; }
+.app-window-content { flex: 1; min-height: 0; min-width: 0; }
+.app-window-titlebar {
+  -webkit-app-region: drag;
+  display: flex;
+  flex: 0 0 calc(36px / var(--tf-zoom, 1));
+  align-items: center;
+  gap: calc(8px / var(--tf-zoom, 1));
+  padding-inline: calc(14px / var(--tf-zoom, 1));
+  padding-inline-end: calc(150px / var(--tf-zoom, 1));
+  background: var(--fr-bg-canvas);
+  color: var(--fr-text-primary);
+  border-bottom: 1px solid var(--fr-border-subtle);
+  font-size: calc(12px / var(--tf-zoom, 1));
+  font-weight: 500;
+  line-height: 1;
+  user-select: none;
+  direction: ltr;
+}
+.app-window-mark {
+  display: grid;
+  place-items: center;
+  width: calc(20px / var(--tf-zoom, 1));
+  height: calc(20px / var(--tf-zoom, 1));
+  border-radius: calc(5px / var(--tf-zoom, 1));
+  background: var(--fr-text-primary);
+  color: var(--fr-bg-canvas);
+  font-size: calc(8px / var(--tf-zoom, 1));
+  font-weight: 700;
+}
+
 body {
   margin: 0;
   background: var(--tf-bg);
@@ -183,6 +214,14 @@ body {
 .sidebar-brand{display:flex;align-items:center;gap:12px;padding:0 8px;flex-shrink:0;text-align:start;white-space:nowrap}
 .sidebar-brand img{width:36px;height:36px}.sidebar-brand{gap:10px}.sidebar-brand>span{font-size:20px;letter-spacing:-.5px;font-weight:600}
 .sidebar-brand{min-height:48px;direction:ltr}.sidebar-brand>.brand-lockup{display:block;width:174px;max-width:100%;line-height:0}.brand-lockup svg{display:block;width:100%;height:auto}.sidebar-brand>img{display:none}.focusrecall-sidebar[data-collapsed=true] .sidebar-brand>img{display:block}
+/* Owner-selected Chrome-style palette: flat circles, selection ring and check. */
+/* In Black, the in-app brand artwork follows the white/gray identity too. */
+html:is([data-fr-theme='black'],[data-fr-theme='t3-light'],[data-fr-theme='t3-dark']) .brand-lockup path[stroke='#F0B35B']{stroke:var(--tf-nav-text)}
+html:is([data-fr-theme='black'],[data-fr-theme='t3-light'],[data-fr-theme='t3-dark']) img[src*='a14-pomodoro-icon'],html:is([data-fr-theme='black'],[data-fr-theme='t3-light'],[data-fr-theme='t3-dark']) img[src*='support-cup']{filter:grayscale(1)}
+.appearance-swatch{border:1px solid var(--fr-border-default)}
+.theme-colour-option:hover .theme-colour-swatch{outline:2px solid var(--fr-border-strong);outline-offset:4px}
+.theme-colour-option[aria-checked=true] .theme-colour-swatch{outline:2px solid var(--fr-state-selected-border);outline-offset:4px}
+.theme-colour-option:focus-visible{outline:2px solid var(--fr-state-focusRing);outline-offset:2px}
 .sidebar-edition{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--tf-nav-muted);margin:12px 8px 30px;white-space:nowrap}
 .sidebar-nav{display:flex;flex-direction:column;gap:8px}
 .sidebar-link{position:relative;display:flex;gap:13px;align-items:center;text-align:start;min-height:48px;padding:11px 14px;border-radius:calc(9px * var(--tf-roundness));color:var(--tf-nav-muted);font-size:16px;white-space:nowrap}
@@ -215,8 +254,107 @@ select {
   font: inherit;
 }
 
+/* Render single-choice dropdowns in the document top layer so their popup,
+   focus and selected option use A14 tokens rather than the Windows blue menu.
+   Chromium retains native select keyboard navigation, typeahead and semantics. */
+@supports (appearance: base-select) {
+  select:not([multiple]):not([size]),
+  select:not([multiple])[size='1'],
+  select:not([multiple]):not([size])::picker(select),
+  select:not([multiple])[size='1']::picker(select) {
+    appearance: base-select;
+  }
+  select:not([multiple]):not([size]), select:not([multiple])[size='1'] {
+    align-items: center;
+    gap: .75rem;
+  }
+  select::picker-icon {
+    content: '';
+    color: var(--fr-text-secondary);
+    inline-size: .4rem;
+    block-size: .4rem;
+    border-inline-end: 1.5px solid currentColor;
+    border-block-end: 1.5px solid currentColor;
+    rotate: 45deg;
+    margin-block-end: .2rem;
+    margin-inline-start: auto;
+    flex-shrink: 0;
+  }
+  select:focus-visible {
+    outline: none;
+    border-color: var(--fr-state-focusRing);
+    box-shadow: none;
+  }
+  select::picker(select) {
+    background: var(--fr-surface-raised);
+    color: var(--fr-text-primary);
+    border: 1px solid var(--fr-border-default);
+    border-radius: .75rem;
+    padding: .375rem;
+    margin-block: .375rem;
+    min-inline-size: anchor-size(self-inline);
+    max-inline-size: min(32rem, calc(100vw / var(--tf-zoom, 1) - 1rem));
+    max-block-size: min(24rem, calc(65vh / var(--tf-zoom, 1)));
+    overflow: auto;
+    box-shadow: 0 8px 24px rgb(0 0 0 / .2);
+    font: inherit;
+  }
+  select option {
+    min-block-size: 2.5rem;
+    padding: .5rem .75rem;
+    border-radius: .375rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+    color: var(--fr-text-primary);
+    background: var(--fr-surface-raised);
+  }
+  select option:checked {
+    color: var(--fr-state-selected-text);
+    background: var(--fr-state-selected-bg);
+    font-weight: 600;
+  }
+  select option:not(:disabled):is(:hover, :focus-visible) {
+    color: var(--fr-state-selected-text);
+    background: var(--fr-state-selected-bg);
+    outline: none;
+    box-shadow: none;
+  }
+  select option:disabled { color: var(--fr-text-disabled); cursor: default; }
+  select option::checkmark { color: inherit; }
+  select optgroup { color: var(--fr-text-secondary); }
+  /* Home sorting belongs to the subjects column, never over the timer panel. */
+  .home-sort-select { font-size: .875rem; }
+  .home-sort-select:focus, .home-sort-select:focus-visible {
+    outline: none;
+    box-shadow: none;
+    border-color: var(--fr-state-focusRing);
+  }
+  .home-sort-select::picker(select) {
+    inline-size: anchor-size(self-inline);
+    min-inline-size: anchor-size(self-inline);
+    max-inline-size: anchor-size(self-inline);
+    padding: .25rem;
+    border-radius: .5rem;
+    font-size: .875rem;
+  }
+  .home-sort-select option {
+    min-block-size: 2rem;
+    padding: .375rem .5rem;
+    font-weight: 400;
+  }
+  .home-sort-select option::checkmark { display: none; }
+  .home-sort-select option:is(:checked, :focus, :focus-visible, :hover) {
+    outline: none;
+    box-shadow: none;
+    border: 0;
+    font-weight: 400;
+  }
+
+}
+
 /* Keyboard focus ring for buttons and controls. Text fields show focus with their own line colour instead (one outline, not two). */
-:focus-visible:not(input:not([type='checkbox']):not([type='radio']):not([type='range'])):not(textarea):not(select) {
+:focus-visible:not(input:not([type='checkbox']):not([type='radio']):not([type='range'])):not(textarea):not(select):not(option) {
   outline: 2px solid var(--fr-state-focusRing, color-mix(in srgb, var(--tf-focus) 75%, transparent));
   outline-offset: 2px;
 }

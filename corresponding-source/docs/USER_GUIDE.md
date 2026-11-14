@@ -38,7 +38,7 @@ Learn offers illustrated explanations and 24 canonical strategies, with context 
 
 ![Learn, fictional profile](screenshots/current/learn.png)
 
-Appearance offers 26 approved themes, independent light/dark choices and system switching. Existing custom Focus colours and legacy preferences migrate. Darkroom's documented colour-vision exceptions are not a blanket accessibility guarantee. Arabic supports RTL. Automated keyboard/ARIA checks are not screen-reader certification.
+Appearance offers 27 themes (including Black), independent light/dark choices and system switching. Existing custom Focus colours and legacy preferences migrate. Darkroom's documented colour-vision exceptions are not a blanket accessibility guarantee. Arabic supports RTL. Automated keyboard/ARIA checks are not screen-reader certification.
 
 ![Appearance](screenshots/current/appearance.png)
 

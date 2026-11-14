@@ -1,3 +1,4 @@
+import {CoachConnection} from '../components/CoachConnection'
 import { SettingLabelContext, useSettingLabel } from '../components/settingLabel'
 import { StudyExperience } from '../components/StudyExperience'
 import { t as uiText } from '../i18n'
@@ -150,6 +151,7 @@ function GeneralPage(): React.JSX.Element {
       <SettingGroup label="Study experience" keywords="quick full minimal timer workflow"><StudyExperience/>        {settings.studyExperience==='full'&&<Row label="Quick preparation before studying" hint={uiText("Optional checklist before the timer starts.")}>
           <Toggle label={uiText('Quick preparation before studying')} checked={settings.preparationEnabled} onChange={v=>set('preparationEnabled',v)}/>
         </Row>}</SettingGroup>
+      <SettingGroup label="A14 Coach" keywords="sync connection study records automatic"><CoachConnection/></SettingGroup>
       <SettingGroup label="Study suggestions" keywords="advice tips reset topics history"><AdviceSettings/></SettingGroup>
       <Section title="Home"><Row label="Show Today Check" hint={uiText('Show the optional daily check-in on Home. Skipping hides it until local midnight.')}><Toggle label={uiText('Show Today Check')} checked={settings.showTodayCheck} onChange={v=>void set('showTodayCheck',v)}/></Row></Section>
       <Section title="Getting started"><SettingGroup label="Starter guide" keywords="welcome help first use basics tutorial"><div className="flex flex-wrap items-center justify-between gap-4"><p className="text-muted">{uiText("A quick tour of studying, review, tracking and insights.")}</p><Button onClick={()=>window.dispatchEvent(new Event(STARTER_GUIDE_EVENT))}>{uiText("Open starter guide")}</Button></div></SettingGroup></Section>

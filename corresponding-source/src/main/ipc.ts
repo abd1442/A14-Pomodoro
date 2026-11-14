@@ -74,6 +74,7 @@ export function broadcast<E extends EventName>(event: E, payload: EventContract[
 }
 
 export function registerIpc(deps: {
+  coachSync:()=>import('./coachSync').StudySyncStatus
   music: RestMusic
   databaseFile: string
   restartForRestore: () => void
@@ -107,6 +108,7 @@ export function registerIpc(deps: {
   setSetting: <K extends SettingKey>(key: K, value: AppSettings[K]) => AppSettings
 }): void {
   const { library, blocks, logs, settings, session, distractions, captures, sessions } = deps
+  handle('coach:syncStatus',()=>deps.coachSync())
   ipcLanguage=()=>settings.getAll().language
   const t=(key:string):string=>translate(settings.getAll().language,key)
   const notes = new NotesService(deps.db, settings)

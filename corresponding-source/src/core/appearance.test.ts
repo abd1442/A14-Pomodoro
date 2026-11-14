@@ -17,6 +17,17 @@ import {
 } from './appearance'
 import { ITEM_PALETTE } from './palette'
 
+it('uses neutral Black controls and timeline defaults without overwriting saved custom timeline colors',()=>{
+ const a=normalizeAppearance({...DEFAULT_APPEARANCE,mode:'dark',darkTheme:'black'})
+ const palette=paletteFor(a,true),vars=toCssVars(a,true)
+ for(const key of ['--tf-line-focus','--tf-line-distracted','--tf-line-detected','--tf-line-idle']){
+  const color=vars[key];expect(color.slice(1,3)).toBe(color.slice(3,5));expect(color.slice(3,5)).toBe(color.slice(5,7))
+ }
+ expect(palette.onAccent).toBe('#101010')
+ const custom=normalizeAppearance({...a,linePalette:'custom',lineCustom:{...a.lineCustom,distracted:'#AABBCC'}})
+ expect(paletteFor(custom,true).line.distracted).toBe('#AABBCC')
+})
+
 describe('contrastRatio', () => {
   it('matches known values', () => {
     expect(contrastRatio('#000000', '#FFFFFF')).toBeCloseTo(21, 0)
@@ -134,12 +145,12 @@ describe('timeline colours', () => {
 })
 
 describe('theme system and beta.27 migration', () => {
-  it('starts fresh profiles on Ivory & Ink and Ink Dim, following Windows', () => {
+  it('starts fresh profiles on the T3 monochrome pair, following Windows', () => {
     const a = normalizeAppearance(null)
-    expect([a.mode, a.lightTheme, a.darkTheme, a.navTone]).toEqual(['system', 'ivory-ink', 'ink-dim', 'theme'])
-    expect(toCssVars(a, false)['--fr-bg-canvas']).toBe('#F5F1E8')
+    expect([a.mode, a.lightTheme, a.darkTheme, a.navTone]).toEqual(['system', 't3-light', 't3-dark', 'theme'])
+    expect(toCssVars(a, false)['--fr-bg-canvas']).toBe('#FAFAFA')
     expect(toCssVars(a, true)['--fr-bg-canvas']).toBe(themeTokensFor(a, 'dark')['bg.canvas'])
-    expect(toCssVars(a, false)['--tf-focus']).toBe('#183D56')
+    expect(toCssVars(a, false)['--tf-focus']).toBe('#181818')
   })
   it('moves the beta.27 default (paper-auto) to the approved default pair without overrides', () => {
     const a = normalizeAppearance({ colourId: 'paper-auto', accentId: 'palette', mode: 'system', sidebarStyle: 'journal' })
@@ -177,7 +188,7 @@ describe('theme system and beta.27 migration', () => {
   })
   it('repairs unknown theme ids and keeps choices made in the new page', () => {
     const a = normalizeAppearance({ lightTheme: 'nope', darkTheme: 'ivory-ink', navTone: 'loud' as never })
-    expect([a.lightTheme, a.darkTheme, a.navTone]).toEqual(['ivory-ink', 'ink-dim', 'theme'])
+    expect([a.lightTheme, a.darkTheme, a.navTone]).toEqual(['t3-light', 't3-dark', 'theme'])
     const chosen = normalizeAppearance({ ...normalizeAppearance(null), lightTheme: 'library', darkTheme: 'pewter-dim', colourId: 'sage' })
     expect([chosen.lightTheme, chosen.darkTheme]).toEqual(['library', 'pewter-dim'])
   })

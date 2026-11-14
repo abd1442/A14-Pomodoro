@@ -169,7 +169,9 @@ const LIGHTS = [
 ]
 
 
-export const THEMES = [...LIGHTS, ...DARKS]
+import { BLACK } from './black.mjs'
+import { T3_THEMES } from './t3.mjs'
+export const THEMES = [...LIGHTS, ...DARKS, BLACK].map(({ isDefault, ...theme }) => theme).concat(T3_THEMES)
 
 /** Shortlist for detailed screen previews (owner still chooses). */
 export const SHORTLIST = ['ivory-ink', 'ink-dim', 'library', 'celadon', 'graphite', 'pewter-dim', 'ink-rail', 'graphite-night', 'indigo-hour', 'chalkboard']

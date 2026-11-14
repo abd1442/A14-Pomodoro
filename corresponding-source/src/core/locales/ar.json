@@ -2964,5 +2964,10 @@
   "Session parts cannot overlap. Choose times outside the other parts or adjust their shared boundary on the timeline.": "لا يمكن أن تتداخل أجزاء الجلسة. اختر أوقاتًا خارج الأجزاء الأخرى أو عدّل الحد المشترك بينها على المخطط الزمني.",
   "Adaptive needs five single-subject sessions of at least 10 minutes rated Focused or Deep. Quick Mode does not collect these ratings, so it uses your default target until qualifying records exist.": "يحتاج الوضع التكيفي إلى خمس جلسات لمادة واحدة، مدة كل منها 10 دقائق على الأقل، بتقييم «مركّز» أو «عميق». لا يجمع الوضع السريع هذه التقييمات، لذا يستخدم هدفك الافتراضي حتى تتوفر سجلات مؤهلة.",
   "Press a key…": "اضغط على مفتاح…",
-  "Between sessions": "بين الجلسات"
+  "Between sessions": "بين الجلسات",
+  "Black": "أسود",
+  "A14 Coach": "A14 Coach",
+  "Recently studied": "آخر دراسة",
+  "Most studied": "الأكثر دراسة",
+  "Black & White": "أسود وأبيض"
 }

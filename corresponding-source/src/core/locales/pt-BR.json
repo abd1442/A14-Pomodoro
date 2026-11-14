@@ -2964,5 +2964,10 @@
   "Session parts cannot overlap. Choose times outside the other parts or adjust their shared boundary on the timeline.": "As partes de uma sessão não podem se sobrepor. Escolha horários fora das outras partes ou ajuste o limite compartilhado na linha do tempo.",
   "Adaptive needs five single-subject sessions of at least 10 minutes rated Focused or Deep. Quick Mode does not collect these ratings, so it uses your default target until qualifying records exist.": "O modo adaptativo precisa de cinco sessões de uma única matéria com pelo menos 10 minutos e avaliadas como Focado ou Profundo. O Modo rápido não coleta essas avaliações, então usa sua meta padrão até haver registros adequados.",
   "Press a key…": "Pressione uma tecla…",
-  "Between sessions": "Entre sessões"
+  "Between sessions": "Entre sessões",
+  "Black": "Preto",
+  "A14 Coach": "A14 Coach",
+  "Recently studied": "Estudadas recentemente",
+  "Most studied": "Mais estudadas",
+  "Black & White": "Preto e branco"
 }

@@ -95,6 +95,7 @@ export interface StartBlockInput {
 }
 
 export interface IpcContract {
+  'coach:syncStatus': {args:[];result:{state:'synced'|'waiting'|'offline'|'error';auto:true;producerOnline:boolean;lastSyncAt?:string;changedAt?:string;revision?:number;message?:string}}
   'learn:get': {args:[];result:LearnState}
   'learn:act': {args:[action:LearnAction];result:LearnState}
   'advice:choose': {args:[surface:AdviceSurface,intent:AdviceIntent,another:boolean];result:string|null}

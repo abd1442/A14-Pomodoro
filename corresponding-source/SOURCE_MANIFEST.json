@@ -1,16 +1,16 @@
 {
   "productName": "A14 Pomodoro",
-  "version": "0.1.6-beta.1",
-  "status": "published-beta",
+  "version": "0.1.6-beta.5",
   "platform": "windows-x64",
-  "sourceCommit": "fcb670235b76c68058feaba7a4292ba8a531abf5",
-  "date": "2026-10-30",
-  "normalization": "Exact raw Git blob bytes; preserved source attributes.",
+  "date": "2026-11-14",
+  "sourceTreeRef": "v0.1.6-beta.5:corresponding-source",
+  "normalization": "Exact working-source bytes; public source attributes preserve bytes. Release metadata is UTF-8.",
+  "scope": "Curated current application sources. Private development history, profiles and local QA artifacts excluded.",
   "files": [
     {
       "file": ".gitattributes",
-      "bytes": 64,
-      "sha256": "cf26f8dd78aa3d6457c3ee110d0e7a085c5982c92bf13efc9cd34c2dab2acdd9"
+      "bytes": 9,
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
     },
     {
       "file": ".github/ISSUE_TEMPLATE/bug.yml",
@@ -49,8 +49,8 @@
     },
     {
       "file": "README.md",
-      "bytes": 3828,
-      "sha256": "c52b827036c422602f2eeed6e8ffc13b1ffba7924704be10045d5a93338e80ed"
+      "bytes": 4028,
+      "sha256": "f20769456856205c3a8539036bceae74747ca5de6cc936ade77bf4d045ca878d"
     },
     {
       "file": "SECURITY.md",
@@ -60,7 +60,7 @@
     {
       "file": "SOURCE_BUILD.md",
       "bytes": 4446,
-      "sha256": "fdb6c4a7053ae2443ccca835bcd59656fe798c236783bf86fa6b34c6fba55b07"
+      "sha256": "f5fb95543dc1d46bdbdb96e3010da98a83caffe74901d9cc5467567cbf4990f6"
     },
     {
       "file": "Start A14 Pomodoro.vbs",
@@ -94,8 +94,8 @@
     },
     {
       "file": "docs/CURRENT_SOURCE.md",
-      "bytes": 994,
-      "sha256": "120dda5d5c44525c165a468b97d0566aae237f574867fb083d509720ce6004b8"
+      "bytes": 814,
+      "sha256": "4abfd796bc1b4f4eea5519de15617fafe862f9a056087d29ee6b22922409b0d9"
     },
     {
       "file": "docs/HOME_CALENDAR_CHANGE_20261021.md",
@@ -119,8 +119,8 @@
     },
     {
       "file": "docs/RELEASE_STATUS.md",
-      "bytes": 407,
-      "sha256": "badacb2ca9503385b6eed9f9d41e579c013bc53fec1e12bc0a3b45f708e8e78f"
+      "bytes": 814,
+      "sha256": "4abfd796bc1b4f4eea5519de15617fafe862f9a056087d29ee6b22922409b0d9"
     },
     {
       "file": "docs/THEME_ACCENT_CONSISTENCY_20261019.md",
@@ -129,18 +129,18 @@
     },
     {
       "file": "docs/USER_GUIDE.md",
-      "bytes": 5054,
-      "sha256": "0f884697cf1eb82d7909f7cfa5ab1141c87a73c46d7cb88c7ed5527906cd0fae"
+      "bytes": 5063,
+      "sha256": "30b3d1805e385f41394e95dfdf2c7f37ebebabc898d0f21d5eb5b1332a52b3c9"
     },
     {
       "file": "docs/WORKSPACE.md",
-      "bytes": 4834,
-      "sha256": "ad1fd3fd54952c651ee8513187945b9c02918d0c849c067036345c69cf7a12ab"
+      "bytes": 5382,
+      "sha256": "c59003f7ccea614cea8b9a3642b1a34633b52c468ee29d7646fc2bfecaf4be9b"
     },
     {
       "file": "docs/branding/a14-pomodoro/README.md",
-      "bytes": 1424,
-      "sha256": "02e4aadb58f6cc2786cdcbc7c46e8b7b93110d7ff3834d687aec2cf31b1aa73c"
+      "bytes": 2002,
+      "sha256": "79ca1878eec499953bcbcd05d70d9d65e7e272ef9fea0ba02297b8ba9f582d47"
     },
     {
       "file": "docs/branding/a14-pomodoro/simple-badges/1-dark.svg",
@@ -168,6 +168,11 @@
       "sha256": "1f796bec4e7ee1bba105c8d02480bfea1c86f5231dedff85080f940cf3bd2623"
     },
     {
+      "file": "docs/design/theme-system-2026/tools/black.mjs",
+      "bytes": 683,
+      "sha256": "4bdc23fbb237b9f2aa782dccab02d1f7e8006445b0abc5ff467648892eeebf36"
+    },
+    {
       "file": "docs/design/theme-system-2026/tools/color.mjs",
       "bytes": 6282,
       "sha256": "7e253258bc311045ac80a47051592063d0a5160115014302397469f7902f63bc"
@@ -179,8 +184,13 @@
     },
     {
       "file": "docs/design/theme-system-2026/tools/seeds.mjs",
-      "bytes": 11969,
-      "sha256": "594fbc11d5cf0bbbffbe582295f1f6b1801a4c9ef714eb92d5c3f76757231137"
+      "bytes": 12284,
+      "sha256": "8f34451bad6707e5d455030548317a1acc471f77e72f42cd48bd7cc56a2b24e9"
+    },
+    {
+      "file": "docs/design/theme-system-2026/tools/t3.mjs",
+      "bytes": 1184,
+      "sha256": "6facc72dffff5070de54b6349d56d901e37bc439396b28a774d148428d899d9a"
     },
     {
       "file": "docs/reviews/2026-10-30-a14-rebrand.md",
@@ -270,22 +280,22 @@
     {
       "file": "package-lock.json",
       "bytes": 252391,
-      "sha256": "7249640456c4ddf45ae500bc8601c7eced4cf8c35d7dc60206d5971104929bb9"
+      "sha256": "1300a9170ff74f75e5baba8c176df84e308322168e64aa24cdcd642e8bfb0f9d"
     },
     {
       "file": "package.json",
       "bytes": 2177,
-      "sha256": "6012e33b2fbe046db2f46b8939274ba20fc13391f76d074177205b1b37c3d379"
+      "sha256": "b771f7ec2803888500bde249d3bc1640bc31b399797627887b172868e5ade9f2"
     },
     {
       "file": "resources/a14-pomodoro-icon.png",
-      "bytes": 30699,
-      "sha256": "27907d6876b99ad5c82dc79c2b5c37d349387a00852d6199c142bad556c561d4"
+      "bytes": 33494,
+      "sha256": "343068c26a366fa2a7cd956108ba1c4400e65561c2ee7ccc849fed2d603e6e74"
     },
     {
       "file": "resources/a14-pomodoro-icon.svg",
-      "bytes": 769,
-      "sha256": "0ccc323d46d3cbf426248f238739ebcc0a372e8130a2b825d1cf2f7342442ced"
+      "bytes": 745,
+      "sha256": "b04c394cce4baddf2ab4563fda7d703c2d9db7d377014b097c8f4c493506d7eb"
     },
     {
       "file": "resources/a14-pomodoro-lockup-dark.svg",
@@ -299,8 +309,8 @@
     },
     {
       "file": "resources/a14-pomodoro.ico",
-      "bytes": 24327,
-      "sha256": "9f4cb3a1adbe0cf85067f0c7e536cf889415095f5b69ea6134ae4fd5a01ae452"
+      "bytes": 27059,
+      "sha256": "95cc0de8eb25f8bc138b2e9c67790041e106bd0bb2f032ac2779ff5c4c4b9eb4"
     },
     {
       "file": "resources/legal/EULA.rtf",
@@ -399,8 +409,8 @@
     },
     {
       "file": "scripts/export-a14-brand.cjs",
-      "bytes": 545,
-      "sha256": "6b67108d3cc89d4d725f857cc675e970f9cd303d12db9fc98f9ca79a61ee6109"
+      "bytes": 993,
+      "sha256": "9264c23217786642ea162431afea49a1a64b9a2250683025777ebfb9bedd0f2e"
     },
     {
       "file": "scripts/fixtures/foreground-window.cc",
@@ -764,8 +774,8 @@
     },
     {
       "file": "scripts/render-brand-icons.cjs",
-      "bytes": 1297,
-      "sha256": "c243ba3e2631129d3b2ce6e477dfe3c8676550064dafd7f8d025533b08bb635c"
+      "bytes": 1487,
+      "sha256": "fab1f7db9984013f555f9e0737f6f80a027ce514361ede043be66785ddc1741e"
     },
     {
       "file": "scripts/render-focusrecall-banners.cjs",
@@ -1264,18 +1274,18 @@
     },
     {
       "file": "src/core/api.ts",
-      "bytes": 17632,
-      "sha256": "7c8935edbf1c144eb7ef770dcec5f31a052fde154961e3bdfa88966fbe946b7a"
+      "bytes": 17820,
+      "sha256": "ecdf692888c3ff04429e9c6c9322478645992b2c04e6065608392d77818754f3"
     },
     {
       "file": "src/core/appearance.test.ts",
-      "bytes": 10648,
-      "sha256": "023910e4089c659bec773162fac81c2178af57bc83606a8dd7e0c6870ef3964a"
+      "bytes": 11545,
+      "sha256": "37d70ddba4c02c732574a12c4f3e29d97ffd41b1f168d2934275a85d715edec8"
     },
     {
       "file": "src/core/appearance.ts",
-      "bytes": 22270,
-      "sha256": "54456b97dfa765c2490e5f713949406185e5bc2e294d4cce4c085df0de463369"
+      "bytes": 22981,
+      "sha256": "299bc4e6294995fd3a623a0fb8040d48b7c5bc888f9e293623653747aa280b7f"
     },
     {
       "file": "src/core/backups.test.ts",
@@ -1306,6 +1316,11 @@
       "file": "src/core/captures.ts",
       "bytes": 1649,
       "sha256": "053bd465225272b88a6c2bb29942a33bdba93cdbc0906ed8f96555faf47d5d05"
+    },
+    {
+      "file": "src/core/coachSync.test.ts",
+      "bytes": 3290,
+      "sha256": "7191709a74819136f3cc6093fef3b0a094996215d8b1db334e600bf604752e42"
     },
     {
       "file": "src/core/completionLocalization.test.ts",
@@ -1350,7 +1365,7 @@
     {
       "file": "src/core/desktopSecurity.test.ts",
       "bytes": 4368,
-      "sha256": "6e48f08e3db4f8a00f844dce867b2509beb7ae1d14db4ef15df6c8f4980bcf4f"
+      "sha256": "8b21af46be7e3848a13e69f46d5815f4d38206090989ec340b59584fd679c5c4"
     },
     {
       "file": "src/core/desktopSecurity.ts",
@@ -1514,8 +1529,8 @@
     },
     {
       "file": "src/core/ipc-schema.json",
-      "bytes": 105363,
-      "sha256": "39b23cdc6826eb5773a982aaea01575ff5159dba631f4ea019052b1b33c6fb67"
+      "bytes": 111264,
+      "sha256": "985ad3f4d55e9738d87025e5035b50bc4a2591baa1428ad2bc53874ade24a7f9"
     },
     {
       "file": "src/core/ipcCaller.test.ts",
@@ -1619,38 +1634,38 @@
     },
     {
       "file": "src/core/locales/ar.json",
-      "bytes": 287713,
-      "sha256": "fa45a4a403b9368534f43ef80c23e3ba09b88a5653e3a243ef9308936a480eca"
+      "bytes": 290867,
+      "sha256": "a59ebecfbfa05498affb4ec8fda8b330e4fc9a65450e24c048315099f5187470"
     },
     {
       "file": "src/core/locales/de.json",
-      "bytes": 246575,
-      "sha256": "c4fa9b0aecf3112b768dd877e38fd62b4fe4325f370af10a80d1e5f021e05b6b"
+      "bytes": 249712,
+      "sha256": "50a39bc02dd123f1f461a5d417e2a50643d331da17f622c2d50df4eef447285f"
     },
     {
       "file": "src/core/locales/en.json",
-      "bytes": 221031,
-      "sha256": "04addbb36cd946ca2fc0540976bbcc3e28bb598824496067df6f4d488b4a151a"
+      "bytes": 224129,
+      "sha256": "1ba7e0a6a21785c28c0260f890a6a6aa3346bd501727ca360d9da5bad171def6"
     },
     {
       "file": "src/core/locales/es.json",
-      "bytes": 245454,
-      "sha256": "dc8d04fd0744b07a17d4505983fbdf9cbd31fd96b34511e718832f916d9bfc52"
+      "bytes": 248599,
+      "sha256": "4a6805e171382e1badebd9a30204f52911df93fe2d1a877146e76b71b53702ac"
     },
     {
       "file": "src/core/locales/fr.json",
-      "bytes": 255325,
-      "sha256": "d0d1f2ca34e6f742c38207d5d7dd6e1d1217dbc8efeee84809d799d949d3d178"
+      "bytes": 258469,
+      "sha256": "08f109c28eb30dcf4fce73a2fa6aebb6bb9038fa5cf11dd34de7af858a8f2b5c"
     },
     {
       "file": "src/core/locales/pt-BR.json",
-      "bytes": 244049,
-      "sha256": "37b0da9a0c19785cb5381eb01494c3c80a875fb860e1750a442c0ee8c2954360"
+      "bytes": 247191,
+      "sha256": "dbfb2a3d698ecd23506bc0d182f6db79e484793461df6203da81bd6cb69ae014"
     },
     {
       "file": "src/core/locales/zh-Hans.json",
-      "bytes": 223431,
-      "sha256": "48a1d8d43e6717263bf93a4aa81627d7404bdf83a437fd1c75b96b961a651643"
+      "bytes": 226554,
+      "sha256": "db1b3a8829e1331ac42ca994aaa9412e5bc298f411b26bbb863c0f78c37b6fec"
     },
     {
       "file": "src/core/localization.test.ts",
@@ -2074,8 +2089,8 @@
     },
     {
       "file": "src/core/themeIntegration.test.ts",
-      "bytes": 4768,
-      "sha256": "21589c7aed6053cca0172afb22b01b25a0c4c77dff094e658385f3012357cf3f"
+      "bytes": 4764,
+      "sha256": "f3ce47b9cac78ce7bd9cb0bd22d6a2a369273fd0883a87925ddc444d31ac1828"
     },
     {
       "file": "src/core/themeMigration.json",
@@ -2084,18 +2099,18 @@
     },
     {
       "file": "src/core/themeSeeds.ts",
-      "bytes": 13260,
-      "sha256": "64167f2c5220e05d98dc6138e683297739d39a6d1d5f46cd402e499f3e8eb716"
+      "bytes": 14735,
+      "sha256": "7d53fa2738c009c96ccfaa05ee136cc4b274cb7d165d91bc7a534f447b704535"
     },
     {
       "file": "src/core/themes.test.ts",
-      "bytes": 7222,
-      "sha256": "3d63e9449c09539b21e2cf292a58299360e9a43635ac06f490a9658755537c49"
+      "bytes": 8417,
+      "sha256": "445bd7408ad5ec352b7e7be518ffc9194cc9492b90450990cb333f207380bf00"
     },
     {
       "file": "src/core/themes.ts",
-      "bytes": 25530,
-      "sha256": "aa21f4bc88544ea55e50e63ce5bb1110aedb8adf7b2a7c706a591a7bfcb51e3c"
+      "bytes": 27112,
+      "sha256": "a5ee81b417d92510937e712924ebd2f9be13eb2dd1b461e349fd49a2815a8d64"
     },
     {
       "file": "src/core/timeinput.test.ts",
@@ -2188,6 +2203,11 @@
       "sha256": "7a84d1dfc42056d62786c3ed96041cee0818401b31dd3987cbcb29d479d5feb8"
     },
     {
+      "file": "src/main/coachSync.ts",
+      "bytes": 7483,
+      "sha256": "a9411666c9a6f70fff5b6fc240c5197da8c392370a90f9a5ed3f43baa15aa971"
+    },
+    {
       "file": "src/main/db/backups.ts",
       "bytes": 11921,
       "sha256": "23d28304e80e26474abdaf93bfa3eee12edaf921763dd630a85ff41ae867cd93"
@@ -2259,13 +2279,13 @@
     },
     {
       "file": "src/main/index.ts",
-      "bytes": 19549,
-      "sha256": "a217cbb2e69c60a441a90935db690b4b4dfe7c193a983c523e470bbd695a6818"
+      "bytes": 20607,
+      "sha256": "758ac5b6318e74fc9a4d01a46ce2cacdeded9ac23a168d66e6f3356ed0e2550b"
     },
     {
       "file": "src/main/ipc.ts",
-      "bytes": 28653,
-      "sha256": "b26f11aedd6506b6c3f49d4e57a92234cddc59a7312c09a695fb0752324f1132"
+      "bytes": 28759,
+      "sha256": "8517d82dd8943ecf73a54df6ae845f3ab0e898d717aae8fc4343dbd0391f89f8"
     },
     {
       "file": "src/main/music.ts",
@@ -2384,8 +2404,8 @@
     },
     {
       "file": "src/main/windows.ts",
-      "bytes": 5199,
-      "sha256": "701ea354aa198ea7578f533dfea63bc4e51959c326f7328ea612f05ff4cb2473"
+      "bytes": 5392,
+      "sha256": "ee7a951eb90b7e3cd9a5963993661b055b84dbc22996e8fab8aa20ed372f2d5a"
     },
     {
       "file": "src/preload/index.d.ts",
@@ -2404,8 +2424,8 @@
     },
     {
       "file": "src/renderer/src/App.tsx",
-      "bytes": 14605,
-      "sha256": "5b7f16f408482d2c14b2a01ae847c308a5693a19fd6cb677e06d44af9c9c62d3"
+      "bytes": 14597,
+      "sha256": "a3386df861ecd008c126c4dce9c1f0c74dbf9bf3c1f0464876e435524f4a3cd7"
     },
     {
       "file": "src/renderer/src/assets/chime.wav",
@@ -2444,8 +2464,8 @@
     },
     {
       "file": "src/renderer/src/components/AppearanceSettings.tsx",
-      "bytes": 23415,
-      "sha256": "8db3f8d70d8b8a9c9d3d7daf5acbaaae118c00c8904c9b58750ac748102b00bd"
+      "bytes": 21203,
+      "sha256": "6d5fdc285b2d445d80405b67eeaecdb7739049ba8a4298865f48c5362c0a15ba"
     },
     {
       "file": "src/renderer/src/components/BackupSettings.tsx",
@@ -2461,6 +2481,11 @@
       "file": "src/renderer/src/components/CircularTimer.tsx",
       "bytes": 2403,
       "sha256": "40ed6411a886d4e4a7ebe5c68fa3bc2f168c35b36cc0693f91828394328d8e32"
+    },
+    {
+      "file": "src/renderer/src/components/CoachConnection.tsx",
+      "bytes": 1592,
+      "sha256": "4816e968486058168891e895523bf5a88c5c60933b998255bbef033b91b04443"
     },
     {
       "file": "src/renderer/src/components/ColorField.tsx",
@@ -2479,8 +2504,8 @@
     },
     {
       "file": "src/renderer/src/components/DayCheckin.tsx",
-      "bytes": 10397,
-      "sha256": "ab21aedfee07594a44d72fbde98f40ffdb5d050aa377f65f28926e00d2a7e265"
+      "bytes": 9652,
+      "sha256": "bc9acaa9979b8a37ee8106e2359685b00ed19773d30a95bb5cd621dc0db8b8e3"
     },
     {
       "file": "src/renderer/src/components/HeatMap.tsx",
@@ -2489,8 +2514,8 @@
     },
     {
       "file": "src/renderer/src/components/HomeSubjectTools.tsx",
-      "bytes": 4456,
-      "sha256": "16b246861106641aca5f7a69be8f87816e3f5c250ae52cfedb0bc2c85f01fdc3"
+      "bytes": 4499,
+      "sha256": "41452757f135ef383c1c8d09eaa9b7f6dc8248306a6a013f1f6995b26ba4ff58"
     },
     {
       "file": "src/renderer/src/components/Icons.tsx",
@@ -2678,6 +2703,11 @@
       "sha256": "a2963ab2745836cd8e4b54445270195b4fcfe040723698fb30d2c06700965b92"
     },
     {
+      "file": "src/renderer/src/components/WindowFrame.tsx",
+      "bytes": 681,
+      "sha256": "75408dc6e16ae016645324d8905f6569dc17f3d1f5002479d7f999b9506707f8"
+    },
+    {
       "file": "src/renderer/src/components/WorkflowRecovery.tsx",
       "bytes": 1882,
       "sha256": "ffd053bd96f97e3b18c752ca80aab5ec1acdaa0d61fb34973a3ac674ca90d99a"
@@ -2849,8 +2879,8 @@
     },
     {
       "file": "src/renderer/src/main.tsx",
-      "bytes": 1152,
-      "sha256": "f2e3a0d84b929edc7799927293109f049a5f4d1b451cdc804e686610257a4a8c"
+      "bytes": 1271,
+      "sha256": "ff65fcaaa3e81e16fe73968cfa330f7f3dea930ebed9cfc7c3e94d5d788e8b66"
     },
     {
       "file": "src/renderer/src/screens/AfterFocus.tsx",
@@ -2989,8 +3019,8 @@
     },
     {
       "file": "src/renderer/src/styles/index.css",
-      "bytes": 24771,
-      "sha256": "8c72ee96fad5ba16ea37e28c31f96d0bef3273ba4a4d10d0fe953d82ab4fe100"
+      "bytes": 30552,
+      "sha256": "5378f9795153593a852846fcf9601332f1539e298d10012c0ba8129985459cfd"
     },
     {
       "file": "src/renderer/src/tabs/DistractionSettings.tsx",
@@ -3004,8 +3034,8 @@
     },
     {
       "file": "src/renderer/src/tabs/Home.tsx",
-      "bytes": 7688,
-      "sha256": "6cfe23bfe9f5219145de9e5904b3ec7cae7a83a85d46992ccf50efde2d41d342"
+      "bytes": 7873,
+      "sha256": "889daf0b6e0e3c1caae6c1d19676e505db05dfd7ca20ba0e3e7b181f606630ac"
     },
     {
       "file": "src/renderer/src/tabs/Learn.tsx",
@@ -3024,8 +3054,8 @@
     },
     {
       "file": "src/renderer/src/tabs/Settings.tsx",
-      "bytes": 41771,
-      "sha256": "73a7e4ae75ee81160dc83c69c5446538c93627ca6cb80c3e4b836920d8a9be6b"
+      "bytes": 41958,
+      "sha256": "a91140f96523705a1cf14f0bdbf8c3d05e2bcdb25e2926f26ec2c67ef8d924a8"
     },
     {
       "file": "src/renderer/src/tabs/Stats.tsx",

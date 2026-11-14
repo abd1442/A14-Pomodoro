@@ -2964,5 +2964,10 @@
   "Session parts cannot overlap. Choose times outside the other parts or adjust their shared boundary on the timeline.": "会话的各部分不能重叠。请选择其他部分之外的时间，或在时间轴上调整它们的共同边界。",
   "Adaptive needs five single-subject sessions of at least 10 minutes rated Focused or Deep. Quick Mode does not collect these ratings, so it uses your default target until qualifying records exist.": "自适应模式需要五次单科目会话，每次至少10分钟，且专注度评为「专注」或「深入」。快速模式不收集这些评分，因此会在出现符合条件的记录前使用默认目标。",
   "Press a key…": "请按一个键…",
-  "Between sessions": "学习时段之间"
+  "Between sessions": "学习时段之间",
+  "Black": "黑色",
+  "A14 Coach": "A14 Coach",
+  "Recently studied": "最近学习",
+  "Most studied": "学习最多",
+  "Black & White": "黑白"
 }

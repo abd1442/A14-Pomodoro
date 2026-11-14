@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import {
   PANEL_SIZES, hasSurfaceOverrides, stageOverridePatch, themeTokensFor, type Accents, type Appearance, type ThemeMode
 } from '@core/appearance'
-import { DARK_THEMES, LIGHT_THEMES, guardStageColour, resolveThemeTokens, STAGE_KEYS, themeById, type NavTone, type ThemeSeed } from '@core/themes'
+import { DARK_THEMES, LIGHT_THEMES, guardStageColour, STAGE_KEYS, themeById, type NavTone, type ThemeSeed } from '@core/themes'
 import { useAppearance } from '../store/appearance'
 import { Button, Segmented } from './ui'
 import { ColourField } from './ColourField'
@@ -12,7 +12,6 @@ import { floatingPanelSize } from '@core/floatingTimer'
 import '../screens/floatingPanel.css'
 
 type Side = 'light' | 'dark'
-const tokensOf = (id: string, mode: Side): Record<string, string> => resolveThemeTokens({ themeId: id, mode })
 const isRtl = (): boolean => document.documentElement.dir === 'rtl'
 
 /** One selected style everywhere: selected border, a 1px ring and the selected background. */
@@ -41,17 +40,14 @@ export function ThemeUndoToast(): React.JSX.Element | null {
 
 // --- Mode ---------------------------------------------------------------------
 
-/** The mode card shows the saved theme(s) it will put on screen. */
+/** Simple colour chips keep mode choices quiet and easy to scan. */
 function ModePicture({ mode, a }: { mode: ThemeMode; a: Appearance }): React.JSX.Element {
   const light = themeById(a.lightTheme)!, dark = themeById(a.darkTheme)!
-  return <span aria-hidden="true" className="relative block w-24 shrink-0">
-    {mode === 'system'
-      ? <><ThemeTile theme={dark} /><span className="absolute inset-0" style={{ clipPath: isRtl() ? 'inset(0 0 0 50%)' : 'inset(0 50% 0 0)' }}><ThemeTile theme={light} /></span></>
-      : <ThemeTile theme={mode === 'light' ? light : dark} />}
-  </span>
+  const colour=mode==='system'?'#888888':mode==='light'?light.canvas:dark.canvas
+  return <span aria-hidden="true" className="appearance-swatch size-9 shrink-0 rounded-full" style={{backgroundColor:colour}} />
 }
 
-/** Light, Dark or Follow Windows: a radio group of pictures. */
+/** Light, Dark or Follow Windows, with one quiet colour circle per choice. */
 export function ThemeModeCards(): React.JSX.Element {
   const { appearance: a, update } = useAppearance()
   const modes: { id: ThemeMode; label: string; hint: string }[] = [
@@ -72,25 +68,6 @@ export function ThemeModeCards(): React.JSX.Element {
 
 // --- Theme pickers ------------------------------------------------------------
 
-/** A theme tile is drawn from that theme's own tokens, so the tile is the preview. */
-function ThemeTile({ theme }: { theme: ThemeSeed }): React.JSX.Element {
-  const s = tokensOf(theme.id, theme.mode)
-  return <span aria-hidden="true" className="theme-tile-mini flex h-14 overflow-hidden rounded-md border border-black/15" style={{ background: s['bg.canvas'] }}>
-    <span className="flex w-[22%] flex-col gap-[3px] px-[3px] py-[5px]" style={{ background: s['nav.bg'] }}>
-      <i className="h-1.5 rounded-[2px]" style={{ background: s['nav.active.bg'] }} />
-      <i className="h-0.5 rounded-[2px] opacity-50" style={{ background: s['nav.muted'] }} />
-      <i className="h-0.5 rounded-[2px] opacity-50" style={{ background: s['nav.muted'] }} />
-    </span>
-    <span className="flex flex-1 flex-col gap-1 p-1.5">
-      <i className="h-[3px] w-3/5 rounded-[2px] opacity-70" style={{ background: s['text.primary'] }} />
-      <span className="flex flex-1 items-end justify-between rounded p-[3px]" style={{ background: s['surface.base'], border: `1px solid ${s['border.default']}` }}>
-        <span className="flex gap-0.5">{STAGE_KEYS.map(k => <i key={k} className="size-[5px] rounded-full" style={{ background: s[`stage.${k}`] }} />)}</span>
-        <i className="h-[7px] w-[18px] rounded-[3px]" style={{ background: s['accent.default'] }} />
-      </span>
-    </span>
-  </span>
-}
-
 const themeLabel = (theme: ThemeSeed): string => uiText(theme.name)
 
 /** Which palette the gallery edits. Light and Dark edit their own; Follow Windows keeps both, so a switch picks one. */
@@ -102,10 +79,9 @@ function useGallerySide(): [Side, (side: Side) => void] {
 }
 
 function ThemeSwatch({ id, side }: { id: string; side: Side }): React.JSX.Element {
-  const s = tokensOf(id, side)
-  return <span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-md border border-black/15" style={{ background: s['bg.canvas'] }}>
-    <i className="size-3.5 rounded-full" style={{ background: s['accent.default'] }} />
-  </span>
+  const theme = themeById(id, side)!
+  const colour=theme.chart.chroma === 0 ? theme.canvas : theme.accent
+  return <span aria-hidden="true" className="theme-colour-swatch appearance-swatch block size-10 shrink-0 rounded-full" style={{backgroundColor:colour}} />
 }
 
 /** Follow Windows only: the two saved themes as tabs, each showing its current choice. */
@@ -130,7 +106,7 @@ function PaletteTabs({ side, onChange }: { side: Side; onChange: (side: Side) =>
   </div>
 }
 
-/** One gallery for one palette. Choosing a tile changes that saved theme; the on-screen one changes immediately. */
+/** One colour-circle gallery per palette; the on-screen choice changes immediately. */
 export function ThemeGallery(): React.JSX.Element {
   useLanguage()
   const { appearance: a, update, resolved } = useAppearance()
@@ -153,14 +129,13 @@ export function ThemeGallery(): React.JSX.Element {
       : <div className="mb-3 flex flex-wrap items-center gap-2"><span className="text-base font-semibold">{title}</span>
         <span className="rounded-full bg-accent-subtle px-2.5 py-0.5 text-xs font-semibold text-accent-subtle-ink">● {uiText("In use now")}</span></div>}
     <div id="palette-gallery" role={a.mode === 'system' ? 'tabpanel' : undefined} aria-labelledby={a.mode === 'system' ? `palette-tab-${side}` : undefined}>
-      <RadioGroup label={`${title} · ${note}`} className="grid grid-cols-[repeat(auto-fill,minmax(8.25rem,1fr))] gap-2" value={selected} values={order.map(x => x.id)} onChange={choose}>
+      <RadioGroup label={`${title} · ${note}`} className="grid grid-cols-[repeat(auto-fill,minmax(5.5rem,1fr))] gap-x-2 gap-y-3" value={selected} values={order.map(x => x.id)} onChange={choose}>
         {(id: string, props) => {
           const theme = themeById(id)!, on = id === selected
           return <button {...props} key={id} aria-label={uiText(side === 'light' ? "{name} light theme" : "{name} dark theme", { name: themeLabel(theme) })} aria-description={theme.isDefault ? uiText("Default") : undefined}
-            className={`relative min-w-0 rounded-xl border p-1.5 text-start transition ${on ? selectedClass : 'border-transparent hover:bg-surface-2'}`}>
-            {on && <span aria-hidden="true" className="absolute -top-1 -end-1 z-10 grid size-5 place-items-center rounded-full border-2 border-surface bg-accent text-[11px] font-bold text-on-accent">✓</span>}
-            <ThemeTile theme={theme} />
-            <span className={`mt-1 flex justify-between gap-1 truncate text-xs ${on ? 'font-semibold text-ink' : 'text-muted'}`}><span className="truncate">{themeLabel(theme)}</span>{theme.isDefault && <span aria-hidden="true">★</span>}</span>
+            className="theme-colour-option flex min-h-20 min-w-0 flex-col items-center justify-start gap-3 rounded-lg px-1 py-2 text-center">
+            <span className="relative"><ThemeSwatch id={id} side={side}/>{on&&<svg aria-hidden="true" viewBox="0 0 16 16" className="absolute -top-1 -end-1 size-4 rounded-full border-2 border-surface bg-accent text-on-accent" fill="none" stroke="currentColor" strokeWidth="2"><path d="m4 8 3 3 5-6"/></svg>}</span>
+            <span className={`w-full break-words text-xs leading-snug ${on ? 'font-semibold text-ink' : 'text-muted'}`}>{themeLabel(theme)}</span>
           </button>
         }}
       </RadioGroup>
@@ -174,18 +149,11 @@ export function ThemeGallery(): React.JSX.Element {
 
 // --- Sidebar ------------------------------------------------------------------
 
-function SidebarPicture({ nav, active, canvas, width = '30%', simple = false }: { nav: string; active: string; canvas: string; width?: string; simple?: boolean }): React.JSX.Element {
-  return <span aria-hidden="true" className="mb-2 flex h-12 overflow-hidden rounded-lg border border-line" style={{ background: canvas }}>
-    <i className="relative" style={{ width, background: nav }}><i className="absolute inset-x-1.5 top-2 h-2 rounded-[3px]" style={{ background: simple ? 'transparent' : active, border: simple ? `1px solid ${active}` : undefined }} /></i>
-  </span>
-}
-
 export function SidebarChoices(): React.JSX.Element {
   const { appearance: a, update, resolved } = useAppearance()
-  const t = themeTokensFor(a, resolved)
   const design = a.sidebarCollapsed ? 'rail' : a.sidebarStyle
-  const designs: { id: 'journal' | 'simple' | 'rail'; label: string; width: string }[] = [
-    { id: 'journal', label: 'Study Journal', width: '30%' }, { id: 'simple', label: 'Simple', width: '30%' }, { id: 'rail', label: 'Icon rail', width: '14%' }
+  const designs: { id: 'journal' | 'simple' | 'rail'; label: string }[] = [
+    { id: 'journal', label: 'Study Journal' }, { id: 'simple', label: 'Simple' }, { id: 'rail', label: 'Icon rail' }
   ]
   const tones: { id: NavTone; label: string }[] = [{ id: 'theme', label: 'Matches theme' }, { id: 'inverse', label: 'Opposite' }, { id: 'accent', label: 'Brand ink' }]
   const toneTokens = (navTone: NavTone): Record<string, string> => themeTokensFor({ ...a, navTone }, resolved)
@@ -194,12 +162,12 @@ export function SidebarChoices(): React.JSX.Element {
       onChange={(id) => void update(id === 'rail' ? { sidebarCollapsed: true } : { sidebarStyle: id, sidebarCollapsed: false })}
       header={<div className="mb-2 font-medium">{uiText("Sidebar design")}</div>}>
       {(id, props) => { const d = designs.find(x => x.id === id)!; return <button {...props} key={id} className={`rounded-xl border p-2 text-center text-sm transition ${design === id ? `${selectedClass} font-semibold text-selected-ink` : 'border-line text-muted hover:bg-surface-2'}`}>
-        <SidebarPicture nav={t['nav.bg']} active={t['nav.active.bg']} canvas={t['bg.canvas']} width={d.width} simple={id === 'simple'} />{uiText(d.label)}</button> }}
+        {uiText(d.label)}</button> }}
     </RadioGroup>
     <RadioGroup label={uiText("Sidebar colour")} className="grid gap-3 sm:grid-cols-3" value={a.navTone} values={tones.map(x => x.id)} onChange={(navTone) => void update({ navTone })}
       header={<div className="mb-2 font-medium">{uiText("Sidebar colour")}</div>}>
       {(id, props) => { const n = toneTokens(id); return <button {...props} key={id} className={`rounded-xl border p-2 text-center text-sm transition ${a.navTone === id ? `${selectedClass} font-semibold text-selected-ink` : 'border-line text-muted hover:bg-surface-2'}`}>
-        <SidebarPicture nav={n['nav.bg']} active={n['nav.active.bg']} canvas={t['bg.canvas']} />{uiText(tones.find(x => x.id === id)!.label)}</button> }}
+        <span aria-hidden="true" className="appearance-swatch mx-auto mb-2 block size-7 rounded-full" style={{backgroundColor:n['nav.bg']}}/>{uiText(tones.find(x => x.id === id)!.label)}</button> }}
     </RadioGroup>
   </div>
 }

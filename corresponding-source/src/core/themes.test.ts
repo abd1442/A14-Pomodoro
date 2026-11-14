@@ -9,14 +9,25 @@ const failures = (t: Tokens): string[] => contrastChecks(t).filter((r) => !r.pas
 const minCvd = (sep: Record<string, number>): number => Math.min(sep.protan, sep.deutan, sep.tritan)
 
 describe('approved theme library', () => {
-  it('has the approved 11 light and 15 dark themes with Ivory & Ink and Ink Dim as defaults', () => {
-    expect(LIGHT_THEMES).toHaveLength(11)
-    expect(DARK_THEMES).toHaveLength(15)
-    expect(DEFAULT_LIGHT_THEME).toBe('ivory-ink')
-    expect(DEFAULT_DARK_THEME).toBe('ink-dim')
+  it('defaults to the T3 monochrome pair and preserves the theme library', () => {
+    expect(LIGHT_THEMES).toHaveLength(12)
+    expect(DARK_THEMES).toHaveLength(17)
+    expect(DEFAULT_LIGHT_THEME).toBe('t3-light')
+    expect(DEFAULT_DARK_THEME).toBe('t3-dark')
   })
-  it('derives exactly the approved tokens for all 26 themes', () => {
-    for (const s of THEMES) expect(deriveTokens(s, themeStages(s)), s.id).toEqual(approved.themes.find((t) => t.id === s.id)!.semantic)
+  it('preserves the approved tokens of all 26 original themes', () => {
+    for (const entry of approved.themes) { const s = THEMES.find(s=>s.id===entry.id)!; expect(deriveTokens(s, themeStages(s)), s.id).toEqual(entry.semantic) }
+  })
+  it.each(['black', 't3-light', 't3-dark'])('keeps %s neutral, including actions, timeline, charts and brand tokens',(themeId)=>{
+    const tokens=resolveThemeTokens({themeId,mode:themeId==='t3-light'?'light':'dark'})
+    for(const [key,value] of Object.entries(tokens))if(/^#[0-9a-f]{6}$/i.test(value)){
+      expect(value.slice(1,3),key).toBe(value.slice(3,5))
+      expect(value.slice(3,5),key).toBe(value.slice(5,7))
+    }
+    if(themeId==='black') {
+      expect(tokens['accent.default']).toBe('#D4D4D4')
+      expect(tokens['text.onAccent']).toBe('#101010')
+    }
   })
 })
 
@@ -25,12 +36,22 @@ describe.each(THEMES.map((s) => [s.id, s] as const))('%s', (_id, s) => {
   it('passes every contrast check', () => expect(failures(t)).toEqual([]))
   it('keeps the four stages apart in normal and colour-deficient vision', () => {
     const sep = stageSeparation(t)
+    if(s.chart.chroma===0){
+      expect(sep.normal).toBeGreaterThanOrEqual(7)
+      expect(minCvd(sep)).toBeGreaterThanOrEqual(7)
+      return
+    }
     // Darkroom (low blue by intent) keeps its documented 13.8 normal / 7.2 CVD.
     expect(sep.normal).toBeGreaterThanOrEqual(s.id === 'darkroom' ? 13 : 15)
     expect(minCvd(sep)).toBeGreaterThanOrEqual(s.id === 'darkroom' ? 7 : 8)
   })
   it('keeps the first five chart series distinguishable', () => {
     const sep = chartSeparation(t, 5)
+    if(s.chart.chroma===0){
+      expect(sep.normal).toBeGreaterThanOrEqual(6)
+      expect(minCvd(sep)).toBeGreaterThanOrEqual(6)
+      return
+    }
     // Darkroom's series vary mostly in lightness (documented trade-off in QUALITY_REPORT.md).
     if (s.id === 'darkroom') {
       // Approved low-blue exception, not an untested exemption. Direct labels
@@ -47,7 +68,8 @@ describe.each(THEMES.map((s) => [s.id, s] as const))('%s', (_id, s) => {
   if (s.mode === 'dark') {
     it('stays dim and muted (owner restraint check) with rising elevation', () => {
       expect(darkRestraint(s, t).ok).toBe(true)
-      const L = elevation(t)
+      // T3 uses a black canvas with lifted input wells; check that explicit hierarchy.
+      const L = s.id === 't3-dark' ? [elevation(t)[1], elevation(t)[0], ...elevation(t).slice(2)] : elevation(t)
       for (let i = 1; i < L.length; i++) expect(L[i] - L[i - 1]).toBeGreaterThanOrEqual(0.015)
     })
   }

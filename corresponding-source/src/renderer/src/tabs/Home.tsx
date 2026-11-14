@@ -2,7 +2,7 @@ import { DailyStudyGoal } from '../components/DailyStudyGoal'
 import { t as uiText, formatTime, count } from '../i18n'
 import { useEffect, useRef, useState } from 'react'
 import { HeatMap } from '../components/HeatMap'
-import { DayCheckinCard } from '../components/DayCheckin'
+import { DayCheckinCard, useDay } from '../components/DayCheckin'
 import { ItemPicker } from '../components/ItemPicker'
 import { SetupCard } from '../components/SetupCard'
 import { useGoalDraft } from '../components/TimerControls'
@@ -32,7 +32,9 @@ export function HomeTab(): React.JSX.Element {
   const today = useToday()
   const calendarDay = useLocalCalendarDay()
   const settings = useSettings(s=>s.settings)
+  const { answers: checkin, reload: reloadCheckin } = useDay(today)
   const checkVisible = showTodayCheck(settings.showTodayCheck,settings.todayCheckSkippedDate,calendarDay)
+    && !(checkin?.day === today && checkin.done)
   const subjects=useLibrary(s=>s.items).filter(i=>!i.archived)
   const [orderedSubjects,setOrderedSubjects]=useState<PickerItem[]>([])
   const [createRequest,setCreateRequest]=useState(0)
@@ -67,7 +69,7 @@ export function HomeTab(): React.JSX.Element {
             <Button variant="ghost" size="sm" onClick={() => sessionCommand(() => window.api.invoke('session:endSitting'))}>{uiText("End sitting")}</Button>
           </div>
         )}
-        {checkVisible&&<div className="shrink-0" data-today-check>{subjects.length?<DayCheckinCard day={today}/>:<details><summary className="cursor-pointer text-sm text-muted">{uiText("Optional daily check-in")}</summary><DayCheckinCard day={today}/></details>}</div>}
+        {checkVisible&&<div className="shrink-0" data-today-check>{subjects.length?<DayCheckinCard answers={checkin} reload={reloadCheckin}/>:<details><summary className="cursor-pointer text-sm text-muted">{uiText("Optional daily check-in")}</summary><DayCheckinCard answers={checkin} reload={reloadCheckin}/></details>}</div>}
 
         </div>
         <div className="home-workspace grid items-start gap-5">

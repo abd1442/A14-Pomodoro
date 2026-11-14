@@ -11,4 +11,6 @@ Production assets are `resources/a14-pomodoro-icon.svg`, `a14-pomodoro-icon.png`
 
 The sidebar uses the approved outline artwork with theme-aware foreground/background colors and the unchanged gold accent. The compact rail uses the badge alone. The idle tray uses the badge; active stage colors retain their existing timer meaning.
 
+On 1 November 2026 the owner requested clearer taskbar lettering, then corrected the oversized first attempt. The final icon-only variant uses approximately **32 source units** of letter height (about 33% larger than the original 24-unit master), centred with about seven source units of clearance from the gold stroke. This replaces the cramped 38-unit experiment. The full wordmark keeps its approved proportions. `scripts/export-a14-brand.cjs` preserves this small-size variant; `scripts/render-brand-icons.cjs` exports the PNG and Windows ICO frames from the editable SVG.
+
 Previous concepts are retained here as design records. They are not packaged with the application. Old product names remain only where required for compatibility, immutable earlier releases or clearly identified historical evidence. No trademark clearance claim is made.

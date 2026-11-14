@@ -1,3 +1,5 @@
+> Current release: **A14 Pomodoro 0.1.6-beta.5**. See [current source](docs/CURRENT_SOURCE.md). Dated verification below is historical.
+
 # A14 Pomodoro
 
 A local-first Windows workspace for focused study, recall notes and thoughtful review of your own study records.
@@ -13,7 +15,7 @@ Current source and Windows release: **A14 Pomodoro — Beta 1 (0.1.6-beta.1)**. 
 - Keep history, recall notes and drawings; explicitly export notes to Obsidian when wanted.
 - Inspect time, conditions and self-ratings in Stats, with uncertainty and observational evidence limits.
 - Explore research-informed Learn content independently of personal ratings.
-- Choose from 26 approved themes, separate light/dark preferences and seven languages: English, Arabic, Spanish, French, Simplified Chinese, Brazilian Portuguese and German.
+- Choose from 27 themes (including Black), separate light/dark preferences and seven languages: English, Arabic, Spanish, French, Simplified Chinese, Brazilian Portuguese and German.
 
 Immediate focus/recall ratings describe recorded experience. They do not demonstrate retention, mastery, causation or which study method is best for you. General guidance and personal observations remain distinct.
 

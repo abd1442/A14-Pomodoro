@@ -1,5 +1,7 @@
 # Workspace guide
 
+**1 November 2026 cleanup:** superseded generated build copies and installer extractions were removed. The retained latest local installer is `dist/A14-Pomodoro-Beta-2-LogoFit-20261101/A14-Pomodoro-0.1.6-beta.2-setup.exe`; separate current Coach work remains in `dist/coach-sync-local`. Source, private recovery/backups, published-release archives and historical evidence remain protected. See [cleanup receipt](CLEANUP_20261101.md). The older version/retention descriptions below are historical context, not a request to recreate removed builds.
+
 The application lives in one checkout on `checkpoint/beta.27`. Older branch names and historical reports are not separate current applications. Do not use a blanket `git clean`, delete all of `out/`, or treat every ignored folder as disposable: protected recovery material also lives under ignored output.
 
 | Location | Purpose / retention |

@@ -5,6 +5,7 @@ import { FloatingPanel } from './screens/FloatingPanel'
 import { ReasonPicker } from './screens/ReasonPicker'
 import { CaptureBox } from './screens/CaptureBox'
 import './store/appearance'
+import { WindowFrame } from './components/WindowFrame'
 
 const hash = window.location.hash
 // Small auxiliary windows do not need to load Stats and the full main interface.
@@ -18,5 +19,5 @@ if (view !== 'main') {
 }
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode><Suspense fallback={null}>{view === 'panel' ? <FloatingPanel /> : view === 'reasons' ? <ReasonPicker /> : view === 'capture' ? <CaptureBox /> : <App />}</Suspense></StrictMode>
+  <StrictMode>{view === 'main' ? <WindowFrame><Suspense fallback={null}><App /></Suspense></WindowFrame> : <Suspense fallback={null}>{view === 'panel' ? <FloatingPanel /> : view === 'reasons' ? <ReasonPicker /> : <CaptureBox />}</Suspense>}</StrictMode>
 )

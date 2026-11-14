@@ -2929,5 +2929,10 @@
   "Session parts cannot overlap. Choose times outside the other parts or adjust their shared boundary on the timeline.": "Session parts cannot overlap. Choose times outside the other parts or adjust their shared boundary on the timeline.",
   "Adaptive needs five single-subject sessions of at least 10 minutes rated Focused or Deep. Quick Mode does not collect these ratings, so it uses your default target until qualifying records exist.": "Adaptive needs five single-subject sessions of at least 10 minutes rated Focused or Deep. Quick Mode does not collect these ratings, so it uses your default target until qualifying records exist.",
   "Press a key…": "Press a key…",
-  "Between sessions": "Between sessions"
+  "Between sessions": "Between sessions",
+  "Black": "Black",
+  "A14 Coach": "A14 Coach",
+  "Recently studied": "Recently studied",
+  "Most studied": "Most studied",
+  "Black & White": "Black & White"
 }

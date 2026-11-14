@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { ACCENT_SETS, normalizeAppearance, stageOverridePatch, toCssVars } from './appearance'
 import { validateIpcArgs } from './ipcValidation'
-import { DEFAULT_DARK_THEME, DEFAULT_LIGHT_THEME, resolveThemeTokens, STAGE_KEYS } from './themes'
+import { resolveThemeTokens, STAGE_KEYS } from './themes'
 import migration from './themeMigration.json'
 
 describe('theme integration compatibility boundaries', () => {
@@ -15,9 +15,9 @@ describe('theme integration compatibility boundaries', () => {
       expect(() => validateIpcArgs(channel, args.map(a => a === appearance ? { ...appearance, stageOverrides: { light: { focus: 42 }, dark: {} } } : a))).toThrow()
     }
   })
-  it('preserves the approved branded default tokens on fresh and legacy default profiles', () => {
+  it('uses the new default pair on fresh profiles and preserves legacy defaults', () => {
     for (const a of [normalizeAppearance(null), normalizeAppearance({ colourId: 'paper-auto', accentId: 'palette', mode: 'system' })]) {
-      for (const [dark, id] of [[false, DEFAULT_LIGHT_THEME], [true, DEFAULT_DARK_THEME]] as const) {
+      for (const [dark, id] of [[false, a.lightTheme], [true, a.darkTheme]] as const) {
         const vars = toCssVars(a, dark), expected = resolveThemeTokens({ themeId: id, mode: dark ? 'dark' : 'light' })
         for (const [key, value] of Object.entries(expected)) expect(vars['--fr-' + key.replace(/\./g, '-')]).toBe(value)
       }

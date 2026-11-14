@@ -623,6 +623,11 @@
     "app:setDemo": {
       "kind": "ref",
       "id": "232"
+    },
+    "coach:syncStatus": {
+      "kind": "tuple",
+      "items": [],
+      "minimum": 0
     }
   },
   "events": [

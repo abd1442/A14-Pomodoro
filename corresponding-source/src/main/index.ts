@@ -1,6 +1,7 @@
 import { unsafeRuntimeSwitches } from '@core/runtimeSecurity'
 declare const __FOCUSRECALL_QA__: boolean
 import { mkdirSync } from 'node:fs'
+import {StudyPublisher} from './coachSync'
 import { join } from 'node:path'
 import { app, BrowserWindow, dialog, globalShortcut, Menu, nativeTheme, Notification, powerMonitor, screen, shell, session as electronSession } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
@@ -51,6 +52,7 @@ let captureBox: CaptureBox | null = null
 let mainWin: BrowserWindow | null = null
 let settingsRepo: SettingsRepo | null = null
 let quitting = false
+let coachLink:StudyPublisher|null=null
 let reminders:StudyReminderService|null=null
 
 // A test run with its own data folder also gets its own Chromium profile, so it
@@ -89,12 +91,22 @@ function showMain(): void {
   mainWin.focus()
 }
 
+/** Keep the custom header and native control overlay on the same palette,
+ * including when another app has focus or Windows changes its color mode. */
+function syncMainWindowChrome(appearance: Appearance): void {
+  if (!mainWin || mainWin.isDestroyed()) return
+  const colors = paletteFor(appearance, nativeTheme.shouldUseDarkColors)
+  mainWin.setBackgroundColor(colors.bg)
+  if (process.platform === 'win32') mainWin.setTitleBarOverlay({ color: colors.bg, symbolColor: colors.text, height: 36 })
+}
+
 function openMainWindow(): void {
   const s = settingsRepo!
   const appearance = s.getAppearance()
   mainWin = createMainWindow({
     saved: s.readRaw('mainWindowBounds') as SavedBounds | null,
     background: paletteFor(appearance, nativeTheme.shouldUseDarkColors).bg,
+    foreground: paletteFor(appearance, nativeTheme.shouldUseDarkColors).text,
     onBoundsChanged: (b) => s.writeRaw('mainWindowBounds', b)
   })
 
@@ -153,8 +165,10 @@ function start(): void {
   const file=databaseFile(dataDir,config.demo)
   db = installPendingRestore(file,openDatabase) ?? openDatabase(file)
   if (config.demo) seedDemo(db)
+  if(!config.demo&&!startupDataDirectory){coachLink=new StudyPublisher(file);coachLink.start()}
 
   const settings = (settingsRepo = new SettingsRepo(db))
+  nativeTheme.on('updated', () => syncMainWindowChrome(settings.getAppearance()))
   const library = new LibraryRepo(db)
   const logs = new LogRepo(db)
   const blocks = new BlocksRepo(db, logs)
@@ -259,6 +273,7 @@ function start(): void {
   function setAppearance(a: Appearance): Appearance {
     const saved = settings.setAppearance(a)
     panel?.sync(settings.getAll(), saved)
+    syncMainWindowChrome(saved)
     broadcast('appearance:changed', saved)
     tray?.update(engine!.get())
     return saved
@@ -334,6 +349,7 @@ function start(): void {
     patterns:()=>[] // Retired personal scheduling; no hidden Stats rebuild.
   })
   registerIpc({
+    coachSync:()=>coachLink?.status()??{state:'offline',auto:true,producerOnline:false,message:'Local sync is isolated from demo and QA profiles.'},
     music,
     reminders,
     databaseFile:file,
@@ -428,6 +444,7 @@ app.on('window-all-closed', () => {
 
 app.on('will-quit', () => {
   reminders?.dispose()
+  coachLink?.stop()
   engine?.dispose()
   tracker?.dispose()
   reasons?.destroy()

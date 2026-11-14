@@ -1,4 +1,4 @@
-// The A14 Pomodoro theme system (approved 2026-10-17): 26 themes, each a small
+// The A14 Pomodoro theme system: 26 original themes, Black and the default T3 pair, each a small
 // set of hand-picked seed colours (themeSeeds.ts, generated) from which every
 // semantic token is derived here. The derivation is a TypeScript port of
 // docs/design/theme-system-2026/tools/build.mjs, so custom stage colours and
@@ -7,7 +7,7 @@
 //   seeds (per theme)  ->  semantic tokens (bg.canvas, accent.text, stage.recall.subtle ...)
 //                      ->  component tokens (aliases, theme independent, in index.css)
 import { BRAND, THEME_SEEDS } from './themeSeeds'
-import { bestOn, contrast, CVD_TYPES, deltaE00, ensureContrast, hexToOklab, hexToOklch, mix, oklch, rgba, shiftL, simulate } from './themeColor'
+import { bestOn, contrast, CVD_TYPES, deltaE00, ensureContrast, hexToOklab, hexToOklch, luminance, mix, oklch, rgba, shiftL, simulate } from './themeColor'
 
 export type ThemeMode = 'light' | 'dark'
 export type StageKey = 'focus' | 'recall' | 'rest' | 'overtime'
@@ -62,7 +62,7 @@ export function deriveTokens(s: ThemeSeed, stages: Stages): Tokens {
   set('bg.canvas', s.canvas); set('bg.sunken', s.sunken)
   set('surface.base', s.base); set('surface.raised', s.raised)
   set('surface.writing', dark ? mix(s.base, s.canvas, 0.45) : s.base)
-  set('surface.overlay', dark ? 'rgba(0,0,0,0.56)' : 'rgba(28,24,20,0.36)')
+  set('surface.overlay', s.chart.chroma === 0 && !dark ? 'rgba(0,0,0,0.36)' : dark ? 'rgba(0,0,0,0.56)' : 'rgba(28,24,20,0.36)')
   set('border.subtle', mix(s.border, s.base, 0.5)); set('border.default', s.border)
   set('border.strong', ensureContrast(mix(s.border, s.text2, 0.35), s.base, 3))
   set('text.primary', s.text); set('text.secondary', s.text2)
@@ -127,6 +127,16 @@ export function deriveTokens(s: ThemeSeed, stages: Stages): Tokens {
   set('nav.bookmark', contrast(s.mark, s.nav.active) >= 2.2 ? s.mark : bestOn(s.nav.active, s.base, s.text))
   set('shadow.card', dark ? 'none' : `0 1px 2px ${rgba(s.text, 0.05)}, 0 6px 18px -6px ${rgba(s.text, 0.09)}`)
   set('shadow.raised', dark ? `0 0 0 1px ${s.border}, 0 12px 32px rgba(0,0,0,0.45)` : `0 2px 4px ${rgba(s.text, 0.06)}, 0 16px 40px -12px ${rgba(s.text, 0.18)}`)
+  if (s.chart.chroma === 0) {
+    // Remove hue while preserving relative luminance and contrast. Includes
+    // status, timeline, illustration and brand colors, not just primary buttons.
+    for (const [key,value] of Object.entries(t)) if (/^#[0-9a-f]{6}$/i.test(value)) {
+      const L=luminance(value),channel=Math.round(255*(L<=0.0031308?12.92*L:1.055*L**(1/2.4)-0.055)).toString(16).padStart(2,'0').toUpperCase()
+      t[key]='#'+channel.repeat(3)
+    }
+    // An ordered tonal ramp for directly labeled monochrome charts.
+    for (let i=0;i<8;i++) t[`chart.series.${i+1}`]=(dark ? ['#777777','#999999','#BBBBBB','#DDDDDD','#FFFFFF','#888888','#AAAAAA','#CCCCCC'] : ['#181818','#303030','#494949','#636363','#808080','#242424','#3C3C3C','#565656'])[i]
+  }
   return t
 }
 
@@ -160,6 +170,7 @@ function stageScore(set: Stages): number {
  */
 export function harmoniseStages(s: ThemeSeed): Stages {
   const seeds = Object.fromEntries(STAGE_KEYS.map((k) => [k, guardStageColour(s[k], s)])) as Stages
+  if(s.chart.chroma===0)return seeds
   const cur = { ...seeds }
   if (stageScore(cur) >= 8) return cur
   const dark = s.mode === 'dark'
@@ -403,7 +414,10 @@ export function darkRestraint(s: ThemeSeed, t: Tokens): { canvasL: number; accen
   const [canvasL] = hexToOklch(s.canvas), [, accentC] = hexToOklch(s.accent)
   const stageC = Math.max(...STAGE_KEYS.map((k) => hexToOklch(t[`stage.${k}`])[1]))
   const accentGlow = contrast(s.accent, s.base)
-  return { canvasL, accentC, stageC, accentGlow, ok: canvasL >= 0.22 && canvasL <= 0.31 && accentC <= 0.12 && stageC <= Math.max(0.09, accentC + 0.005) && accentGlow <= 8 }
+  // Black is explicitly deeper than the original dim-dark family. All contrast,
+  // chroma, accent-glow and elevation checks still apply to it.
+  const minimumCanvasL = s.id === 't3-dark' ? 0 : s.id === 'black' ? 0.17 : 0.22
+  return { canvasL, accentC, stageC, accentGlow, ok: canvasL >= minimumCanvasL && canvasL <= 0.31 && accentC <= 0.12 && stageC <= Math.max(0.09, accentC + 0.005) && accentGlow <= (s.id==='t3-dark'?17:s.id==='black'?13:8) }
 }
 
 /** OKLab lightness of sunken, canvas, card and raised: dark elevation must rise at every step. */

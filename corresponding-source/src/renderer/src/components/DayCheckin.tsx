@@ -14,7 +14,7 @@ import { localCalendarDay } from '@core/homePreferences'
 const isChips = (t: string): boolean => t === 'single' || t === 'multi'
 
 /** A study day's check-in answers, kept fresh. */
-function useDay(day: string): { answers: DayAnswers | null; reload: () => Promise<void> } {
+export function useDay(day: string): { answers: DayAnswers | null; reload: () => Promise<void> } {
   const [answers, setAnswers] = useState<DayAnswers | null>(null)
   const current=useRef(day);current.current=day
   const reload = useCallback(async () => {const result=await window.api.invoke('day:get', day);if(current.current===day)setAnswers(result)}, [day])
@@ -82,11 +82,10 @@ function DayForm({ day, answers, onSaved, onCancel, extra, followToday = false }
 /**
  * Home's daily check-in: the questions that are the same all day (sleep,
  * exercise, physical state, pressure, energy and mood today). Shown once per
- * study day until answered or skipped, then one line with Edit.
+ * study day until answered or skipped; Home hides the completed card.
  */
-export function DayCheckinCard({ day }: { day: string }): React.JSX.Element | null {
+export function DayCheckinCard({ answers, reload }: { answers: DayAnswers | null; reload: () => Promise<void> }): React.JSX.Element | null {
   const schema = useLogSchema((s) => s.schema)
-  const { answers, reload } = useDay(day)
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState<DayAnswers | null>(null)
   const [skipBusy,setSkipBusy]=useState(false),[skipError,setSkipError]=useState('')
@@ -103,25 +102,6 @@ export function DayCheckinCard({ day }: { day: string }): React.JSX.Element | nu
   const shown = editing && draft ? draft : answers!
   const weekday = formatDate(shown.day, { weekday: 'long' })
 
-  if (shown.done && !editing) {
-    const chips = answerChips(schema, Object.fromEntries(Object.entries(shown.values).filter(([id])=>!shown.untouched.includes(Number(id)))), 'day')
-    return (
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-line bg-surface px-6 py-3">
-        <span className="text-base font-semibold">{uiText("Today")}</span>
-        {chips.length ? (
-          <AnswerChips chips={chips} />
-        ) : (
-          <span className="text-base text-muted">{shown.skipped ? uiText("Skipped for today") : uiText("No answers")}</span>
-        )}
-        <span className="flex-1" />
-        {/* An accent button opens the check-in in both states, so it is easy to find. */}
-        <Button variant="primary" onClick={open} className="shadow-sm">
-          <CheckInIcon /> {shown.skipped && !chips.length ? uiText("Check in") : uiText("Edit check-in")}
-        </Button>
-        {skipButton}
-      </div>
-    )
-  }
   if (!shown.done && !editing) {
     return (
       <div className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-2xl border border-focus/40 bg-focus/8 px-6 py-4">

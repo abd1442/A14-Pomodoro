@@ -34,14 +34,14 @@ export function HomeSubjectTools({items}:{items:PickerItem[]}):React.JSX.Element
   if(items.length<2)return null
   return <>
     <div className="flex shrink-0 items-center gap-2 text-sm">
-      <label><span className="sr-only">{t('Sort subjects')}</span><select aria-label={t('Sort subjects')} title={t('Sort subjects')} aria-busy={busy} className={`${inputBase} min-h-13 w-40 max-w-[35vw] py-2`} value={current.mode} onChange={e=>{
+      <label><span className="sr-only">{t('Sort subjects')}</span><select aria-label={t('Sort subjects')} title={t('Sort subjects')} aria-busy={busy} className={`${inputBase} home-sort-select min-h-11 w-40 max-w-[35vw] py-2`} value={current.mode} onChange={e=>{
         const mode=e.target.value as HomeSubjectOrdering['mode']
         const ids=mode==='manual'&&!current.ids.length?items.map(i=>i.id):current.ids
         void save({mode,ids})
       }}>
-        <option value="recent">{t('Recently studied · pinned first')}</option>
+        <option value="recent">{t('Recently studied')}</option>
         <option value="alphabetical">{t('Alphabetical')}</option>
-        <option value="most">{t('Most studied · recorded time')}</option>
+        <option value="most">{t('Most studied')}</option>
         <option value="manual">{t('Custom order')}</option>
       </select></label>
       {preference.mode==='manual'&&<Button size="sm" className="min-h-13 min-w-11 px-3" aria-label={t('Arrange subjects')} title={t('Arrange subjects')} disabled={busy} onClick={()=>{setError('');setDraft(items.map(i=>i.id))}}><span aria-hidden="true">↕</span></Button>}

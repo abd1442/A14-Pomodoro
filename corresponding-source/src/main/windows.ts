@@ -51,6 +51,7 @@ function restoredBounds(saved: SavedBounds | null): Rectangle | null {
 export function createMainWindow(opts: {
   saved: SavedBounds | null
   background: string
+  foreground: string
   onBoundsChanged: (b: SavedBounds) => void
 }): BrowserWindow {
   const bounds = restoredBounds(opts.saved) ?? defaultBounds()
@@ -61,6 +62,7 @@ export function createMainWindow(opts: {
     show: false,
     autoHideMenuBar: true,
     title: 'A14 Pomodoro',
+    ...(process.platform === 'win32' ? { titleBarStyle: 'hidden' as const, titleBarOverlay: { color: opts.background, symbolColor: opts.foreground, height: 36 } } : {}),
     icon: join(__dirname, '../../resources/a14-pomodoro.ico'),
     backgroundColor: opts.background,
     webPreferences: {
