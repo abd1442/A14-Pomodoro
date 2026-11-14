@@ -1,30 +1,16 @@
 # Application source and release materials
 
-## A14 Pomodoro Beta 1 source
+## A14 Pomodoro Beta 5
 
-[corresponding-source](corresponding-source/SOURCE_MANIFEST.json) contains Windows **0.1.6-beta.1 — A14 Pomodoro Beta 1**, exact source snapshot `fcb670235b76c68058feaba7a4292ba8a531abf5`. The `v0.1.6-beta.1` release assembly maps the Windows installer to this snapshot. [Build directions](corresponding-source/SOURCE_BUILD.md) · [Current release manifest](RELEASE-MANIFEST.json) · [Source archive](https://github.com/abd1442/A14-Pomodoro/releases/download/v0.1.6-beta.1/A14-Pomodoro-Beta-1-Source.zip). Locked runtime/dependency source materials are retained with their original provenance records.
+Windows **0.1.6-beta.5** corresponds to public source snapshot `bd3947925c874086ebf8df6c29341c291382dadd` under [corresponding-source](corresponding-source/SOURCE_MANIFEST.json). The release assembly tag is `v0.1.6-beta.5`. Each editable input is identified by a SHA-256 manifest; its rebuild matches all 15 compiled production files.
 
-## Beta 2 Windows source
+- [Matching source and dependency materials](https://github.com/abd1442/A14-Pomodoro/releases/download/v0.1.6-beta.5/A14-Pomodoro-Beta-5-Source.zip)
+- [Build directions](corresponding-source/SOURCE_BUILD.md)
+- [Current release manifest](RELEASE-MANIFEST.json)
+- [Notices](https://github.com/abd1442/A14-Pomodoro/releases/download/v0.1.6-beta.5/A14-Pomodoro-Beta-5-Notices.zip)
 
-[the immutable Beta 2 source](https://github.com/abd1442/A14-Pomodoro/tree/v0.1.5-beta.2/corresponding-source) contains Windows **0.1.5-beta.2, FocusRecall Beta 2**, exact public source snapshot `0326da0016f53dfc0c5d8bae8eb89df1d5c38c2f`. The tag `v0.1.5-beta.2` identifies the release assembly; the installer maps to this application snapshot. [Build directions](corresponding-source/SOURCE_BUILD.md) · [Historical Beta 2 manifest](release-history/FocusRecall-Beta-2-RELEASE-MANIFEST.json) · [Beta 2 source materials](https://github.com/abd1442/A14-Pomodoro/releases/download/v0.1.5-beta.2/FocusRecall-Beta-2-Source.zip).
+The source archive includes the editable Windows app, native sampler, theme generators, artwork and build scripts, unchanged locked dependency/preferred-source inputs and pinned runtime source retrieval directions. No private Git history, profiles or backups are included. Full recursive Chromium retrieval/rebuild and every third-party source-completeness question are not represented as certified. Maintain source availability while distributing the binaries. Original app code is GPL-3.0-only; supplied component licenses apply separately.
 
-The attached source archive includes the exact curated editable Windows inputs, unchanged locked dependency/preferred-source inputs and pinned runtime source-access directions. Linux/macOS remain frozen Beta 1 builds. Source delivery does not imply that unperformed installer/hardware/assistive-technology checks passed; see [release notes](RELEASE_NOTES.md).
+## Historical sources
 
-## Published Beta 1 source
-
-FocusRecall original code/artwork is **GPL-3.0-only**. Third-party terms remain applicable. Use the source and notices attached to the [single Beta 1 release](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.1.1-beta.1). No private repository access is needed.
-
-The tag `v0.1.1-beta.1` identifies a release assembly, not one common application build revision. At that immutable tag, its automatic source ZIP/tar contains the application snapshots below. The larger `FocusRecall-Beta-1-Source.zip` additionally supplies dependency/preferred upstream source inputs, exact FFmpeg source, native/theme/artwork/build inputs and pinned runtime source access/replacement directions. `FocusRecall-Beta-1-Notices.zip` contains the corresponding project/component notices.
-
-| Platform | Build source revision | Source folder in this repository |
-| --- | --- | --- |
-| windows-x64 | `822068b128b47e3cff3627082ee0e336dfa17d71` | [Beta 1 Windows source](https://github.com/abd1442/A14-Pomodoro/tree/v0.1.1-beta.1/corresponding-source) |
-| linux-x64 | `f583c7de992dfbf8edfe3f20bc369c0f26567112` | [platform-source/linux-x64](platform-source/linux-x64/SOURCE_MANIFEST.json) |
-| macos-arm64 | `8bdc835e3e7f7f5a7fa1c62c829c9b2d2f2addca` | [platform-source/macos-arm64](platform-source/macos-arm64/SOURCE_MANIFEST.json) |
-| macos-x64 | `f93d7991d4ba52335cfdbc72d536fdd0eb76fcb6` | [platform-source/macos-x64](platform-source/macos-x64/SOURCE_MANIFEST.json) |
-
-The [Beta 1 release manifest](release-history/Beta-1-RELEASE-MANIFEST.json) maps every Beta 1 binary to its source, version, SHA-256 and matching source archive. The two Mac snapshots differ only by a verification-script cold-start deadline; application code is unchanged.
-
-Runtime source access must remain available while the binaries are offered. Full recursive Chromium/CIPD retrieval and a complete Electron rebuild were not performed; the source package explains the bounded review and pinned upstream access. Modified components can be rebuilt/replaced using the supplied directions, without vendor-only signing keys.
-
-The owner confirmed authorship of the unchanged F/R logo on 20 October 2026. Editable artwork/theme inputs are retained. The bounded provenance review found no identified outstanding third-party artwork permission request; it is not independent proof of ownership or trademark clearance. Runtime Mac framework permissions and notices are included with the downloads.
+Earlier versions remain at their immutable tags: [A14 Pomodoro Beta 1](https://github.com/abd1442/A14-Pomodoro/tree/v0.1.6-beta.1/corresponding-source), [FocusRecall Beta 2](https://github.com/abd1442/A14-Pomodoro/tree/v0.1.5-beta.2/corresponding-source) and [original cross-platform Beta 1](https://github.com/abd1442/A14-Pomodoro/tree/v0.1.1-beta.1). Linux/macOS snapshots and their original manifests remain under platform-source. Older release assets have not been renamed or overwritten.

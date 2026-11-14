@@ -3202,5 +3202,7 @@
       "bytes": 491,
       "sha256": "517e22bbe4bbea02975209311126f37096e30af51d6a07b81f06ca4cdd688e7f"
     }
-  ]
+  ],
+  "status": "published-beta",
+  "sourceCommit": "bd3947925c874086ebf8df6c29341c291382dadd"
 }

@@ -1,39 +1,42 @@
 {
   "schemaVersion": 1,
-  "title": "A14 Pomodoro \u2014 Beta 1",
-  "version": "0.1.6-beta.1",
-  "tag": "v0.1.6-beta.1",
-  "tagMeaning": "A14 Pomodoro Beta 1 release assembly; source revision mapped separately.",
+  "title": "A14 Pomodoro \u2014 Beta 5",
+  "version": "0.1.6-beta.5",
+  "tag": "v0.1.6-beta.5",
   "license": "GPL-3.0-only",
+  "sourceCommit": "bd3947925c874086ebf8df6c29341c291382dadd",
+  "sourceFolder": "corresponding-source",
+  "sourceManifestSHA256": "2c8010ad52e0be83dcef11ffcb3f01a7e89a167cc3682e2d5d3d177446711de4",
   "artifacts": [
     {
       "platform": "windows-x64",
-      "file": "A14-Pomodoro-Beta-1-Windows-x64-Setup.exe",
-      "version": "0.1.6-beta.1",
-      "sourceCommit": "fcb670235b76c68058feaba7a4292ba8a531abf5",
+      "file": "A14-Pomodoro-0.1.6-beta.5-setup.exe",
+      "version": "0.1.6-beta.5",
+      "sourceCommit": "bd3947925c874086ebf8df6c29341c291382dadd",
       "sourceFolder": "corresponding-source",
-      "bytes": 121440350,
-      "sha256": "5da9043e6d22cc92405b6ae7a07d28ad00558f563942a3626f3e0ef7c1c4c18c"
+      "bytes": 121463621,
+      "sha256": "af2b3b117fb094d6ea684f0a44da588a50057a7574998740d9664410f302fe9a"
     }
   ],
   "verification": {
-    "testFiles": 90,
-    "testsPassed": 1200,
-    "sourceOutputsMatched": 16,
+    "testFiles": 91,
+    "testsPassed": 1223,
+    "sourceOutputsMatched": 15,
+    "sourceFilesMatchedToGit": 640,
     "installerPayloadFilesMatched": 119,
-    "productionSecurityPassed": true,
+    "productionFusesVerified": true,
     "installerExecuted": false,
     "physicalLifecycleCertified": false,
     "nativeAssistiveTechnologyCertified": false
   },
-  "otherPlatforms": "Windows x64 only. Linux/macOS remain older FocusRecall experimental downloads.",
+  "otherPlatforms": "Windows x64 only. Linux/macOS remain older experimental builds.",
   "sourceDelivery": {
-    "file": "A14-Pomodoro-Beta-1-Source.zip",
-    "bytes": 158973568,
-    "sha256": "8e35497eaf9a5762e7e5feac142231dffdff602b6454e5be1394044396a73786"
+    "file": "A14-Pomodoro-Beta-5-Source.zip",
+    "bytes": 158992123,
+    "sha256": "88abca96f81b57c0753e43ae0094a96be39b0f06d593c4bffaa1845a7f5a3705"
   },
   "notices": {
-    "file": "A14-Pomodoro-Beta-1-Notices.zip",
+    "file": "A14-Pomodoro-Beta-5-Notices.zip",
     "bytes": 2166123,
     "sha256": "5827af3249e180594dde928400df2f428d06aa70f4bd2c9b5048a08f44bce866"
   }

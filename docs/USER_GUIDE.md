@@ -1,6 +1,8 @@
 # A14 Pomodoro user guide
 
-This guide follows Windows **A14 Pomodoro Beta 1 (0.1.6-beta.1)**. Save for later on Recall/Log preserves unfinished drafts, History retains its browsing scope, saved notes offer Show more, and standalone notes can be deleted locally while exported copies remain. Parked Thoughts and automatic Resume reason prompts have been removed; the bottom calendar stays visible while scrolling. The Linux/macOS Beta 1 downloads are unchanged: [guide for that version](https://github.com/abd1442/A14-Pomodoro/blob/v0.1.1-beta.1/docs/USER_GUIDE.md).
+This guide follows Windows **A14 Pomodoro Beta 5 (0.1.6-beta.5)**. Save for later on Recall/Log preserves unfinished drafts, History retains its browsing scope, saved notes offer Show more, and standalone notes can be deleted locally while exported copies remain. Parked Thoughts and automatic Resume reason prompts have been removed; the bottom calendar stays visible while scrolling. The Linux/macOS Beta 1 downloads are unchanged: [guide for that version](https://github.com/abd1442/A14-Pomodoro/blob/v0.1.1-beta.1/docs/USER_GUIDE.md).
+
+Beta 5 adds theme-matched Windows chrome, White and Black & White defaults, compact dropdowns, and a daily check-in that disappears from Home after saving. Existing saved theme choices remain selected.
 
 The [main page](../README.md) introduces every part of A14 Pomodoro with screenshots. This guide is the detailed reference: each screen step by step, the smaller settings, and what to do when something goes wrong. It builds on Beta 1 (0.1.1-beta.1) with the current-source changes noted above, using Windows screenshots. Linux and macOS share the study workflows but remain experimental; follow their release-specific installation notes. Screenshots show real application screens with made-up subjects and notes.
 
@@ -183,7 +185,7 @@ A14 Pomodoro does not encrypt local databases or backups. Protect your Windows a
 
 ## Install, update and protect your records
 
-Choose your operating system on the [Beta 1 release page](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.1.1-beta.1), check its SHA-256 and follow its installation instructions. Windows is unsigned; Mac builds are not Developer ID signed or notarized. Keep operating-system protection enabled and stop on malware or damaged-app warnings. Linux/macOS still need real-world testing. [Availability](RELEASE_STATUS.md).
+Use the [current Windows release](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.1.6-beta.5), or choose Linux/macOS from the [older experimental release](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.1.1-beta.1), check its SHA-256 and follow its installation instructions. Windows is unsigned; Mac builds are not Developer ID signed or notarized. Keep operating-system protection enabled and stop on malware or damaged-app warnings. Linux/macOS still need real-world testing. [Availability](RELEASE_STATUS.md).
 
 For a first installation, run the verified installer, follow its prompts and open A14 Pomodoro. Choose Quick or Full Mode during setup; language and mode can be changed later in Settings. If you want to look around first, **Settings → General → Data → Open demo data** opens a separate fictional database.
 
