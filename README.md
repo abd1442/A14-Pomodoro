@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <sub><b>Windows · Linux · macOS</b> &nbsp;·&nbsp; <b>Beta 5 Windows · 0.1.6-beta.5</b> &nbsp;·&nbsp; <b>7 languages</b> &nbsp;·&nbsp; <b>GPL-3.0-only</b></sub>
+  <sub><b>Windows · Linux · macOS</b> &nbsp;·&nbsp; <b>Beta 6 Windows · 0.1.6-beta.6</b> &nbsp;·&nbsp; <b>7 languages</b> &nbsp;·&nbsp; <b>GPL-3.0-only</b></sub>
 </p>
 
 <p align="center">
@@ -54,13 +54,13 @@ Use as much or as little of it as you like. Notes, ratings, rest timers and auto
 
 ## Downloads
 
-[**Download A14 Pomodoro — Beta 5 for Windows x64**](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.1.6-beta.5)
+[**Download A14 Pomodoro — Beta 6 for Windows x64**](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.1.6-beta.6)
 
-**0.1.6-beta.5 · Windows x64 · Unsigned prerelease.** Includes theme-matched Windows chrome, T3-style monochrome defaults, compact dropdowns and the daily check-in completion fix. [Release notes and limitations](RELEASE_NOTES.md) · [Matching source](SOURCE_NOTICE.md) · [Checksums](SHA256SUMS.txt).
+**0.1.6-beta.6 · Windows x64 · Unsigned prerelease.** Interface, appearance-settings and logo polish: shared switches, visible black-and-white logo, reliable appearance Undo and keyboard-complete Settings search. [Release notes and limitations](RELEASE_NOTES.md) · [Matching source](SOURCE_NOTICE.md) · [Checksums](SHA256SUMS.txt).
 
 Back up your records and quit through the tray before updating. Keep the existing installation scope and data folder. Actual installer lifecycle and physical accessibility checks remain uncompleted.
 
-Linux/macOS remain on the [older experimental FocusRecall builds](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.1.1-beta.1). Earlier release tags and assets remain unchanged. The README screenshots below are from earlier documented captures; they have not been relabeled as new Beta 5 screenshots.
+Linux/macOS remain on the [older experimental FocusRecall builds](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.1.1-beta.1). Earlier release tags and assets remain unchanged. The README screenshots below are from earlier documented captures; they have not been relabeled as new Beta 6 screenshots.
 
 [Report a beta problem](https://github.com/abd1442/A14-Pomodoro/issues/new?template=beta-test.yml). Use fictional examples and omit private records or backups.
 

@@ -1,23 +1,23 @@
 {
   "platform": "windows-x64",
-  "version": "0.1.6-beta.5",
-  "tag": "v0.1.6-beta.5",
-  "sourceCommit": "bd3947925c874086ebf8df6c29341c291382dadd",
+  "version": "0.1.6-beta.6",
+  "tag": "v0.1.6-beta.6",
+  "sourceCommit": "99b5e4dab0db978e0198deaafefc6d652ae5dc1d",
   "sourceTree": "corresponding-source",
-  "sourceTreeRef": "v0.1.6-beta.5",
+  "sourceTreeRef": "v0.1.6-beta.6",
   "binary": {
     "platform": "windows-x64",
-    "file": "A14-Pomodoro-0.1.6-beta.5-setup.exe",
-    "version": "0.1.6-beta.5",
-    "sourceCommit": "bd3947925c874086ebf8df6c29341c291382dadd",
+    "file": "A14-Pomodoro-0.1.6-beta.6-setup.exe",
+    "version": "0.1.6-beta.6",
+    "sourceCommit": "99b5e4dab0db978e0198deaafefc6d652ae5dc1d",
     "sourceFolder": "corresponding-source",
-    "bytes": 121463621,
-    "sha256": "af2b3b117fb094d6ea684f0a44da588a50057a7574998740d9664410f302fe9a"
+    "bytes": 121464604,
+    "sha256": "0f7e39b82994ba153b96ee2265c8cc5c052216f5bd826516ae6afd9ddd5a3560"
   },
   "correspondingSource": {
-    "file": "A14-Pomodoro-Beta-5-Source.zip",
-    "bytes": 158992123,
-    "sha256": "88abca96f81b57c0753e43ae0094a96be39b0f06d593c4bffaa1845a7f5a3705"
+    "file": "A14-Pomodoro-Beta-6-Source.zip",
+    "bytes": 159035250,
+    "sha256": "2df391b40b4e812cdac238ac3e3c977b819ce66c7021da1ec77c98ff704e2ea2"
   },
   "noDeveloperHistory": true
 }
