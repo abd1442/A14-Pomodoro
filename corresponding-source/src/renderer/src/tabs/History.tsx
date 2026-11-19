@@ -112,6 +112,8 @@ export function HistoryTab(): React.JSX.Element {
   }, [reload, stage])
 
   const all = useMemo(() => flattenBlocks(sittings ?? [], dayStart), [sittings, dayStart])
+  // A fresh profile has nothing to filter: lead with the next action instead of filter controls.
+  const neverStudied = sittings !== null && all.length === 0
   const categoryOf = useMemo(() => {
     const m = new Map(items.map((i) => [i.id, i.categoryId]))
     return (id: Id): Id | undefined => m.get(id)
@@ -141,8 +143,8 @@ export function HistoryTab(): React.JSX.Element {
     <div className="h-full overflow-y-auto">
       <div className="flex flex-col gap-7 px-10 py-9">
         <header className="flex flex-wrap items-center gap-4">
-          <h1 className="flex-1 text-4xl font-light tracking-tight">{uiText("History")}</h1>
-          <input dir="auto" className={`${inputBase} w-80`} aria-label={uiText("Search history")} placeholder={view==='notes'?uiText("Search saved notes…"):uiText("Search recall and session notes…")} value={query} onChange={(e) => setQuery(e.target.value)} />
+          <h1 className="flex-1 text-3xl font-semibold tracking-tight">{uiText("History")}</h1>
+          <input dir="auto" hidden={neverStudied} className={`${inputBase} w-80`} aria-label={uiText("Search history")} placeholder={view==='notes'?uiText("Search saved notes…"):uiText("Search recall and session notes…")} value={query} onChange={(e) => setQuery(e.target.value)} />
           <Segmented<View>
             value={view}
             onChange={setView}
@@ -154,7 +156,7 @@ export function HistoryTab(): React.JSX.Element {
           />
         </header>
 
-        {view !== 'notes' && <><div className="flex flex-wrap items-center gap-3">
+        {view !== 'notes' && !neverStudied && <><div className="flex flex-wrap items-center gap-3">
           <Segmented<RangePreset>
             value={preset === 'day' || preset === 'custom' ? ('' as RangePreset) : preset}
             onChange={(p) => {
@@ -241,7 +243,7 @@ export function HistoryTab(): React.JSX.Element {
           <ReviewList blocks={filtered} />
         ) : (
           <>
-            <div className="flex flex-wrap items-center justify-between gap-3"><p className="text-muted">{formatCount(sum.sessions, 'session')} · {timeOrDash(sum.focusSeconds)}{uiText(" focused")}</p><Button aria-expanded={showCharts} onClick={() => setShowCharts(!showCharts)}>{uiText("Summary, calendar & charts")}</Button></div>
+            {!neverStudied && <div className="flex flex-wrap items-center justify-between gap-3"><p className="text-muted">{formatCount(sum.sessions, 'session')} · {timeOrDash(sum.focusSeconds)}{uiText(" focused")}</p><Button aria-expanded={showCharts} onClick={() => setShowCharts(!showCharts)}>{uiText("Summary, calendar & charts")}</Button></div>}
             {showCharts && <div className="flex flex-col gap-6">
             <div className="grid gap-6 2xl:grid-cols-2">
               <Card title={preset === 'day' && selectedDay ? dayLabel(selectedDay) : uiText("Selected range")}>
@@ -291,7 +293,7 @@ export function HistoryTab(): React.JSX.Element {
             <section className="flex flex-col gap-4">
               <div className="flex items-center justify-between gap-4">
                 <h2 className="text-2xl font-semibold">{uiText("Sessions")}</h2>
-                <span className="flex items-center gap-3 text-base text-muted">{uiText("Group by")}<Segmented<GroupBy>
+                <span className={`flex items-center gap-3 text-base text-muted ${neverStudied ? 'hidden' : ''}`}>{uiText("Group by")}<Segmented<GroupBy>
                     value={groupBy}
                     onChange={setGroupBy}
                     options={[
@@ -302,7 +304,7 @@ export function HistoryTab(): React.JSX.Element {
                   />
                 </span>
               </div>
-              <SessionGroups blocks={filtered} by={groupBy} categoryOf={categoryOf} reload={reload} highlight={highlight} query={query} />
+              <SessionGroups blocks={filtered} by={groupBy} categoryOf={categoryOf} reload={reload} highlight={highlight} query={query} neverStudied={sittings !== null && all.length === 0} />
             </section>
           </>
         )}
@@ -453,7 +455,7 @@ function SessionGroups({
   blocks,
   by,
   categoryOf,
-  reload,highlight,query
+  reload,highlight,query,neverStudied=false
 }: {
   blocks: DayBlock[]
   by: GroupBy
@@ -461,6 +463,7 @@ function SessionGroups({
   reload: () => Promise<void>
   highlight: number|null
   query:string
+  neverStudied?:boolean
 }): React.JSX.Element {
   const { items, categories } = useLibrary()
   const [shown, setShown] = useState(30)
@@ -469,7 +472,10 @@ function SessionGroups({
   const count = Math.max(shown, highlight === null ? 0 : ordered.findIndex(s => s.id === highlight) + 1)
   const visible = new Set(ordered.slice(0, count).map(s => s.id))
   const milestones = useStageMilestones()
-  if (!groups.length) return <p className="rounded-2xl border border-dashed border-line px-6 py-10 text-center text-base text-muted">{uiText("No sessions match.")}</p>
+  // Same empty state as Stats on a fresh profile; a filtered miss stays a light dashed note.
+  if (!groups.length) return neverStudied
+    ? <div className="flex flex-wrap items-center gap-8 rounded-2xl border border-line bg-surface px-6 py-12"><span aria-hidden="true" className="block size-24 shrink-0 text-accent-text"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M22 16H70L82 28V86H22ZM70 16V28H82M34 16V86M45 38H68M45 50H68M45 62H58"/><circle cx="74" cy="76" r="17" fill="var(--tf-surface)"/><path d="M74 67V85M65 76H83"/></svg></span><div className="min-w-0"><h3 className="text-2xl font-semibold">{uiText('A place for your study story')}</h3><p className="mt-3 mb-4 max-w-[30rem] leading-relaxed text-muted">{uiText('Your first session will put something here. Start with what you want to study.')}</p><Button variant="primary" onClick={()=>useUi.getState().setTab('home')}>{uiText('Start studying')}</Button></div></div>
+    : <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-line px-6 py-10 text-center"><p className="text-lg font-semibold">{uiText('No sessions in this range.')}</p><p className="max-w-prose text-muted">{uiText('Choose another date range or subject, or start a study session.')}</p></div>
   const title = (key: string): string => {
     if (by === 'day') return dayLabel(key)
     if (by === 'subject') return items.find((i) => i.id === Number(key))?.name ?? 'Deleted subject'

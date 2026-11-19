@@ -145,7 +145,7 @@ function FieldEditor({ field, siblings, index, groups }: { field: LogField; sibl
   const count = hasOptions ? field.options.filter((o) => !o.archived).length : null
 
   return (
-    <li id={`log-question-${field.id}`} data-field-id={field.id} className={`px-6 py-3 ${field.archived ? 'opacity-60' : ''}`}>
+    <li id={`log-question-${field.id}`} tabIndex={-1} data-field-id={field.id} className={`px-6 py-3 ${field.archived ? 'opacity-60' : ''}`}>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2"><QuestionTypeIcon type={field.type}/>
         <InlineName value={field.label} onSave={(label) => window.api.invoke('log:saveField', { id: field.id, groupId: field.groupId, label })} className="text-base font-medium" />
         <span className="rounded-md bg-surface-2 px-2 py-1 text-sm text-muted">

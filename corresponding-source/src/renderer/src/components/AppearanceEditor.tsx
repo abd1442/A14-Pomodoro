@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react'
 import { DEFAULT_APPEARANCE, normalizeAppearance, type Appearance } from '@core/appearance'
 import { useAppearance } from '../store/appearance'
 import { Button, inputClass } from './ui'
+import { offerUndo } from './AppearanceSettings'
+
+const PRESETS_CHANGED='a14-appearance-presets-changed'
 
 // Settings → Appearance → Advanced: fonts, corners and spacing, and saved setups.
 // Custom colours now live in Stage colours (AppearanceSettings).
@@ -38,11 +41,12 @@ export function PresetSettings():React.JSX.Element{
   const {appearance:a,update}=useAppearance()
   const {run,error,message,setMessage}=useRunner()
   const [presets,setPresets]=useState<{name:string;appearance:Appearance}[]>([]),[name,setName]=useState('')
-  const refresh=()=>void window.api.invoke('appearance:presets').then(setPresets)
+  const refresh=()=>void window.api.invoke('appearance:presets').then(p=>{setPresets(p);window.dispatchEvent(new Event(PRESETS_CHANGED))})
   useEffect(refresh,[])
   return <div className="flex flex-col gap-4">
-    <h3 className="text-lg font-semibold">{uiText("Your appearance presets")}</h3><div className="flex flex-wrap gap-3"><input aria-label={uiText("Preset name")} className={`${inputClass} min-w-0 flex-1`} placeholder={uiText("Name this setup")} value={name} onChange={(e)=>setName(e.target.value)}/><Button disabled={!name.trim()} onClick={()=>void run(async()=>{await window.api.invoke('appearance:savePreset',name,a);setName('');refresh();setMessage(uiText('Preset saved.'))})}>{uiText("Save preset")}</Button><Button onClick={()=>void run(async()=>{const path=await window.api.invoke('appearance:export',a);if(path)setMessage(uiText('Preset exported to {path}',{path}))})}>{uiText("Export JSON")}</Button><Button onClick={()=>void run(async()=>{const preset=await window.api.invoke('appearance:import');if(preset){await update(preset);setMessage(uiText('Preset imported.'))}})}>{uiText("Import JSON")}</Button><Button onClick={()=>void update(DEFAULT_APPEARANCE)}>{uiText("Reset appearance")}</Button></div>
-    {presets.map((preset)=><div key={preset.name} className="flex items-center gap-3"><Button onClick={()=>void update(normalizeAppearance(preset.appearance))}>{preset.name}</Button><Button variant="ghost" size="sm" onClick={()=>void run(async()=>{await window.api.invoke('appearance:deletePreset',preset.name);refresh()})}>{uiText("Remove preset")}</Button></div>)}
+    <h3 className="text-lg font-semibold">{uiText("Your appearance presets")}</h3><div className="flex flex-wrap gap-3"><input aria-label={uiText("Preset name")} className={`${inputClass} min-w-0 flex-1`} placeholder={uiText("Name this setup")} value={name} onChange={(e)=>setName(e.target.value)}/><Button disabled={!name.trim()} onClick={()=>void run(async()=>{await window.api.invoke('appearance:savePreset',name,a);setName('');refresh();setMessage(uiText('Preset saved.'))})}>{uiText("Save preset")}</Button><Button onClick={()=>void run(async()=>{const path=await window.api.invoke('appearance:export',a);if(path)setMessage(uiText('Preset exported to {path}',{path}))})}>{uiText("Export JSON")}</Button><Button onClick={()=>void run(async()=>{const preset=await window.api.invoke('appearance:import');if(preset){offerUndo(a,'Setup applied.');await update(preset);setMessage(uiText('Preset imported.'))}})}>{uiText("Import JSON")}</Button></div>
+    {presets.length>0&&<ul className="divide-y divide-line rounded-xl border border-line">{presets.map((preset)=><li key={preset.name} className="flex items-center gap-3 px-4 py-2"><span dir="auto" className="min-w-0 flex-1 truncate font-medium">{preset.name}</span><Button size="sm" className="border border-line" onClick={()=>{offerUndo(a,'Setup applied.');void update(normalizeAppearance(preset.appearance))}}>{uiText("Apply")}</Button><Button variant="ghost" size="sm" onClick={()=>void run(async()=>{await window.api.invoke('appearance:deletePreset',preset.name);refresh()})}>{uiText("Remove preset")}</Button></li>)}</ul>}
+    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4"><p className="text-sm text-muted">{uiText("Reset appearance")}</p><Button variant="danger" size="sm" onClick={()=>{offerUndo(a,'Appearance reset.');void update(DEFAULT_APPEARANCE)}}>{uiText("Reset")}</Button></div>
     {error&&<p role="alert" className="text-status-error">{error}</p>}{message&&<p role="status" className="text-muted">{message}</p>}
   </div>
 }
@@ -50,6 +54,6 @@ export function PresetSettings():React.JSX.Element{
 /** How many setups are saved, for the Advanced row summary. */
 export function usePresetCount():number{
   const [count,setCount]=useState(0)
-  useEffect(()=>{void window.api.invoke('appearance:presets').then(p=>setCount(p.length))},[])
+  useEffect(()=>{const load=():void=>{void window.api.invoke('appearance:presets').then(p=>setCount(p.length))};load();window.addEventListener(PRESETS_CHANGED,load);return()=>window.removeEventListener(PRESETS_CHANGED,load)},[])
   return count
 }

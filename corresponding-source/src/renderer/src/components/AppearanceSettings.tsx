@@ -1,3 +1,4 @@
+import { SettingSwitch } from './SettingSwitch'
 import { t as uiText, useLanguage } from '../i18n'
 import { useEffect, useRef, useState } from 'react'
 import {
@@ -19,22 +20,33 @@ export const selectedClass = 'border-selected-line bg-selected ring-1 ring-selec
 
 // --- Undo toast ---------------------------------------------------------------
 
-let undoListener: ((previous: Appearance | null) => void) | null = null
+let undoListener: ((previous: Appearance, message: UndoMessage) => void) | null = null
 /** Remembers the appearance before a theme change so the toast can put it back. */
-export function offerUndo(previous: Appearance): void { undoListener?.(previous) }
+/** Offer Undo for one appearance action. The next independent appearance edit withdraws it, so Undo never reverts later changes. */
+export function offerUndo(previous: Appearance, message: UndoMessage = 'Theme changed.'): void { undoListener?.(previous, message) }
+type UndoMessage = 'Theme changed.' | 'Setup applied.' | 'Appearance reset.'
 
 export function ThemeUndoToast(): React.JSX.Element | null {
   const { update } = useAppearance()
-  const [previous, setPrevious] = useState<Appearance | null>(null)
+  const [offer, setOffer] = useState<{ previous: Appearance; message: UndoMessage } | null>(null)
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | undefined
-    undoListener = (p) => { setPrevious(p); clearTimeout(timer); timer = setTimeout(() => setPrevious(null), 8000) }
-    return () => { undoListener = null; clearTimeout(timer) }
+    // The offered action itself (and main's echo of the same saved value) are not new edits; any different appearance withdraws the offer.
+    let own: string | null = null, unsubscribe = (): void => {}
+    const withdraw = (): void => { setOffer(null); clearTimeout(timer); unsubscribe() }
+    undoListener = (previous, message) => {
+      unsubscribe(); clearTimeout(timer); own = null
+      setOffer({ previous, message })
+      unsubscribe = useAppearance.subscribe((state, prior) => { if (state.appearance === prior.appearance) return; const key = JSON.stringify(state.appearance); if (own === null) { own = key; return } if (key !== own) withdraw() })
+      timer = setTimeout(withdraw, 8000)
+    }
+    return () => { undoListener = null; clearTimeout(timer); unsubscribe() }
   }, [])
-  if (!previous) return null
+  if (!offer) return null
+  const previous = offer.previous
   return <div role="status" className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-4 rounded-xl border border-line bg-raised px-5 py-3 shadow-[var(--fr-shadow-raised)]">
-    <span>{uiText("Theme changed.")}</span>
-    <Button size="sm" onClick={() => { void update(previous); setPrevious(null) }}>{uiText("Undo")}</Button>
+    <span>{uiText(offer.message)}</span>
+    <Button size="sm" onClick={() => { setOffer(null); void update(previous) }}>{uiText("Undo")}</Button>
   </div>
 }
 
@@ -43,8 +55,9 @@ export function ThemeUndoToast(): React.JSX.Element | null {
 /** Simple colour chips keep mode choices quiet and easy to scan. */
 function ModePicture({ mode, a }: { mode: ThemeMode; a: Appearance }): React.JSX.Element {
   const light = themeById(a.lightTheme)!, dark = themeById(a.darkTheme)!
-  const colour=mode==='system'?'#888888':mode==='light'?light.canvas:dark.canvas
-  return <span aria-hidden="true" className="appearance-swatch size-9 shrink-0 rounded-full" style={{backgroundColor:colour}} />
+  // Follow Windows shows both saved canvases, split diagonally.
+  const background=mode==='system'?`linear-gradient(135deg, ${light.canvas} 50%, ${dark.canvas} 50%)`:mode==='light'?light.canvas:dark.canvas
+  return <span aria-hidden="true" className="appearance-swatch size-9 shrink-0 rounded-full" style={{background}} />
 }
 
 /** Light, Dark or Follow Windows, with one quiet colour circle per choice. */
@@ -80,8 +93,9 @@ function useGallerySide(): [Side, (side: Side) => void] {
 
 function ThemeSwatch({ id, side }: { id: string; side: Side }): React.JSX.Element {
   const theme = themeById(id, side)!
-  const colour=theme.chart.chroma === 0 ? theme.canvas : theme.accent
-  return <span aria-hidden="true" className="theme-colour-swatch appearance-swatch block size-10 shrink-0 rounded-full" style={{backgroundColor:colour}} />
+  // Canvas on one half, the theme's accent (or ink, for monochrome) on the other, so similar themes stay distinguishable.
+  const second=theme.chart.chroma === 0 ? theme.text : theme.accent
+  return <span aria-hidden="true" className="theme-colour-swatch appearance-swatch block size-10 shrink-0 rounded-full" style={{background:`linear-gradient(135deg, ${theme.canvas} 50%, ${second} 50%)`}} />
 }
 
 /** Follow Windows only: the two saved themes as tabs, each showing its current choice. */
@@ -167,7 +181,7 @@ export function SidebarChoices(): React.JSX.Element {
     <RadioGroup label={uiText("Sidebar colour")} className="grid gap-3 sm:grid-cols-3" value={a.navTone} values={tones.map(x => x.id)} onChange={(navTone) => void update({ navTone })}
       header={<div className="mb-2 font-medium">{uiText("Sidebar colour")}</div>}>
       {(id, props) => { const n = toneTokens(id); return <button {...props} key={id} className={`rounded-xl border p-2 text-center text-sm transition ${a.navTone === id ? `${selectedClass} font-semibold text-selected-ink` : 'border-line text-muted hover:bg-surface-2'}`}>
-        <span aria-hidden="true" className="appearance-swatch mx-auto mb-2 block size-7 rounded-full" style={{backgroundColor:n['nav.bg']}}/>{uiText(tones.find(x => x.id === id)!.label)}</button> }}
+        <span aria-hidden="true" className="appearance-swatch mx-auto mb-2 block size-7 rounded-full" style={{background:`linear-gradient(135deg, ${n['nav.bg']} 50%, ${n['nav.active.bg']} 50%)`}}/>{uiText(tones.find(x => x.id === id)!.label)}</button> }}
     </RadioGroup>
   </div>
 }
@@ -233,8 +247,8 @@ export function StageColourEditor(): React.JSX.Element {
         {custom[k] && <button type="button" className="mt-2 text-sm text-accent-text hover:underline" onClick={() => void update(stageOverridePatch(a, side, k, null))}>{uiText("Use the theme colour")}</button>}
       </div>
     })}</div>
-    <label className="flex items-center gap-3"><input type="checkbox" className="size-5 accent-[var(--fr-accent-default)]" checked={a.focusIsAccent} onChange={e => void update({ focusIsAccent: e.target.checked })} />
-      <span><span className="block">{uiText("A custom Focus colour also colours buttons")}</span><span className="text-sm text-muted">{uiText("Buttons, rings and selection follow your Focus colour.")}</span></span></label>
+    <div className="flex items-center justify-between gap-4"><span><span className="block">{uiText("A custom Focus colour also colours buttons")}</span><span className="text-sm text-muted">{uiText("Buttons, rings and selection follow your Focus colour.")}</span></span>
+      <SettingSwitch label="A custom Focus colour also colours buttons" checked={a.focusIsAccent} onChange={focusIsAccent => void update({ focusIsAccent })} /></div>
   </div>
 }
 

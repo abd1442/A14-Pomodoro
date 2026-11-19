@@ -13,6 +13,7 @@ import { GoalField, LengthForMode, ModeControl } from './TimerControls'
 import { useSettings } from '../store/session'
 import { FieldInput } from './log/FieldInput'
 import { Button, Dialog, inputBase } from './ui'
+import { SettingSwitch } from './SettingSwitch'
 
 /**
  * Home's session setup: subject, timer mode and length, the session goal, and
@@ -141,18 +142,7 @@ function OptionRow({ label, hint, children }: { label: string; hint?: string; ch
 
 /** An on/off switch, the same as in Settings. */
 export function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label?: string }): React.JSX.Element {
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={checked}
-      aria-label={label}
-      onClick={() => onChange(!checked)}
-      className={`relative h-8 w-14 shrink-0 rounded-full transition-colors ${checked ? 'bg-focus' : 'bg-surface-2 ring-1 ring-line'}`}
-    >
-      <span className={`absolute top-1 left-1 size-6 rounded-full shadow transition-transform ${checked ? 'translate-x-6 bg-on-accent' : 'bg-muted'}`} />
-    </button>
-  )
+  return <SettingSwitch checked={checked} onChange={onChange} label={label} />
 }
 
 /** The study setup the next log starts from: a setup chosen here, or the default. */

@@ -1,3 +1,4 @@
+import { SettingSwitch } from '../components/SettingSwitch'
 import { useSettingLabel } from '../components/settingLabel'
 import { trackingConsented, TRACKING_DISCLOSURE, TITLE_DISCLOSURE, TRACKING_RECONFIRM } from '@core/trackingConsent'
 import { t as uiText } from '../i18n'
@@ -33,7 +34,7 @@ export function AutomaticTrackingCard():React.JSX.Element {
     <div className="my-4 flex flex-wrap gap-2">{['App time','Window activity','Detected distractions'].map(label=><span key={label} className="rounded-full border border-line bg-surface px-3 py-2 text-sm">{uiText(label)}</span>)}</div>
     <p className="tracking-disclosure text-sm text-muted">{uiText(TRACKING_DISCLOSURE)}</p>
     {settings.foregroundTrackingEnabled&&!enabled&&<p className="mt-3 text-sm text-muted">{uiText(TRACKING_RECONFIRM)}</p>}
-    <label className="mt-4 flex items-start gap-3 text-sm text-muted"><input type="checkbox" className="mt-1" aria-label={uiText("Record window titles")} disabled={!enabled} checked={settings.foregroundTrackingTitlesEnabled} onChange={e=>void set('foregroundTrackingTitlesEnabled',e.target.checked)}/><span>{uiText(TITLE_DISCLOSURE)}</span></label>
+    <div className="mt-4 flex items-start justify-between gap-4 text-sm text-muted"><span>{uiText(TITLE_DISCLOSURE)}</span><SettingSwitch label="Record window titles" disabled={!enabled} checked={settings.foregroundTrackingTitlesEnabled} onChange={v=>void set('foregroundTrackingTitlesEnabled',v)}/></div>
     <p className="mt-3 text-xs text-muted">{uiText("App classifications are estimates. Review detected distractions; tracking does not prove attention. You can delete recorded titles separately from study history. Copies in backups and exports remain separate.")}</p>
     <p className="mt-3 text-xs text-muted">{uiText("After deletion, saved automatic detections and switch counts are preserved. Later rules apply to other sessions; individual records remain editable.")}</p>
     <div className="mt-4 flex flex-col items-start gap-2"><Button variant="quiet" disabled={!idle||deleting} onClick={()=>void deleteTitles()}>{uiText("Delete window titles")}</Button><p className="text-xs text-muted">{uiText("Removes titles from this profile, keeping study history. Copies in backups and exports remain. Saved title rules stay editable below.")}</p>{!idle&&<p className="text-xs text-muted">{uiText("Finish or leave the current study workflow before deleting window titles.")}</p>}<p role="status" className="text-sm text-muted">{deletion}</p></div>
@@ -132,20 +133,8 @@ const CAPTURES: { key: keyof CaptureSettings; label: string; hint: string }[] = 
   { key: 'longAbsence', label: 'Long absence question', hint: 'Continue, or end the session where you left, after a long time away.' }
 ]
 
-function Switch({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label?:string }): React.JSX.Element {
-  const name = useSettingLabel(label)
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-label={name}
-      aria-checked={checked}
-      onClick={() => onChange(!checked)}
-      className={`relative h-8 w-14 shrink-0 rounded-full transition-colors ${checked ? 'bg-focus' : 'bg-surface-2 ring-1 ring-line'}`}
-    >
-      <span className={`absolute top-1 left-1 size-6 rounded-full shadow transition-transform ${checked ? 'translate-x-6 bg-on-accent' : 'bg-muted'}`} />
-    </button>
-  )
+function Switch(props: { checked: boolean; onChange: (v: boolean) => void; label?: string }): React.JSX.Element {
+  return <SettingSwitch {...props} />
 }
 
 /** Distraction reasons: rename, reorder, archive, add. The picker shows the most used first. */

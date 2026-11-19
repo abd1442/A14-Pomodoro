@@ -104,12 +104,12 @@ export function DayCheckinCard({ answers, reload }: { answers: DayAnswers | null
 
   if (!shown.done && !editing) {
     return (
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-2xl border border-focus/40 bg-focus/8 px-6 py-4">
-        <Button variant="primary" onClick={open} className="shadow-sm">
-          <CheckInIcon />{uiText(" Check in")}</Button>
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-2xl border border-line bg-surface px-6 py-3">
         <span className="min-w-0 flex-1 text-lg">{uiText("How are you today? ")}<span className="text-muted">{uiText("Optional")}</span>
         </span>
         {skipButton}
+        <Button onClick={open} className="border border-line">
+          <CheckInIcon />{uiText(" Check in")}</Button>
       </div>
     )
   }

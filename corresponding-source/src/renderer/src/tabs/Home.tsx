@@ -74,7 +74,7 @@ export function HomeTab(): React.JSX.Element {
         </div>
         <div className="home-workspace grid items-start gap-5">
           <div className="home-subjects flex min-w-0 flex-col gap-4">
-            <h1 className="text-4xl font-light tracking-tight">{subjects.length?uiText("What are you studying?"):uiText("Add your first subject")}</h1>{!subjects.length&&<p className="text-muted">{uiText("A course, book, skill or anything you want to learn.")}</p>}
+            <h1 className="text-3xl font-semibold tracking-tight">{subjects.length?uiText("What are you studying?"):uiText("Add your first subject")}</h1>{!subjects.length&&<p className="text-muted">{uiText("A course, book, skill or anything you want to learn.")}</p>}
             <ItemPicker
               homeOrdering
               onOrder={setOrderedSubjects}

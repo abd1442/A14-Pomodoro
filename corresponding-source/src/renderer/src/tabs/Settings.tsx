@@ -1,3 +1,4 @@
+import { SettingSwitch } from '../components/SettingSwitch'
 import {CoachConnection} from '../components/CoachConnection'
 import { SettingLabelContext, useSettingLabel } from '../components/settingLabel'
 import { StudyExperience } from '../components/StudyExperience'
@@ -27,7 +28,7 @@ import { NotesSettings } from '../components/NotesSettings'
 import { FontSettings, PresetSettings, ShapeSettings, usePresetCount } from '../components/AppearanceEditor'
 import { AdvancedRow, CustomSurfacesRow, PanelPreview, SidebarChoices, StageColourEditor, ThemeGallery, ThemeModeCards, ThemeUndoToast } from '../components/AppearanceSettings'
 import { TimelineColours } from '../components/TimelineColours'
-import { SettingsGuide, SettingIcon } from '../components/SettingsGuide'
+import { SettingsGuide } from '../components/SettingsGuide'
 import { RestExample } from '../components/SettingsExamples'
 import { BackupSettings } from '../components/BackupSettings'
 import { StudyReminderSettings } from '../components/StudyReminderSettings'
@@ -95,6 +96,7 @@ export function SettingsTab(): React.JSX.Element {
       const detail = el.closest('details') ?? el.querySelector(':scope > details')
       if (detail) detail.open = true
       el.scrollIntoView({ block: 'center', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+      el.focus({ preventScroll: true })
       el.classList.add('setting-highlight')
       setTimeout(() => el.classList.remove('setting-highlight'), 1800)
     }, 60)
@@ -103,7 +105,7 @@ export function SettingsTab(): React.JSX.Element {
     <div className="settings-surface h-full overflow-y-auto">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-7 lg:px-10 lg:py-9">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <h1 className="text-3xl font-semibold">{uiText("Settings")}</h1>
+          <h1 className="text-3xl font-semibold tracking-tight">{uiText("Settings")}</h1>
           <input
             type="search"
             dir="auto"
@@ -116,7 +118,7 @@ export function SettingsTab(): React.JSX.Element {
           />
 
         </div>
-        {!searching && <SettingsGuide page={page} onChange={setPage} onJump={pick}/>}
+        {!searching && <SettingsGuide page={page} onChange={setPage}/>}
         {searching ? (
           <div className="flex flex-col gap-8">
             {matches(query,'about A14 Pomodoro creator why privacy local data donation donate support ko-fi feedback')&&<AboutA14Pomodoro/>}
@@ -146,16 +148,16 @@ function GeneralPage(): React.JSX.Element {
   const { settings, set } = useSettings()
   return (
     <>
-      <nav aria-label={uiText('General settings sections')} className="flex flex-wrap gap-2">{['Study experience','Home','Automatic tracking','Focus','Sound'].map(label=><Button key={label} size="sm" variant="quiet" onClick={()=>{const target=document.getElementById(label==='Study experience'?slug(label):'general-'+slug(label));target?.scrollIntoView({block:'start'});target?.focus({preventScroll:true})}}>{uiText(label)} →</Button>)}</nav>
-      <SettingGroup label="Language" keywords="language العربية Español Français 简体中文 Português Deutsch English"><LanguageSettings /></SettingGroup>
-      <SettingGroup label="Study experience" keywords="quick full minimal timer workflow"><StudyExperience/>        {settings.studyExperience==='full'&&<Row label="Quick preparation before studying" hint={uiText("Optional checklist before the timer starts.")}>
+      <nav aria-label={uiText('General settings sections')} className="flex flex-wrap gap-2">{['Study experience','Home','Automatic tracking','Focus','Notes','Sound'].map(label=><Button key={label} size="sm" variant="quiet" onClick={()=>{const target=document.getElementById(label==='Study experience'?slug(label):'general-'+slug(label));target?.scrollIntoView({block:'start'});target?.focus({preventScroll:true})}}>{uiText(label)} →</Button>)}</nav>
+      <SettingGroup label="Language" keywords="language العربية Español Français 简体中文 Português Deutsch English" flush><LanguageSettings /></SettingGroup>
+      <div className="divide-y divide-line rounded-2xl border border-line bg-surface [&:not(:has([data-row]))]:hidden"><SettingGroup label="Study experience" keywords="quick full minimal timer workflow"><StudyExperience framed={false}/></SettingGroup>{settings.studyExperience==='full'&&<Row label="Quick preparation before studying" hint={uiText("Optional checklist before the timer starts.")}>
           <Toggle label={uiText('Quick preparation before studying')} checked={settings.preparationEnabled} onChange={v=>set('preparationEnabled',v)}/>
-        </Row>}</SettingGroup>
-      <SettingGroup label="A14 Coach" keywords="sync connection study records automatic"><CoachConnection/></SettingGroup>
-      <SettingGroup label="Study suggestions" keywords="advice tips reset topics history"><AdviceSettings/></SettingGroup>
+        </Row>}</div>
+      <div className="rounded-2xl border border-line bg-surface [&:not(:has([data-row]))]:hidden"><SettingGroup label="A14 Coach" keywords="sync connection study records automatic" flush><CoachConnection/></SettingGroup></div>
+      <div className="rounded-2xl border border-line bg-surface [&:not(:has([data-row]))]:hidden"><SettingGroup label="Study suggestions" keywords="advice tips reset topics history"><AdviceSettings/></SettingGroup></div>
       <Section title="Home"><Row label="Show Today Check" hint={uiText('Show the optional daily check-in on Home. Skipping hides it until local midnight.')}><Toggle label={uiText('Show Today Check')} checked={settings.showTodayCheck} onChange={v=>void set('showTodayCheck',v)}/></Row></Section>
       <Section title="Getting started"><SettingGroup label="Starter guide" keywords="welcome help first use basics tutorial"><div className="flex flex-wrap items-center justify-between gap-4"><p className="text-muted">{uiText("A quick tour of studying, review, tracking and insights.")}</p><Button onClick={()=>window.dispatchEvent(new Event(STARTER_GUIDE_EVENT))}>{uiText("Open starter guide")}</Button></div></SettingGroup></Section>
-      <Section title="Automatic tracking"><SettingGroup label="Automatic tracking" keywords="privacy apps windows titles foreground distraction"><AutomaticTrackingCard/></SettingGroup></Section>
+      <Section title="Automatic tracking" plain><SettingGroup label="Automatic tracking" keywords="privacy apps windows titles foreground distraction" flush><AutomaticTrackingCard/></SettingGroup></Section>
       <Section title="Focus">
         <p className="px-6 py-4 text-sm text-muted">{uiText("Screen locking also interrupts tracking, even if you continue studying on paper. Resume when you return; locked time is not credited as Focus.")}</p>
         <Row label="Default focus target" hint={uiText("Flow counts up toward this, then keeps going.")}>
@@ -506,7 +508,7 @@ function AppearanceJumps(): React.JSX.Element {
   return <nav aria-label={uiText("Appearance sections")} className="-mb-3 flex flex-wrap gap-2">
     {APPEARANCE_JUMPS.map(j => <button key={j.id} type="button" aria-current={current === j.id ? 'true' : undefined}
       className={`rounded-full border px-4 py-1.5 text-sm transition ${current === j.id ? 'border-line bg-control font-semibold text-ink' : 'border-line text-muted hover:text-ink'}`}
-      onClick={() => document.getElementById(j.id)?.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })}>{uiText(j.label)}</button>)}
+      onClick={() => { const target = document.getElementById(j.id); target?.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); target?.focus({ preventScroll: true }) }}>{uiText(j.label)}</button>)}
   </nav>
 }
 
@@ -592,7 +594,7 @@ function Section({ title, children, advanced = false, plain = false, lead, ancho
       id={anchor??("general-"+slug(title))} tabIndex={-1}
       className={`flex scroll-mt-4 flex-col gap-3 ${searching && !titleMatch ? '[&:not(:has([data-row]))]:hidden' : ''}`}
     >
-      {!advanced && <h2 className="flex items-center gap-3 text-lg font-semibold"><SettingIcon title={title}/>{uiText(title)}</h2>}
+      {!advanced && <h2 className="text-lg font-semibold">{uiText(title)}</h2>}
       {lead && !searching && <p className="-mt-1 text-sm text-muted">{uiText(lead)}</p>}
       <div
         className={`${plain ? 'flex flex-col gap-4' : 'divide-y divide-line rounded-2xl border border-line bg-surface'} ${searching && !titleMatch ? '[&>*:not([data-row])]:hidden' : ''}`}
@@ -637,12 +639,14 @@ function Row({ label, hint, keywords, children }: { label: string; hint?: string
     <div
       id={id}
       data-row
-      role="group" aria-labelledby={labelId} aria-describedby={hint ? hintId : undefined}
+      role={searching ? 'button' : 'group'} aria-labelledby={labelId} aria-describedby={hint ? hintId : undefined}
       onChangeCapture={status.arm}
       onClickCapture={status.arm}
       onKeyDownCapture={status.arm}
+      tabIndex={searching ? 0 : -1}
       className={`relative grid min-h-18 grid-cols-1 items-start gap-4 px-6 py-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] transition-colors ${searching ? 'cursor-pointer hover:bg-surface-2/50' : ''}`}
       onClick={searching ? () => pick(id, page) : undefined}
+      onKeyDown={searching ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(id, page) } } : undefined}
     >
       <div className="min-w-0">
         <div id={labelId} className="text-base font-medium">{uiText(label)}</div>
@@ -653,7 +657,7 @@ function Row({ label, hint, keywords, children }: { label: string; hint?: string
         </span>
       )}
       </div>
-      <SettingLabelContext.Provider value={uiText(label)}><div className={`setting-controls min-w-0 ${searching ? 'pointer-events-none' : ''}`}>{children}</div></SettingLabelContext.Provider>
+      <SettingLabelContext.Provider value={uiText(label)}><div inert={searching} className={`setting-controls min-w-0 xl:flex xl:justify-end ${searching ? 'pointer-events-none' : ''}`}>{children}</div></SettingLabelContext.Provider>
     </div>
   )
 }
@@ -692,20 +696,8 @@ function useSaveStatus(): { arm: () => void; shown: boolean; error: string | nul
   return { arm: () => (armed.current = Date.now()), shown, error }
 }
 
-function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label?:string }): React.JSX.Element {
-  const name = useSettingLabel(label)
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-label={name}
-      aria-checked={checked}
-      onClick={() => onChange(!checked)}
-      className={`relative h-8 w-14 shrink-0 rounded-full transition-colors ${checked ? 'bg-focus' : 'bg-surface-2 ring-1 ring-line'}`}
-    >
-      <span className={`absolute top-1 left-1 size-6 rounded-full shadow transition-transform ${checked ? 'translate-x-6 bg-on-accent' : 'bg-muted'}`} />
-    </button>
-  )
+function Toggle(props: { checked: boolean; onChange: (v: boolean) => void; label?: string }): React.JSX.Element {
+  return <SettingSwitch {...props} />
 }
 
 /** Edit stage names and the hour each one ends at; the last stage never ends. */

@@ -271,8 +271,8 @@ function StatsPanel({active,ctx,exploring,restoredOutcome,onFilters,children}:{a
 function Switch({ label, hint, on, onChange }: { label: string; hint: string; on: boolean; onChange: (v: boolean) => void }): React.JSX.Element {
   return (
     <button type="button" role="switch" aria-checked={on} title={hint} onClick={() => onChange(!on)} className="flex items-center gap-3 text-base">
-      <span className={`relative h-6 w-11 rounded-full transition-colors ${on ? 'bg-focus' : 'bg-surface-2 ring-1 ring-line'}`}>
-        <span className={`absolute top-0.5 size-5 rounded-full bg-surface shadow transition-[left] ${on ? 'left-[1.375rem]' : 'left-0.5'}`} />
+      <span className={`relative h-6 w-11 rounded-full transition-colors ${on ? 'bg-focus' : 'bg-transparent ring-[1.5px] ring-inset ring-muted'}`}>
+        <span className={`absolute top-0.5 size-5 rounded-full shadow-sm transition-[left] ${on ? 'left-[1.375rem] bg-on-accent' : 'left-0.5 bg-muted'}`} />
       </span>
       <span className={on ? 'text-ink' : 'text-muted'}>{label}</span>
     </button>

@@ -77,12 +77,12 @@ export function FocusScreen({ block }: { block: RunningBlock }): React.JSX.Eleme
         <Button
           variant="quiet"
           onClick={toggle}
-          className={`min-h-14 min-w-36 text-lg ${distracted ? 'ring-2 ring-overtime' : ''}`}
+          className={`min-h-14 min-w-36 border border-line text-lg ${distracted ? 'ring-2 ring-overtime' : ''}`}
           title={hint(distracted ? 'Back to studying' : 'Stop the clock while you are pulled away', keys.hotkeyDistracted)}
         >
           {distracted ? uiText("Back") : uiText("Distracted")}
         </Button>
-        <Button variant="quiet" onClick={() => setSwitching(true)} className="min-h-14 min-w-32 text-lg" title={hint('Change subject; the session goes on', keys.hotkeySwitch)}>{uiText("Switch")}</Button>
+        <Button variant="quiet" onClick={() => setSwitching(true)} className="min-h-14 min-w-32 border border-line text-lg" title={hint('Change subject; the session goes on', keys.hotkeySwitch)}>{uiText("Switch")}</Button>
         <Button variant="primary" onClick={finish} className="min-h-14 px-8 text-lg" style={{ background: color, color: `var(--fr-stage-${stage}-on)` }}>{uiText("Finish session")}</Button>
       </div>
 

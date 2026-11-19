@@ -16,7 +16,7 @@
 }
 
 /* One continuous focus stroke on Home search, rather than border plus detached outline. */
-.subject-search:focus{border-color:var(--fr-state-focusRing,var(--tf-focus));outline:2px solid var(--fr-state-focusRing,var(--tf-focus));outline-offset:-1px;box-shadow:none}
+.subject-search:focus{border-color:var(--fr-border-strong,var(--tf-border));outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--tf-focus) 16%,transparent)}
 
 /* Language direction is independent of the chosen palette. Data axes and clocks
    keep their numeric order; prose and navigation follow the interface language. */
@@ -186,15 +186,9 @@ html {
   direction: ltr;
 }
 .app-window-mark {
-  display: grid;
-  place-items: center;
+  display: block;
   width: calc(20px / var(--tf-zoom, 1));
   height: calc(20px / var(--tf-zoom, 1));
-  border-radius: calc(5px / var(--tf-zoom, 1));
-  background: var(--fr-text-primary);
-  color: var(--fr-bg-canvas);
-  font-size: calc(8px / var(--tf-zoom, 1));
-  font-weight: 700;
 }
 
 body {
@@ -216,9 +210,13 @@ body {
 .sidebar-brand{min-height:48px;direction:ltr}.sidebar-brand>.brand-lockup{display:block;width:174px;max-width:100%;line-height:0}.brand-lockup svg{display:block;width:100%;height:auto}.sidebar-brand>img{display:none}.focusrecall-sidebar[data-collapsed=true] .sidebar-brand>img{display:block}
 /* Owner-selected Chrome-style palette: flat circles, selection ring and check. */
 /* In Black, the in-app brand artwork follows the white/gray identity too. */
-html:is([data-fr-theme='black'],[data-fr-theme='t3-light'],[data-fr-theme='t3-dark']) .brand-lockup path[stroke='#F0B35B']{stroke:var(--tf-nav-text)}
+/* Monochrome: the countdown arc moves just inside the tile's corner so it reads as part of the mark, not a tab on its edge. */
+html:is([data-fr-theme='black'],[data-fr-theme='t3-light'],[data-fr-theme='t3-dark']) .brand-lockup path[stroke='#F0B35B']{stroke:var(--tf-nav-muted);stroke-width:5;d:path('M52 16H71A17 17 0 0 1 88 33V52')}
 html:is([data-fr-theme='black'],[data-fr-theme='t3-light'],[data-fr-theme='t3-dark']) img[src*='a14-pomodoro-icon'],html:is([data-fr-theme='black'],[data-fr-theme='t3-light'],[data-fr-theme='t3-dark']) img[src*='support-cup']{filter:grayscale(1)}
-.appearance-swatch{border:1px solid var(--fr-border-default)}
+/* Dark monochrome: every app-icon copy becomes a light tile so it stays visible on black chrome; an Opposite (light) sidebar keeps the dark tile, and vice versa in White. */
+html:is([data-fr-theme='black'],[data-fr-theme='t3-dark']) img[src*='a14-pomodoro-icon'],html[data-fr-theme='t3-light'] .focusrecall-sidebar[data-nav-tone=inverse] .sidebar-brand>img{filter:grayscale(1) invert(1)}
+html:is([data-fr-theme='black'],[data-fr-theme='t3-dark']) .focusrecall-sidebar[data-nav-tone=inverse] .sidebar-brand>img{filter:grayscale(1)}
+.appearance-swatch{border:1px solid var(--fr-border-strong,var(--fr-border-default))}
 .theme-colour-option:hover .theme-colour-swatch{outline:2px solid var(--fr-border-strong);outline-offset:4px}
 .theme-colour-option[aria-checked=true] .theme-colour-swatch{outline:2px solid var(--fr-state-selected-border);outline-offset:4px}
 .theme-colour-option:focus-visible{outline:2px solid var(--fr-state-focusRing);outline-offset:2px}
@@ -578,12 +576,19 @@ html[data-density='compact'] main .py-9, html[data-density='compact'] main .py-8
 .home-calendar { max-height:42%;overflow-y:auto; }
 .tracking-disclosure { max-inline-size:75ch; }
 /* Preserve space for the subject list when Home stacks at narrow widths. */
-@container home (max-width:69.99rem) { .home-calendar { max-height:min(30%,13rem); } }
+.home-full-layout { display:flex;flex-direction:column;flex:1 1 auto;min-height:0; }
+/* Narrow Home: one scroll region; the year map follows the subjects instead of a clipped second pane. */
+@container home (max-width:69.99rem) {
+  .home-full-layout { overflow-y:auto; }
+  .home-full-layout > .home-scroll { flex:none;overflow:visible; }
+  .home-calendar { max-height:none;overflow:visible;padding-bottom:1.5rem; }
+}
 /* A compact rail at high zoom is a layout adaptation, not a saved preference. */
 @media(max-width:760px) {
   .focusrecall-sidebar { width:88px!important;padding:20px 12px 16px; }
   .focusrecall-sidebar .sidebar-brand { padding:0;justify-content:center;margin-bottom:24px; }
   .focusrecall-sidebar .sidebar-brand img { width:38px;height:38px; }
+  .focusrecall-sidebar .sidebar-brand>img { display:block; }
   .focusrecall-sidebar .sidebar-brand>span,.focusrecall-sidebar .sidebar-edition,.focusrecall-sidebar .sidebar-label,.focusrecall-sidebar .sidebar-version,.focusrecall-sidebar .sidebar-collapse,.focusrecall-sidebar .sidebar-sitting { display:none; }
   .focusrecall-sidebar .sidebar-link,.focusrecall-sidebar .sidebar-panel { justify-content:center;gap:0;padding:12px 8px;min-height:48px; }
   .focusrecall-sidebar .sidebar-link[aria-current]:after { inset-inline-start:0;inset-inline-end:auto;top:14px;width:3px;height:20px;clip-path:none;border-radius:3px; }
@@ -651,3 +656,6 @@ html[data-density='compact'] main .py-9, html[data-density='compact'] main .py-8
 .focusrecall-sidebar :focus-visible{outline:2px solid var(--tf-nav-active);outline-offset:-3px}
 .sidebar-link[aria-current]:focus-visible{outline-color:var(--tf-nav-onActive)}
 @media(forced-colors:active){.focusrecall-sidebar :focus-visible{outline-color:Highlight}}
+
+/* Native radios and checkboxes follow the theme accent instead of the system blue. */
+input[type='radio'],input[type='checkbox']{accent-color:var(--fr-accent-default)}

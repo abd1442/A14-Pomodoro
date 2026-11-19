@@ -142,7 +142,7 @@ const NAV: { id: Tab; label: string; icon: React.ReactNode }[] = [
 function Sidebar(): React.JSX.Element {
   const tab=useUi(s=>s.tab),setTab=useUi(s=>s.setTab),openLibrary=useUi(s=>s.openLibrary)
   const {appearance:a,update}=useAppearance(),collapsed=a.sidebarCollapsed
-  return <aside aria-label={uiText("Sidebar")} data-style={a.sidebarStyle} data-collapsed={collapsed} className="focusrecall-sidebar">
+  return <aside aria-label={uiText("Sidebar")} data-style={a.sidebarStyle} data-nav-tone={a.navTone} data-collapsed={collapsed} className="focusrecall-sidebar">
     <button type="button" onClick={()=>setTab('home')} aria-label={uiText("A14 Pomodoro, go to Home")} title={uiText("A14 Pomodoro, go to Home")} className="sidebar-brand"><Logo/><span className="brand-lockup" aria-hidden="true" dangerouslySetInnerHTML={{__html:brandLockup.replaceAll('#233957','currentColor').replaceAll('#FFFFFF','var(--tf-nav-bg, var(--tf-surface))')}}/></button>
     {a.sidebarStyle==='journal'&&<p className="sidebar-edition">{uiText("Your study companion")}</p>}
     <nav className="sidebar-nav" aria-label={uiText("Main")}>{NAV.map(n=><button key={n.id} type="button" title={uiText(n.label)} aria-label={uiText(n.label)} aria-current={tab===n.id?'page':undefined} onClick={()=>n.id==='library'?openLibrary({kind:'root'}):setTab(n.id)} className="sidebar-link"><svg viewBox="0 0 20 20" width="23" height="23" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{n.icon}</svg><span className="sidebar-label">{uiText(n.label)}</span></button>)}</nav>

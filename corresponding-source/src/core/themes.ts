@@ -135,6 +135,8 @@ export function deriveTokens(s: ThemeSeed, stages: Stages): Tokens {
       t[key]='#'+channel.repeat(3)
     }
     // An ordered tonal ramp for directly labeled monochrome charts.
+    // Empty heat-map days sit on a black canvas in dark monochrome; lift them so the grid stays readable.
+    if (dark) t['chart.heat.0']=mix(s.sunken, s.border, 0.6)
     for (let i=0;i<8;i++) t[`chart.series.${i+1}`]=(dark ? ['#777777','#999999','#BBBBBB','#DDDDDD','#FFFFFF','#888888','#AAAAAA','#CCCCCC'] : ['#181818','#303030','#494949','#636363','#808080','#242424','#3C3C3C','#565656'])[i]
   }
   return t
