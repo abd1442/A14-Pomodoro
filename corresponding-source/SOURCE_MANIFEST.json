@@ -6,6 +6,8 @@
   "sourceTreeRef": "v0.0.1-beta.1:corresponding-source",
   "normalization": "Exact working-source bytes; public source attributes preserve bytes. Release metadata is UTF-8.",
   "scope": "Curated current application sources. Private development history, profiles and local QA artifacts excluded.",
+  "status": "published-beta",
+  "sourceCommit": "b72de0a6d208b0f0b9ec9395254cc902e79c1ccc",
   "files": [
     {
       "file": ".gitattributes",

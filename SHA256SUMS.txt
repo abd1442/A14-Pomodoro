@@ -1,4 +1,4 @@
-0f7e39b82994ba153b96ee2265c8cc5c052216f5bd826516ae6afd9ddd5a3560  A14-Pomodoro-0.1.6-beta.6-setup.exe
-3921d7288f5cc2ad999415d51854db8e89f3ba139f753b8f566ac737aa165b31  A14-Pomodoro-Beta-6-Notices.zip
-2df391b40b4e812cdac238ac3e3c977b819ce66c7021da1ec77c98ff704e2ea2  A14-Pomodoro-Beta-6-Source.zip
-337a3edcccff1e7ee459e304dff8b146173ba985b7d7c52be86a87cc454c2dcb  RELEASE-MANIFEST.json
+da66d19bc50bd8b1159687a8a34f075458ba46896b07c91ae7bd47c9253bd91d  A14-Pomodoro-0.0.1-beta.1-setup.exe
+3921d7288f5cc2ad999415d51854db8e89f3ba139f753b8f566ac737aa165b31  A14-Pomodoro-Beta-1-Notices.zip
+b5af99b71ff7d8e69b198fcbbe22d11a298126e3423203cf6191e562b98cc03c  A14-Pomodoro-Beta-1-Source.zip
+86f5bd82bcf65c85ea0fb9de697f76a9e211dcfa479f2f6a8a7e258c6d26adc3  RELEASE-MANIFEST.json
