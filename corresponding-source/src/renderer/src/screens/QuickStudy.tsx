@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { distractedSince, sessionFocusSeconds } from '@core/session'
 import { clockDisplay } from '@core/modes'
 import { formatClock } from '@core/timer'
@@ -20,8 +19,7 @@ export function QuickStudy():React.JSX.Element {
  const state=useSession(s=>s.state)
  const now=useNow(state.running!==null,1000)
  const clock=state.running?clockDisplay(state.running.timerMode,state.running.targetSeconds,sessionFocusSeconds(state.running,now)):null
- const [override,setOverride]=useState<number|null>(null)
- const plan=useNextBlockPlan(override),paused=state.running&&distractedSince(state.running)!==null
+ const plan=useNextBlockPlan(),paused=state.running&&distractedSince(state.running)!==null
  const action=(destination:'break'|'finish'):void=>{if(state.running)void sessionCommand(()=>window.api.invoke('session:quickAction',destination,state.running!.id))}
  const showTimer=<Button variant="ghost" className="ql-show-timer" onClick={()=>void sessionCommand(()=>window.api.invoke('settings:set','panelOpen',true))}>{t('Show timer')}</Button>
  const header=<header className="ql-head"><h1>{t('Quick Mode')}</h1><p>{t('Choose a subject and start. Finish saves and stops.')}</p></header>
@@ -52,7 +50,7 @@ export function QuickStudy():React.JSX.Element {
      {mode&&<p className="ql-hint">{t(mode.hint)}</p>}
      {plan.mode==='adaptive'&&plan.suggestion?.basedOn===0&&<p className="ql-adaptive-explanation">{t('Adaptive needs five single-subject sessions of at least 10 minutes rated Focused or Deep. Quick Mode does not collect these ratings, so it uses your default target until qualifying records exist.')}</p>}
     </div>
-    <details className="ql-options"><summary>{t('Timer options')}</summary><div className="ql-options-body"><ModeControl value={plan.mode} onChange={plan.setMode} itemId={subject?.id??null} targetSeconds={plan.targetSeconds}/><LengthForMode plan={plan} adaptiveOverride={override} setAdaptiveOverride={setOverride}/></div></details>
+    <details className="ql-options"><summary>{t('Timer options')}</summary><div className="ql-options-body"><ModeControl value={plan.mode} onChange={plan.setMode} itemId={subject?.id??null} targetSeconds={plan.targetSeconds}/><LengthForMode plan={plan}/></div></details>
     </div>
     <Button variant="primary" className="ql-start" disabled={!subject} onClick={()=>void sessionCommand(()=>window.api.invoke('preparation:begin',{itemId:subject!.id,timerMode:plan.mode,targetSeconds:plan.targetSeconds}))}>{t('Start')}</Button>
    </section>

@@ -22,8 +22,6 @@ import { SettingSwitch } from './SettingSwitch'
  */
 export function SetupCard({
   plan,
-  adaptiveOverride,
-  setAdaptiveOverride,
   goal,
   setGoal,
   onStart,
@@ -31,8 +29,6 @@ export function SetupCard({
   compact = false
 }: {
   plan: NextBlockPlan
-  adaptiveOverride: number | null
-  setAdaptiveOverride: (m: number | null) => void
   goal: string
   setGoal: (v: string) => void
   onStart: () => void
@@ -74,7 +70,7 @@ export function SetupCard({
 
         <div className="flex flex-col gap-3">
           <ModeControl compact={compact} value={plan.mode} onChange={plan.setMode} itemId={plan.subject?.id ?? null} targetSeconds={plan.targetSeconds} />
-          <LengthForMode plan={plan} adaptiveOverride={adaptiveOverride} setAdaptiveOverride={setAdaptiveOverride} />
+          <LengthForMode plan={plan} />
         </div>
 
         {firstSession&&settings.panelAutoShow&&<div className="rounded-xl bg-focus/10 p-3 text-sm"><p>{uiText("Start opens your floating timer. You can return to A14 Pomodoro at any time.")}</p><label className="mt-2 flex items-center gap-2"><input type="checkbox" checked={!settings.minimizeOnStart} onChange={e=>void set('minimizeOnStart',!e.target.checked)}/>{uiText("Keep this window open")}</label></div>}

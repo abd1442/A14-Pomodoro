@@ -2971,5 +2971,7 @@
   "Most studied": "Les plus étudiées",
   "Black & White": "Noir et blanc",
   "Setup applied.": "Configuration appliquée.",
-  "Appearance reset.": "Apparence réinitialisée."
+  "Appearance reset.": "Apparence réinitialisée.",
+  "Sets its own length from your good sessions, on this subject and across all your subjects.": "Fixe sa propre durée à partir de tes bonnes sessions, dans cette matière et dans toutes tes matières.",
+  "Sets its own length from your recent well-focused sessions, on this subject and across all your subjects. A planning default, not an optimal learning duration.": "Fixe sa propre durée à partir de tes sessions récentes bien concentrées, dans cette matière et dans toutes tes matières. C'est une valeur de planification, pas une durée d'apprentissage optimale."
 }

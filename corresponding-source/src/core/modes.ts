@@ -25,27 +25,33 @@ const LOOK_BACK = 10
  * Adaptive target for a subject: the median focus length of its last 10
  * good blocks (focus Focused or Deep), rounded to 5 minutes and kept within
  * 15 to 50 minutes. Blocks split after the fact and blocks under 10 minutes
- * do not count, and neither do sessions with more than one subject. With
- * fewer than 5 good sessions it uses the default target.
+ * do not count, and neither do sessions with more than one subject. Until a
+ * subject has 5 good sessions it learns from your good sessions on every
+ * subject; with fewer than 5 of those it uses the default target.
  */
 export function adaptiveTarget(samples: AdaptiveSample[], itemId: number, defaultSeconds: number): AdaptiveSuggestion {
   const good = goodSamples(samples, itemId)
-  if (good.length < MIN_QUALIFYING) {
-    return {
-      targetSeconds: defaultSeconds,
-      basedOn: 0,
-      reason: `Your default target, until there are ${MIN_QUALIFYING} good sessions on this subject (${good.length} so far).`
-    }
+  if (good.length >= MIN_QUALIFYING) {
+    const minutes = medianMinutes(good)
+    return { targetSeconds: minutes * 60, basedOn: good.length, reason: `Suggested ${minutes} min, based on your last ${good.length} good sessions on this subject.` }
   }
+  const all = goodSamples(samples, null)
+  if (all.length >= MIN_QUALIFYING) {
+    const minutes = medianMinutes(all)
+    return { targetSeconds: minutes * 60, basedOn: all.length, reason: `Suggested ${minutes} min, based on your last ${all.length} good sessions across all subjects.` }
+  }
+  return {
+    targetSeconds: defaultSeconds,
+    basedOn: 0,
+    reason: `Your default target, until there are ${MIN_QUALIFYING} good sessions (${all.length} so far).`
+  }
+}
+
+function medianMinutes(good: AdaptiveSample[]): number {
   const lengths = good.map((s) => s.focusSeconds).sort((a, b) => a - b)
   const mid = Math.floor(lengths.length / 2)
   const median = lengths.length % 2 ? lengths[mid] : (lengths[mid - 1] + lengths[mid]) / 2
-  const minutes = Math.min(50, Math.max(15, Math.round(median / 300) * 5))
-  return {
-    targetSeconds: minutes * 60,
-    basedOn: good.length,
-    reason: `Suggested ${minutes} min, based on your last ${good.length} good sessions on this subject.`
-  }
+  return Math.min(50, Math.max(15, Math.round(median / 300) * 5))
 }
 
 /** Sessions whose parts are on more than one subject. */
@@ -61,13 +67,13 @@ export function mixedSessions(samples: { sessionId?: number; itemId: number }[])
   return mixed
 }
 
-/** The last 10 good sessions on a subject that the adaptive target is based on, newest first. */
-function goodSamples(samples: AdaptiveSample[], itemId: number): AdaptiveSample[] {
+/** The last 10 good sessions (on one subject, or on any with null) the adaptive target is based on, newest first. */
+function goodSamples(samples: AdaptiveSample[], itemId: number | null): AdaptiveSample[] {
   const mixed = mixedSessions(samples)
   return samples
     .filter(
       (s) =>
-        s.itemId === itemId &&
+        (itemId === null || s.itemId === itemId) &&
         s.origin !== 'estimated_split' &&
         !(s.sessionId !== undefined && mixed.has(s.sessionId)) &&
         s.focusSeconds >= 600 &&
@@ -80,7 +86,8 @@ function goodSamples(samples: AdaptiveSample[], itemId: number): AdaptiveSample[
 
 /** Focus seconds of the good sessions behind the suggestion (for the Adaptive diagram). */
 export function goodSessionLengths(samples: AdaptiveSample[], itemId: number): number[] {
-  return goodSamples(samples, itemId).map((s) => s.focusSeconds)
+  const own = goodSamples(samples, itemId)
+  return (own.length >= MIN_QUALIFYING ? own : goodSamples(samples, null)).map((s) => s.focusSeconds)
 }
 
 export interface ClockDisplay {

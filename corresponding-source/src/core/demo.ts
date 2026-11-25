@@ -119,21 +119,21 @@ export function rng(seed: number): () => number {
 }
 
 const CATEGORIES: DemoCategory[] = [
-  { key: 'uni', name: 'University', color: '#5B8DEF', parentKey: null },
-  { key: 'y3', name: 'Year 3', color: '#4FA3A5', parentKey: 'uni' },
-  { key: 'online', name: 'Online courses', color: '#6BAA75', parentKey: null },
-  { key: 'books', name: 'Books', color: '#D9A441', parentKey: null },
-  { key: 'skills', name: 'Skills', color: '#A77BCA', parentKey: null }
+  { key: 'uni', name: 'University', color: '#7E9CC2', parentKey: null },
+  { key: 'y3', name: 'Year 3', color: '#5FA8A4', parentKey: 'uni' },
+  { key: 'online', name: 'Online courses', color: '#8AAA82', parentKey: null },
+  { key: 'books', name: 'Books', color: '#E0A458', parentKey: null },
+  { key: 'skills', name: 'Skills', color: '#A88BC9', parentKey: null }
 ]
 
 const ITEMS: DemoItem[] = [
-  { key: 'structures', categoryKey: 'y3', name: 'Structures II', color: '#4FA3A5', unit: 'chapters', total: 14, activity: 'problems', pinned: true, prior: 'some', hoursBefore: 4, newField: false, buildsOn: [], difficulty: 7 },
-  { key: 'physics', categoryKey: 'y3', name: 'Building Physics', color: '#D9825B', unit: 'lectures', total: 24, activity: 'lecture-recorded', prior: 'new', hoursBefore: 0, newField: false, buildsOn: ['structures'], difficulty: 6 },
-  { key: 'history', categoryKey: 'y3', name: 'History of Architecture', color: '#A77BCA', unit: 'pages', total: 380, activity: 'reading-book', prior: 'before', hoursBefore: 30, newField: false, buildsOn: [], difficulty: 4 },
-  { key: 'lhtl', categoryKey: 'online', name: 'Learning How to Learn', color: '#6BAA75', unit: 'videos', total: 52, activity: 'lecture-recorded', pinned: true, prior: 'new', hoursBefore: 0, newField: true, buildsOn: [], difficulty: 3 },
-  { key: 'python', categoryKey: 'online', name: 'CS50 Python', color: '#5B8DEF', unit: 'problems', total: null, activity: 'coding', prior: 'some', hoursBefore: 6, newField: false, buildsOn: [], difficulty: 6 },
-  { key: 'habits', categoryKey: 'books', name: 'Atomic Habits', color: '#D9A441', unit: 'pages', total: 320, activity: 'reading-book', prior: 'well', hoursBefore: 0, newField: false, buildsOn: [], difficulty: 2 },
-  { key: 'arabic', categoryKey: 'skills', name: 'Arabic calligraphy', color: '#8A9BA8', unit: 'sheets', total: null, activity: 'studio', prior: 'new', hoursBefore: 0, newField: true, buildsOn: [], difficulty: 5 }
+  { key: 'structures', categoryKey: 'y3', name: 'Structures II', color: '#5FA8A4', unit: 'chapters', total: 14, activity: 'problems', pinned: true, prior: 'some', hoursBefore: 4, newField: false, buildsOn: [], difficulty: 7 },
+  { key: 'physics', categoryKey: 'y3', name: 'Building Physics', color: '#D27D5F', unit: 'lectures', total: 24, activity: 'lecture-recorded', prior: 'new', hoursBefore: 0, newField: false, buildsOn: ['structures'], difficulty: 6 },
+  { key: 'history', categoryKey: 'y3', name: 'History of Architecture', color: '#A88BC9', unit: 'pages', total: 380, activity: 'reading-book', prior: 'before', hoursBefore: 30, newField: false, buildsOn: [], difficulty: 4 },
+  { key: 'lhtl', categoryKey: 'online', name: 'Learning How to Learn', color: '#8AAA82', unit: 'videos', total: 52, activity: 'lecture-recorded', pinned: true, prior: 'new', hoursBefore: 0, newField: true, buildsOn: [], difficulty: 3 },
+  { key: 'python', categoryKey: 'online', name: 'CS50 Python', color: '#7E9CC2', unit: 'problems', total: null, activity: 'coding', prior: 'some', hoursBefore: 6, newField: false, buildsOn: [], difficulty: 6 },
+  { key: 'habits', categoryKey: 'books', name: 'Atomic Habits', color: '#E0A458', unit: 'pages', total: 320, activity: 'reading-book', prior: 'well', hoursBefore: 0, newField: false, buildsOn: [], difficulty: 2 },
+  { key: 'arabic', categoryKey: 'skills', name: 'Arabic calligraphy', color: '#949DA6', unit: 'sheets', total: null, activity: 'studio', prior: 'new', hoursBefore: 0, newField: true, buildsOn: [], difficulty: 5 }
 ]
 
 const RECALLS: Record<string, string[]> = {

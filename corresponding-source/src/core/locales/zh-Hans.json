@@ -2971,5 +2971,7 @@
   "Most studied": "学习最多",
   "Black & White": "黑白",
   "Setup applied.": "已应用设置。",
-  "Appearance reset.": "外观已重置。"
+  "Appearance reset.": "外观已重置。",
+  "Sets its own length from your good sessions, on this subject and across all your subjects.": "根据你的优质学习时段自行设定时长，参考本科目以及你所有科目的数据。",
+  "Sets its own length from your recent well-focused sessions, on this subject and across all your subjects. A planning default, not an optimal learning duration.": "根据你近期专注度高的学习时段自行设定时长，参考本科目以及你所有科目的数据。这是计划用的默认值，并非最佳学习时长。"
 }

@@ -560,7 +560,6 @@ html[data-density='compact'] main .py-9, html[data-density='compact'] main .py-8
 .subject-colour-frame { border-color: var(--tf-border); }
 .subject-colour-frame[aria-selected="true"] { outline: 2px solid var(--tf-focus); outline-offset: 2px; }
 .subject-colour-card[aria-selected="true"] { outline: 2px solid var(--tf-focus); outline-offset: 2px; }
-.subject-perforations { background: repeating-linear-gradient(0deg, var(--panel-colour) 0 6px, transparent 6px 15px); opacity: .8; }
 .home-layout > aside { min-width: 0; }
 @media (prefers-reduced-motion: reduce) {
   .settings-guide, .settings-guide svg { transition: none; }

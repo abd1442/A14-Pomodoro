@@ -47,9 +47,9 @@ Write an optional session goal: “Explain how water moves through a plant” is
 
 Choose a timer:
 
-- **Flow:** counts up, with a target marker. Useful when you want room to continue while the work is going well.
+- **Flow:** counts up with no length to pick. Useful when you want room to continue while the work is going well.
 - **Fixed:** counts down from your chosen target. Useful when you have a set amount of time available.
-- **Adaptive:** suggests a target from eligible past sessions on the subject, using your default until enough are available. You can override it.
+- **Adaptive:** sets its own length from your recent well-focused sessions: on the subject once it has five, and across all your subjects until then.
 
 The target helps plan time. Choose a comfortable duration, then select **Start**. If preparation is enabled, confirm the **Get ready** panel before beginning.
 

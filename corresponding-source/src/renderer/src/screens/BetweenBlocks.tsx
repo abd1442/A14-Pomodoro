@@ -20,8 +20,7 @@ import { AdviceCard } from '../components/AdviceCard'
  */
 export function BetweenBlocksScreen(): React.JSX.Element | null {
   const sitting = useSession((s) => s.state.sitting)
-  const [adaptiveOverride, setAdaptiveOverride] = useState<number | null>(null)
-  const plan = useNextBlockPlan(adaptiveOverride)
+  const plan = useNextBlockPlan()
   const [goal, setGoal] = useGoalDraft()
   const categories = useLibrary((s) => s.categories)
   const blocks = useBlocks((s) => s.blocks)
@@ -84,7 +83,7 @@ export function BetweenBlocksScreen(): React.JSX.Element | null {
             </div>
             <div className="mt-6 flex max-w-xl flex-col gap-4 border-t border-line pt-5">
               <ModeControl value={plan.mode} onChange={plan.setMode} itemId={plan.subject?.id ?? null} targetSeconds={plan.suggestion?.targetSeconds} />
-              <LengthForMode plan={plan} adaptiveOverride={adaptiveOverride} setAdaptiveOverride={setAdaptiveOverride} />
+              <LengthForMode plan={plan} />
               <GoalField value={goal} onChange={setGoal} />
             </div>
             <div className="mt-7 flex flex-wrap items-center gap-3">

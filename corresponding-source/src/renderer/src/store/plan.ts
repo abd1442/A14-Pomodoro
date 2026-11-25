@@ -9,7 +9,7 @@ import { useSettings } from './session'
 export const MODES: { value: TimerMode; label: string; hint: string }[] = [
   { value: 'flow', label: 'Flow', hint: 'Counts up toward a target and keeps going. Finish when you are ready.' },
   { value: 'fixed', label: 'Fixed', hint: 'Counts down from a set length, then shows the overtime.' },
-  { value: 'adaptive', label: 'Adaptive', hint: 'Like Flow, with a target learned from your good blocks on this subject.' }
+  { value: 'adaptive', label: 'Adaptive', hint: 'Sets its own length from your good sessions, on this subject and across all your subjects.' }
 ]
 
 export interface NextBlockPlan {
@@ -25,9 +25,9 @@ export interface NextBlockPlan {
 /**
  * The next block: the last subject and mode chosen, and the target for that
  * mode (Flow: the default target, Fixed: its countdown, Adaptive: the
- * suggestion unless an override was typed for this subject).
+ * length learned from your sessions).
  */
-export function useNextBlockPlan(adaptiveOverrideMinutes: number | null = null): NextBlockPlan {
+export function useNextBlockPlan(): NextBlockPlan {
   const settings = useSettings((s) => s.settings)
   const set = useSettings((s) => s.set)
   const items = useLibrary((s) => s.items)
@@ -42,7 +42,7 @@ export function useNextBlockPlan(adaptiveOverrideMinutes: number | null = null):
 
   let targetSeconds = settings.focusTargetMinutes * 60
   if (mode === 'fixed') targetSeconds = settings.fixedMinutes * 60
-  if (mode === 'adaptive') targetSeconds = adaptiveOverrideMinutes ? adaptiveOverrideMinutes * 60 : (suggestion?.targetSeconds ?? targetSeconds)
+  if (mode === 'adaptive') targetSeconds = suggestion?.targetSeconds ?? targetSeconds
 
   return {
     subject,

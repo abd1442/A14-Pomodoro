@@ -2971,5 +2971,7 @@
   "Most studied": "الأكثر دراسة",
   "Black & White": "أسود وأبيض",
   "Setup applied.": "تم تطبيق الإعداد.",
-  "Appearance reset.": "تمت إعادة تعيين المظهر."
+  "Appearance reset.": "تمت إعادة تعيين المظهر.",
+  "Sets its own length from your good sessions, on this subject and across all your subjects.": "يحدد مدته بنفسه من جلساتك الجيدة، في هذه المادة وفي جميع موادك.",
+  "Sets its own length from your recent well-focused sessions, on this subject and across all your subjects. A planning default, not an optimal learning duration.": "يحدد مدته بنفسه من جلساتك الأخيرة ذات التركيز العالي، في هذه المادة وفي جميع موادك. هذه مدة افتراضية للتخطيط، وليست المدة المثلى للتعلّم."
 }

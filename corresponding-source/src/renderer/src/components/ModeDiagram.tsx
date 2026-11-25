@@ -10,7 +10,7 @@ import { useSettings } from '../store/session'
 export const MODE_EXPLAINED: Record<TimerMode, string> = {
   flow: "Counts up toward the target and keeps going past it if you're in the zone.",
   fixed: 'Counts down from the length you set; after zero it shows the overtime.',
-  adaptive: 'Suggests a length from recent sessions on this subject rated highly for focus. This is a planning default, not an optimal learning duration.'
+  adaptive: 'Sets its own length from your recent well-focused sessions, on this subject and across all your subjects. A planning default, not an optimal learning duration.'
 }
 
 const v = (vars: Record<string, string>): React.CSSProperties => vars as React.CSSProperties

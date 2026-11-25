@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <sub><b>Windows · Linux · macOS</b> &nbsp;·&nbsp; <b>Beta 6 Windows · 0.1.6-beta.6</b> &nbsp;·&nbsp; <b>7 languages</b> &nbsp;·&nbsp; <b>GPL-3.0-only</b></sub>
+  <sub><b>Windows</b> &nbsp;·&nbsp; <b>Beta 1 · 0.0.1-beta.1</b> &nbsp;·&nbsp; <b>7 languages</b> &nbsp;·&nbsp; <b>GPL-3.0-only</b></sub>
 </p>
 
 <p align="center">
@@ -54,13 +54,11 @@ Use as much or as little of it as you like. Notes, ratings, rest timers and auto
 
 ## Downloads
 
-[**Download A14 Pomodoro — Beta 6 for Windows x64**](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.1.6-beta.6)
+[**Download A14 Pomodoro — Beta 1 for Windows x64**](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.0.1-beta.1)
 
-**0.1.6-beta.6 · Windows x64 · Unsigned prerelease.** Interface, appearance-settings and logo polish: shared switches, visible black-and-white logo, reliable appearance Undo and keyboard-complete Settings search. [Release notes and limitations](RELEASE_NOTES.md) · [Matching source](SOURCE_NOTICE.md) · [Checksums](SHA256SUMS.txt).
+**0.0.1-beta.1 · Windows x64 · Unsigned prerelease.** [Release notes and limitations](RELEASE_NOTES.md) · [Matching source](SOURCE_NOTICE.md) · [Checksums](SHA256SUMS.txt).
 
-Back up your records and quit through the tray before updating. Keep the existing installation scope and data folder. Actual installer lifecycle and physical accessibility checks remain uncompleted.
-
-Linux/macOS remain on the [older experimental FocusRecall builds](https://github.com/abd1442/A14-Pomodoro/releases/tag/v0.1.1-beta.1). Earlier release tags and assets remain unchanged. The README screenshots below are from earlier documented captures; they have not been relabeled as new Beta 6 screenshots.
+If you already use A14 Pomodoro, back up your records in Settings and quit through the tray icon before installing. Your study data is kept.
 
 [Report a beta problem](https://github.com/abd1442/A14-Pomodoro/issues/new?template=beta-test.yml). Use fictional examples and omit private records or backups.
 
@@ -101,9 +99,9 @@ Full Mode walks through one study cycle. Every step after Start can be skipped.
 
 **1 · Plan.** Select a subject on Home and choose a timer:
 
-- **Flow** counts up past a target marker, for when you want to keep going while it's working.
-- **Fixed** counts down from the time you have.
-- **Adaptive** suggests a target from your recent sessions on that subject. You can override it.
+- **Flow** counts up with no length to pick. Keep going while it's working and finish when you're ready.
+- **Fixed** counts down from the time you have (15, 25, 35, 45 minutes or your own).
+- **Adaptive** sets its own length from your recent well-focused sessions: on that subject once it has five, and across all your subjects until then.
 
 A short, specific goal helps: *"Explain how insulation changes a wall's U-value"* is easier to check afterwards than *"Study building physics"*. It stays attached to the session.
 
@@ -151,8 +149,6 @@ A short, specific goal helps: *"Explain how insulation changes a wall's U-value"
 ## Home tools
 
 These live on the Full Mode Home screen.
-
-Current source removes Parked Thoughts and the automatic reason question after Resume. The calendar spans the bottom of Home and stays visible while subjects scroll. These changes are included in the current Windows release; [view the Beta 1 guide](https://github.com/abd1442/A14-Pomodoro/blob/v0.1.1-beta.1/docs/USER_GUIDE.md) for that version.
 
 **Saved for later.** If you put off an unfinished review, log or rest, it appears here with a **Resume** button. Time while the app was closed is not counted as rest.
 
@@ -266,7 +262,7 @@ Uninstalling keeps your profile. **Restore Backup** replaces the current databas
 
 ## Install
 
-Use [Downloads](#downloads) for Windows; Linux/macOS remain on the Beta 1 release. The current Windows installer uses the A14 Pomodoro name; older Linux/macOS builds retain FocusRecall branding. Follow the instructions for the version you download. Windows uses an unsigned x64 installer; Ubuntu 24.04 x64 uses a DEB; Macs use the Apple Silicon or Intel app ZIP. Linux/macOS remain experimental. Keep security protections enabled and report warnings instead of overriding malware or damaged-app alerts.
+Use [Downloads](#downloads) to get the Windows x64 installer. It is unsigned, so Windows may show a SmartScreen warning: keep your protection on, and report any warning you are unsure about instead of overriding it.
 
 On first launch, pick Quick or Full Mode and your language. To look around before adding your own subjects, choose **Open demo data** in **Settings → General → Data**. It opens a separate database of made-up study and leaves your own records untouched.
 
@@ -290,9 +286,9 @@ The [user guide](docs/USER_GUIDE.md) has every screen in detail and more trouble
 
 A14 Pomodoro's original code is licensed **GPL-3.0-only**. [License](LICENSE) · [Third-party notices](THIRD-PARTY-NOTICES.txt) · [Source package information](SOURCE_NOTICE.md) · [Application source and build guide](corresponding-source/SOURCE_BUILD.md)
 
-Use the source package and release tag that match your download; different platforms were built from different source revisions. The Windows source on `main` matches A14 Pomodoro Beta 5 (0.1.6-beta.5). Earlier platform and FocusRecall source snapshots remain available at their immutable tags, as explained in [SOURCE_NOTICE.md](SOURCE_NOTICE.md).
+The source on `main` and in the release's source package matches A14 Pomodoro Beta 1 (0.0.1-beta.1), as explained in [SOURCE_NOTICE.md](SOURCE_NOTICE.md).
 
-Screenshots show the documented earlier development capture running with a fictional profile: made-up subjects, sessions and notes. They are unedited captures, cropped and arranged for this page. [How they were made](screenshots/readme-captures/manifest.json).
+Screenshots show a development capture running with a fictional profile: made-up subjects, sessions and notes. They are unedited captures, cropped and arranged for this page. [How they were made](screenshots/readme-captures/manifest.json).
 
 ---
 

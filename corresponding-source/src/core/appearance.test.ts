@@ -139,7 +139,7 @@ describe('timeline colours', () => {
     expect(normalizeAppearance({ linePalette: 'nope' } as never).linePalette).toBe('calm')
   })
   it('warns when a custom colour is close to a subject colour', () => {
-    expect(tooCloseTo('#5B8DEE', ITEM_PALETTE)).toContain('#5B8DEF')
+    expect(tooCloseTo('#7E9CC3', ITEM_PALETTE)).toContain('#7E9CC2')
     expect(tooCloseTo('#000000', ITEM_PALETTE)).toEqual([])
   })
 })

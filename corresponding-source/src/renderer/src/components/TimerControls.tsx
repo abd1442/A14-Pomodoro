@@ -45,7 +45,6 @@ export function ModeControl({
         })}
       </div>
       {!compact && <ModeDiagram mode={value} itemId={itemId} targetSeconds={targetSeconds} />}
-      {compact&&value==='adaptive'&&targetSeconds!==undefined&&<p className="text-sm text-muted">{uiText("Target: ")}{Math.round(targetSeconds/60)}{uiText(" min")}</p>}
     </div>
   )
 }
@@ -84,42 +83,19 @@ export function LengthChips({ value, onChange, label }: { value: number; onChang
   )
 }
 
-/** The length for the chosen mode: chips for Flow and Fixed, the suggestion and an override for Adaptive. */
-export function LengthForMode({
-  plan,
-  adaptiveOverride,
-  setAdaptiveOverride
-}: {
-  plan: NextBlockPlan
-  adaptiveOverride: number | null
-  setAdaptiveOverride: (m: number | null) => void
-}): React.JSX.Element {
+/**
+ * The length for the chosen mode. Only Fixed asks for minutes: Flow lets you
+ * keep going, and Adaptive sets its own length from your past sessions.
+ */
+export function LengthForMode({ plan }: { plan: NextBlockPlan }): React.JSX.Element | null {
   const { settings, set } = useSettings()
-  if (plan.mode === 'adaptive') {
-    return (
-      <div title={plan.suggestion?.reason} aria-description={plan.suggestion?.reason} className="flex flex-col gap-2 rounded-xl bg-surface-2/60 px-4 py-3">
-        <label className="flex flex-wrap items-center gap-3 text-base text-muted">{uiText("Use instead")}<OverrideInput value={adaptiveOverride} placeholder={String(Math.round(plan.targetSeconds / 60))} onChange={setAdaptiveOverride} />{uiText("min")}{adaptiveOverride !== null && (
-            <button type="button" className="text-focus hover:underline" onClick={() => setAdaptiveOverride(null)}>{uiText("use the suggestion")}</button>
-          )}
-        </label>
-      </div>
-    )
-  }
-  const fixed = plan.mode === 'fixed'
+  if (plan.mode !== 'fixed') return null
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-sm text-muted">{fixed ? uiText("Counts down from (minutes)") : uiText("Target (minutes)")}</span>
-      <LengthChips
-        label={fixed ? 'Countdown length' : 'Target length'}
-        value={fixed ? settings.fixedMinutes : settings.focusTargetMinutes}
-        onChange={(m) => void set(fixed ? 'fixedMinutes' : 'focusTargetMinutes', m)}
-      />
+      <span className="text-sm text-muted">{uiText("Counts down from (minutes)")}</span>
+      <LengthChips label="Countdown length" value={settings.fixedMinutes} onChange={(m) => void set('fixedMinutes', m)} />
     </div>
   )
-}
-
-function OverrideInput({ value, onChange, placeholder }: { value: number | null; onChange: (m: number | null) => void; placeholder?: string }): React.JSX.Element {
-  return <TimeInput label={uiText("Use this length instead")} placeholder={placeholder} min={1} max={240} value={value} onChange={onChange} className="w-24" />
 }
 
 /**

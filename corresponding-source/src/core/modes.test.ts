@@ -18,6 +18,12 @@ describe('adaptiveTarget', () => {
     expect(r).toMatchObject({ targetSeconds: 25 * MIN, basedOn: 0 })
     expect(r.reason).toMatch(/4 so far/)
   })
+  it('learns from all subjects until this subject has 5 good blocks', () => {
+    const others = [s(40, 5, { itemId: 2 }), s(40, 4, { itemId: 3 }), s(40, 4, { itemId: 2 }), s(40, 5, { itemId: 3 })]
+    const r = adaptiveTarget([...others, s(40, 4)], 1, 25 * MIN)
+    expect(r).toMatchObject({ targetSeconds: 40 * MIN, basedOn: 5 })
+    expect(r.reason).toMatch(/across all subjects/)
+  })
   it('uses the median of good blocks, rounded to 5 minutes', () => {
     const r = adaptiveTarget([s(31, 4), s(33, 5), s(37, 4), s(36, 5), s(34, 4)], 1, 25 * MIN)
     expect(r.targetSeconds).toBe(35 * MIN)

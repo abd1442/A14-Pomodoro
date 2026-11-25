@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3'
 import { migrations } from './migrations'
 import { appliedVersions, applyMigrations, automaticSnapshot } from './backups'
+import { refreshDefaultColours } from './defaultColours'
 
 export type Db = Database.Database
 
@@ -14,6 +15,7 @@ export function openDatabase(file: string, options: { snapshot?: (db:Db,file:str
   const hasData=!!db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name != 'schema_migrations'").get()
   if(hasData && file!==':memory:' && list.some((m)=>!versions.includes(m.version))) (options.snapshot??automaticSnapshot)(db,file)
   applyMigrations(db,list)
+  if(list===migrations)refreshDefaultColours(db)
   return db
   } catch(e){db.close();throw e}
 }

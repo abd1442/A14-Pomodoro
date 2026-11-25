@@ -25,8 +25,7 @@ export function useToday(): string {
  * Scrollable subjects and session setup above a reserved activity-calendar footer.
  */
 export function HomeTab(): React.JSX.Element {
-  const [adaptiveOverride, setAdaptiveOverride] = useState<number | null>(null)
-  const plan = useNextBlockPlan(adaptiveOverride)
+  const plan = useNextBlockPlan()
   const sitting = useSession((s) => s.state.sitting)
   const [goal, setGoal] = useGoalDraft()
   const today = useToday()
@@ -57,7 +56,7 @@ export function HomeTab(): React.JSX.Element {
 
   return (
     <div className="home-root flex h-full min-h-0 flex-col overflow-hidden" style={{containerType:'inline-size',containerName:'home'}}>
-      <section ref={quickStart} aria-label={uiText("Quick start")} className="home-quick-start sticky top-0 z-20 flex flex-wrap items-center gap-2 border-b border-line bg-bg/95 px-4 py-3 backdrop-blur">{subjects.length?<select aria-label={uiText("Quick start subject")} className="min-h-11 min-w-0 flex-1 rounded-xl border border-line bg-surface px-3" value={plan.subject?.id??''} onChange={e=>{plan.setSubject(Number(e.target.value));setAdaptiveOverride(null)}}><option value="" disabled>{uiText("Choose a subject")}</option>{(orderedSubjects.length?orderedSubjects:subjects).map(i=><option key={i.id} value={i.id}>{i.name}</option>)}</select>:<Button variant="primary" onClick={()=>setCreateRequest(n=>n+1)}>{uiText("Add your first subject")}</Button>}<Button variant="primary" disabled={!plan.subject} onClick={start}>{sitting?uiText("Start next session"):uiText("Start")}</Button><button ref={optionsButton} type="button" aria-expanded={timerOptionsOpen} aria-controls="home-timer-options" className="min-h-11 rounded-lg px-3 text-sm text-focus" onClick={()=>setTimerOptionsOpen(v=>!v)}>{uiText("Timer options ")}<span aria-hidden="true">{timerOptionsOpen?'▴':'▾'}</span></button>{timerOptionsOpen&&<div id="home-timer-options" role="region" aria-label={uiText("Timer options")} className="absolute top-full right-4 left-4 mt-2 ml-auto w-auto max-w-lg shadow-xl"><SetupCard compact plan={plan} adaptiveOverride={adaptiveOverride} setAdaptiveOverride={setAdaptiveOverride} goal={goal} setGoal={setGoal} onStart={start} startLabel={sitting?'Start next session':'Start'}/></div>}</section>
+      <section ref={quickStart} aria-label={uiText("Quick start")} className="home-quick-start sticky top-0 z-20 flex flex-wrap items-center gap-2 border-b border-line bg-bg/95 px-4 py-3 backdrop-blur">{subjects.length?<select aria-label={uiText("Quick start subject")} className="min-h-11 min-w-0 flex-1 rounded-xl border border-line bg-surface px-3" value={plan.subject?.id??''} onChange={e=>plan.setSubject(Number(e.target.value))}><option value="" disabled>{uiText("Choose a subject")}</option>{(orderedSubjects.length?orderedSubjects:subjects).map(i=><option key={i.id} value={i.id}>{i.name}</option>)}</select>:<Button variant="primary" onClick={()=>setCreateRequest(n=>n+1)}>{uiText("Add your first subject")}</Button>}<Button variant="primary" disabled={!plan.subject} onClick={start}>{sitting?uiText("Start next session"):uiText("Start")}</Button><button ref={optionsButton} type="button" aria-expanded={timerOptionsOpen} aria-controls="home-timer-options" className="min-h-11 rounded-lg px-3 text-sm text-focus" onClick={()=>setTimerOptionsOpen(v=>!v)}>{uiText("Timer options ")}<span aria-hidden="true">{timerOptionsOpen?'▴':'▾'}</span></button>{timerOptionsOpen&&<div id="home-timer-options" role="region" aria-label={uiText("Timer options")} className="absolute top-full right-4 left-4 mt-2 ml-auto w-auto max-w-lg shadow-xl"><SetupCard compact plan={plan} goal={goal} setGoal={setGoal} onStart={start} startLabel={sitting?'Start next session':'Start'}/></div>}</section>
       <div className="home-full-layout">
       <div className="home-scroll min-h-0 flex-1 overflow-y-auto">
       <div className="home-layout flex flex-col gap-6 px-8 py-6">
@@ -82,10 +81,7 @@ export function HomeTab(): React.JSX.Element {
               layout="tiles"
               autoFocus
               selectedId={plan.subject?.id ?? null}
-              onSelect={(i) => {
-                setAdaptiveOverride(null)
-                plan.setSubject(i.id)
-              }}
+              onSelect={(i) => plan.setSubject(i.id)}
               onConfirm={start}
             />
           </div>
@@ -93,8 +89,6 @@ export function HomeTab(): React.JSX.Element {
           <aside id="home-launcher" className="home-launcher flex scroll-mt-24 flex-col gap-6">
             <SetupCard
               plan={plan}
-              adaptiveOverride={adaptiveOverride}
-              setAdaptiveOverride={setAdaptiveOverride}
               goal={goal}
               setGoal={setGoal}
               onStart={start}

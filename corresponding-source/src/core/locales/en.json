@@ -2970,5 +2970,7 @@
   "Your study week": "Your study week",
   "Your study-day boundary is used. Each cell is a date; darker means more focused time.": "Your study-day boundary is used. Each cell is a date; darker means more focused time.",
   "Your week": "Your week",
-  "Your week in focus": "Your week in focus"
+  "Your week in focus": "Your week in focus",
+  "Sets its own length from your good sessions, on this subject and across all your subjects.": "Sets its own length from your good sessions, on this subject and across all your subjects.",
+  "Sets its own length from your recent well-focused sessions, on this subject and across all your subjects. A planning default, not an optimal learning duration.": "Sets its own length from your recent well-focused sessions, on this subject and across all your subjects. A planning default, not an optimal learning duration."
 }

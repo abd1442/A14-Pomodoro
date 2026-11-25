@@ -1,4 +1,4 @@
-> Current release: **A14 Pomodoro 0.1.6-beta.6**. See [current source](docs/CURRENT_SOURCE.md). Dated verification below is historical.
+> Current release: **A14 Pomodoro 0.0.1-beta.1**. See [current source](docs/CURRENT_SOURCE.md).
 
 # A14 Pomodoro
 

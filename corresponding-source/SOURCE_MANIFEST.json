@@ -1,9 +1,9 @@
 {
   "productName": "A14 Pomodoro",
-  "version": "0.1.6-beta.6",
+  "version": "0.0.1-beta.1",
   "platform": "windows-x64",
-  "date": "2026-11-19",
-  "sourceTreeRef": "v0.1.6-beta.6:corresponding-source",
+  "date": "2026-11-26",
+  "sourceTreeRef": "v0.0.1-beta.1:corresponding-source",
   "normalization": "Exact working-source bytes; public source attributes preserve bytes. Release metadata is UTF-8.",
   "scope": "Curated current application sources. Private development history, profiles and local QA artifacts excluded.",
   "files": [
@@ -49,8 +49,8 @@
     },
     {
       "file": "README.md",
-      "bytes": 4028,
-      "sha256": "edb93918f24459424c561383e18c93fe5ee0921b2aff0a4b7af13b01824314ed"
+      "bytes": 3988,
+      "sha256": "76f858a8bd435f9d699fbdb3eb95c248677a6486521739ee275c1d1c26f1571a"
     },
     {
       "file": "SECURITY.md",
@@ -59,8 +59,8 @@
     },
     {
       "file": "SOURCE_BUILD.md",
-      "bytes": 4446,
-      "sha256": "f5fb95543dc1d46bdbdb96e3010da98a83caffe74901d9cc5467567cbf4990f6"
+      "bytes": 4405,
+      "sha256": "3993b5bf9c4939c3cdd699160084e1977c6061276419eb47480be2ebf182df7a"
     },
     {
       "file": "Start A14 Pomodoro.vbs",
@@ -94,8 +94,8 @@
     },
     {
       "file": "docs/CURRENT_SOURCE.md",
-      "bytes": 771,
-      "sha256": "c20fb8e1353d1cd7753f6a197ac6c852ae865ecc8b70d03361aebbd774019860"
+      "bytes": 429,
+      "sha256": "37cbf4eaea8b277bbf1163316568a162139a021c1f6b1049f149f0c8e198d451"
     },
     {
       "file": "docs/HOME_CALENDAR_CHANGE_20261021.md",
@@ -119,8 +119,8 @@
     },
     {
       "file": "docs/RELEASE_STATUS.md",
-      "bytes": 771,
-      "sha256": "c20fb8e1353d1cd7753f6a197ac6c852ae865ecc8b70d03361aebbd774019860"
+      "bytes": 429,
+      "sha256": "37cbf4eaea8b277bbf1163316568a162139a021c1f6b1049f149f0c8e198d451"
     },
     {
       "file": "docs/THEME_ACCENT_CONSISTENCY_20261019.md",
@@ -280,12 +280,12 @@
     {
       "file": "package-lock.json",
       "bytes": 252391,
-      "sha256": "cf7239c54b0d320585693f4eaba9908778446234ba37d73864b65c9ce8241d99"
+      "sha256": "da38b4f0f90452e14bbb73005897a6064d08d2ebb6e09c12b3fe0a7ff5ca50a3"
     },
     {
       "file": "package.json",
       "bytes": 2177,
-      "sha256": "4e8015f03216444643ae523553d20c641d441ff7a6a852df6f034a03420c5220"
+      "sha256": "c99101ddbc19832759a212e3dc51da921336d2559440b8a885c9ee11e357cab8"
     },
     {
       "file": "resources/a14-pomodoro-icon.png",
@@ -1279,8 +1279,8 @@
     },
     {
       "file": "src/core/appearance.test.ts",
-      "bytes": 11545,
-      "sha256": "37d70ddba4c02c732574a12c4f3e29d97ffd41b1f168d2934275a85d715edec8"
+      "bytes": 11344,
+      "sha256": "b3b393490bfb4de5479916ef1e12d3e346695aacb82b2cd90bde69df34d64053"
     },
     {
       "file": "src/core/appearance.ts",
@@ -1354,8 +1354,8 @@
     },
     {
       "file": "src/core/demo.ts",
-      "bytes": 25253,
-      "sha256": "cde5ec9e52ca0b270fb13ca7b79e3eab9df926a8f23c705baf3680bc4be9f037"
+      "bytes": 24780,
+      "sha256": "6e8d106e7593afb51848807f977cd107f1deb257ec7896ab7027ed37890e3bde"
     },
     {
       "file": "src/core/desktopResponsiveness.test.ts",
@@ -1634,38 +1634,38 @@
     },
     {
       "file": "src/core/locales/ar.json",
-      "bytes": 288018,
-      "sha256": "12de06e87fa6349668e2aed1849fda89b77ac9799b8d654e8c32e71fa2b6636f"
+      "bytes": 288651,
+      "sha256": "1c5f5ba15a1b16f9e846de951ebf18293d3c0f444225701a74d93d18c20d5357"
     },
     {
       "file": "src/core/locales/de.json",
-      "bytes": 246840,
-      "sha256": "3894bcb3d2fbe6a29432f24703446abebd2d6a9efc0019fff2fa6e0595296d60"
+      "bytes": 247386,
+      "sha256": "21d1fc07a43e970449401f5b2a3cdfe1847b3e45d46c524078077721fa7c05f1"
     },
     {
       "file": "src/core/locales/en.json",
-      "bytes": 225741,
-      "sha256": "489dc52a66a9b1cdf1b17b9ce33181f018da5e2b8107b3694cb1e70b98f015ba"
+      "bytes": 226259,
+      "sha256": "78481e0b00f7e8345625d07b367af714f669036592b30bd3290de826ec1fea07"
     },
     {
       "file": "src/core/locales/es.json",
-      "bytes": 245725,
-      "sha256": "57962bd2aa50d5875d68d2c732d68525035870a752754ea8656362f7c693861d"
+      "bytes": 246290,
+      "sha256": "0446371a99d42aefb72ee2941cd063222761696fa2749433e9b5ff57fd521622"
     },
     {
       "file": "src/core/locales/fr.json",
-      "bytes": 255598,
-      "sha256": "4111cd4e7493a93da7105fffe59e83c80f03fc376333da0d5d6d09e4da27dec2"
+      "bytes": 256174,
+      "sha256": "54773f02289c89ea18e9e509bfaa023ba2057df3c2bc56ac315a8e647d14f532"
     },
     {
       "file": "src/core/locales/pt-BR.json",
-      "bytes": 244315,
-      "sha256": "d3a74c7663b38f1f20d33ac5b2f37bf8e28302731227b1d4a6e74d189aa97b1b"
+      "bytes": 244894,
+      "sha256": "7ad58f1223f682ab17c200c222102165e94f1984f8738e09d5d13fb060a9cce9"
     },
     {
       "file": "src/core/locales/zh-Hans.json",
-      "bytes": 223668,
-      "sha256": "09f6cdf45026a40a1bdd0d3874653a7187d7532d7da6702859576624bce3512f"
+      "bytes": 224204,
+      "sha256": "8c8acce67d1e74ce3e869e2ab7e5ab74456d086ecf655899d43741d1aeef0657"
     },
     {
       "file": "src/core/localization.test.ts",
@@ -1739,13 +1739,13 @@
     },
     {
       "file": "src/core/modes.test.ts",
-      "bytes": 3468,
-      "sha256": "06120be4e5fc1555b0d2578c0412025c07e3987d27b81a397988a2483cf1130f"
+      "bytes": 3857,
+      "sha256": "9b5345837ddb0aaeab5cf13299f062d5bfc5813fe76d907987aa2670fbd3de43"
     },
     {
       "file": "src/core/modes.ts",
-      "bytes": 4396,
-      "sha256": "7114d944cc732e2125584b5f8d3783cfe5ea2b59c5b887db23298a55188fde7f"
+      "bytes": 4847,
+      "sha256": "e90e8c07068ccb11350cb5ba07bb6ca97838064e8343d826bbcdefe2ed84e277"
     },
     {
       "file": "src/core/music.ts",
@@ -1779,8 +1779,8 @@
     },
     {
       "file": "src/core/palette.ts",
-      "bytes": 608,
-      "sha256": "298702875291b2f45da7b96adefdae98a04ad20475323987a61bfb3cecbdc8c6"
+      "bytes": 1073,
+      "sha256": "bb071b949648badb9cbead8696f97527610e3b63d1b6d2371b50607c2ec44b83"
     },
     {
       "file": "src/core/personalInsights.test.ts",
@@ -2214,8 +2214,13 @@
     },
     {
       "file": "src/main/db/database.ts",
-      "bytes": 1005,
-      "sha256": "29096d76d6b53294c391ccf180091ecce58ef2bfbd3c5b76853620536300033e"
+      "bytes": 1111,
+      "sha256": "41507bcc1cc7e4d065f2f78f350c8c0a86883bbe027fefd940cf1370f2aee703"
+    },
+    {
+      "file": "src/main/db/defaultColours.ts",
+      "bytes": 798,
+      "sha256": "2aaee8c88247db48638bf2c2e273a0743692df552ffca650ba807da3b6c94ca8"
     },
     {
       "file": "src/main/db/migrate10.ts",
@@ -2249,8 +2254,8 @@
     },
     {
       "file": "src/main/db/migrations.ts",
-      "bytes": 12624,
-      "sha256": "bbbc53e4f1b8be606912710c837f6c4f8a869cff4c895bc0a77362da6357f403"
+      "bytes": 12335,
+      "sha256": "aa20dcd7b7dadda0f3895a1d17d27e376d64d3f5614e6503e0926149f0380761"
     },
     {
       "file": "src/main/db/schemaTokens.ts",
@@ -2549,8 +2554,8 @@
     },
     {
       "file": "src/renderer/src/components/ModeDiagram.tsx",
-      "bytes": 6644,
-      "sha256": "a7366960a89071b404bd7f636d6b674c546d4471e633c305a7bd79fe37c775fd"
+      "bytes": 6663,
+      "sha256": "9e0117b15d0c6a5ffcfe4ae884b2c523dddeb71ca6edcc5446857abe4da0aec5"
     },
     {
       "file": "src/renderer/src/components/NamedSlider.tsx",
@@ -2639,8 +2644,8 @@
     },
     {
       "file": "src/renderer/src/components/SetupCard.tsx",
-      "bytes": 9664,
-      "sha256": "175d441558faf943bd51ed6dd7c6885f814509220563d090395e12088d8c8b5c"
+      "bytes": 9459,
+      "sha256": "e0487c22caa8f3c0761f18779fde4d48732989f958eb3c0798a2b71c0c14aac8"
     },
     {
       "file": "src/renderer/src/components/Stage.tsx",
@@ -2679,8 +2684,8 @@
     },
     {
       "file": "src/renderer/src/components/SubjectPanel.tsx",
-      "bytes": 598,
-      "sha256": "ed70cefec683e1506480a41c6db86f5a4d6638549a03b760120c94582aa9a790"
+      "bytes": 454,
+      "sha256": "9ea68d4ce4b282e79ae4242d9b3d1ae5735c7f52f429043f9fd7ded242e32d75"
     },
     {
       "file": "src/renderer/src/components/SwitchDialog.tsx",
@@ -2694,8 +2699,8 @@
     },
     {
       "file": "src/renderer/src/components/TimerControls.tsx",
-      "bytes": 6592,
-      "sha256": "854c782a060f5f33866ae67abe0a0e24d4af9a42d2d6e028a44386a65f4ff47e"
+      "bytes": 5166,
+      "sha256": "6b17061ee74f6ffbc7e46498fc3a5cc3ceb99c9d701ee953c44cf10cf220b334"
     },
     {
       "file": "src/renderer/src/components/TimerValue.tsx",
@@ -2894,8 +2899,8 @@
     },
     {
       "file": "src/renderer/src/screens/BetweenBlocks.tsx",
-      "bytes": 6437,
-      "sha256": "137a9d00e3a24dedf26bf89aaa011a7210e4360f3f10f1ef867477b4c9d60485"
+      "bytes": 6152,
+      "sha256": "a6a2ecdf7746d1117e413388e33a878107cd10eba5b6d14c1bb5fc8b475c6640"
     },
     {
       "file": "src/renderer/src/screens/CaptureBox.tsx",
@@ -2919,8 +2924,8 @@
     },
     {
       "file": "src/renderer/src/screens/QuickStudy.tsx",
-      "bytes": 5675,
-      "sha256": "9f8731f94c1d62988e0894f40333bd3801722238df10c9293f8d77f330266351"
+      "bytes": 5514,
+      "sha256": "377e4b00fa484d1737e19d9e326f5d38133a46fc4f23d6b18ed3a069fdc3b634"
     },
     {
       "file": "src/renderer/src/screens/QuickWrapUp.tsx",
@@ -2999,8 +3004,8 @@
     },
     {
       "file": "src/renderer/src/store/plan.ts",
-      "bytes": 2277,
-      "sha256": "a60a0bb373e3f2f6788239d892c64a23fa3e759f3861704d2eadf935542dce77"
+      "bytes": 2169,
+      "sha256": "36a92125b47d2b2ff471d287aef917102d3e362c88d6f516ada28d747254a42e"
     },
     {
       "file": "src/renderer/src/store/reasons.ts",
@@ -3024,8 +3029,8 @@
     },
     {
       "file": "src/renderer/src/styles/index.css",
-      "bytes": 30987,
-      "sha256": "145be7ce48d75991cec7a084470596a645c2d2ae1516709b098fd197a207bb1b"
+      "bytes": 30854,
+      "sha256": "56d32d9dd4c49680b41d676fd1de7941d6af5b1e66bd2d5566bcb7069363a834"
     },
     {
       "file": "src/renderer/src/tabs/DistractionSettings.tsx",
@@ -3039,8 +3044,8 @@
     },
     {
       "file": "src/renderer/src/tabs/Home.tsx",
-      "bytes": 7876,
-      "sha256": "049e80627fba647f3d2385bd75a69c172fb09a4d7230895434d721f62eceeb9f"
+      "bytes": 7371,
+      "sha256": "539897e35bf543fb03d77dba1b3f8a95bbef9f2f55c4ac5e3155e9a66a726abf"
     },
     {
       "file": "src/renderer/src/tabs/Learn.tsx",
