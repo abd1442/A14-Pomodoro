@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://abd1442.github.io/A14-Pomodoro/sitemap.xml

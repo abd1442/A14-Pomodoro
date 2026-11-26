@@ -17,7 +17,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/abd1442/A14-Pomodoro/releases/latest"><b>⬇ Download for Windows (free)</b></a>
+  <a href="https://github.com/abd1442/A14-Pomodoro/releases/latest"><b>⬇ Download for Windows (free)</b></a> &nbsp;·&nbsp;
+  <a href="https://abd1442.github.io/A14-Pomodoro/"><b>Website</b></a>
 </p>
 
 <p align="center">

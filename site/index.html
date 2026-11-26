@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A14 Pomodoro: free Pomodoro study timer for Windows with active-recall notes</title>
+<meta name="description" content="A14 Pomodoro is a free, open-source study timer for Windows. Pomodoro, Flow and Adaptive timers, a floating timer, active-recall notes after every session, subject tracking and private offline study stats. No account, no tracking.">
+<meta name="keywords" content="pomodoro timer, study timer, pomodoro app windows, active recall, study tracker, focus timer, free pomodoro app, study app for students, floating timer, offline study app">
+<link rel="canonical" href="https://abd1442.github.io/A14-Pomodoro/">
+<link rel="icon" type="image/png" href="img/icon.png">
+<meta name="theme-color" content="#1d3550">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="A14 Pomodoro">
+<meta property="og:title" content="A14 Pomodoro: free study timer for Windows">
+<meta property="og:description" content="Pomodoro, Flow and Adaptive timers, active-recall notes after every session, subject tracking and private study stats. No account, no tracking.">
+<meta property="og:url" content="https://abd1442.github.io/A14-Pomodoro/">
+<meta property="og:image" content="https://abd1442.github.io/A14-Pomodoro/img/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A14 Pomodoro: free study timer for Windows">
+<meta name="twitter:description" content="Pomodoro, Flow and Adaptive timers, active-recall notes and private study stats. No account, no tracking.">
+<meta name="twitter:image" content="https://abd1442.github.io/A14-Pomodoro/img/social-preview.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"A14 Pomodoro","applicationCategory":"EducationalApplication","operatingSystem":"Windows 10, Windows 11","softwareVersion":"0.0.1-beta.1","description":"Free study timer for Windows with Pomodoro, Flow and Adaptive timers, active-recall notes after every session, subject tracking and private offline study stats.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://www.gnu.org/licenses/gpl-3.0.html","downloadUrl":"https://github.com/abd1442/A14-Pomodoro/releases/latest","url":"https://abd1442.github.io/A14-Pomodoro/","image":"https://abd1442.github.io/A14-Pomodoro/img/social-preview.png","inLanguage":["en","ar","es","fr","de","pt-BR","zh-Hans"]}
+</script>
+<style>
+:root{--bg:#f6f1e9;--card:#fffdf9;--ink:#262421;--soft:#5f5a53;--line:#e4dacb;--navy:#1d3550;--navy2:#2b4b6f;--accent:#d0687f}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--navy2)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+.brand img{width:40px;height:40px}
+nav .links{display:flex;gap:22px;font-size:15px}
+nav .links a{color:var(--soft);text-decoration:none}
+nav .links a:hover{color:var(--ink)}
+.hero>*,.split>*,.grid3>*{min-width:0}
+.hero{display:grid;grid-template-columns:1fr 1.25fr;gap:48px;align-items:center;padding:48px 0 72px}
+h1{font-size:clamp(34px,5vw,54px);line-height:1.08;margin:0 0 18px;letter-spacing:-.02em}
+.lead{font-size:20px;color:var(--soft);margin:0 0 28px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;padding:15px 26px;border-radius:999px;font-size:17px;box-shadow:0 6px 20px rgba(29,53,80,.25)}
+.btn:hover{background:var(--navy2)}
+.btn.ghost{background:transparent;color:var(--navy);box-shadow:none;border:1.5px solid var(--line)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.fine{font-size:14px;color:var(--soft)}
+.shot{border-radius:16px;box-shadow:0 24px 60px rgba(40,30,20,.18);overflow:hidden}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;padding:0;list-style:none}
+.chips li{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px}
+section{padding:64px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(26px,3.4vw,36px);margin:0 0 12px;letter-spacing:-.01em}
+.sub{color:var(--soft);max-width:720px;margin:0 0 32px;font-size:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{margin:0 0 6px;font-size:19px}
+.card p{margin:0;color:var(--soft);font-size:16px}
+.split{display:grid;grid-template-columns:1fr 1.3fr;gap:44px;align-items:center}
+.split.rev{grid-template-columns:1.3fr 1fr}
+.split.rev .txt{order:2}
+ul.tick{padding:0;list-style:none;margin:0}
+ul.tick li{padding-left:28px;position:relative;margin:8px 0}
+ul.tick li:before{content:"";position:absolute;left:4px;top:.62em;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:16px;overflow:hidden;border:1px solid var(--line);font-size:16px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+th{background:#efe7da}
+tr:last-child td{border-bottom:0}
+.yes{color:#2f7a5a;font-weight:600}
+.cta{text-align:center;background:var(--navy);color:#fff;border-radius:24px;padding:56px 24px;margin:64px 0}
+.cta h2{color:#fff}
+.cta p{color:#c9d5e3}
+.cta .btn{background:#fff;color:var(--navy)}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 20px;margin:10px 0}
+summary{cursor:pointer;font-weight:600}
+footer{padding:32px 0 48px;color:var(--soft);font-size:14px;border-top:1px solid var(--line)}
+@media (max-width:860px){
+  .hero,.split,.split.rev{grid-template-columns:1fr;gap:28px}
+  .split.rev .txt{order:0}
+  .grid3{grid-template-columns:1fr}
+  nav .links{display:none}
+  .hero{padding-top:16px}
+  table{font-size:14px}th,td{padding:10px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a class="brand" href="./"><img src="img/icon.png" alt="" width="40" height="40">A14 Pomodoro</a>
+  <div class="links"><a href="#features">Features</a><a href="#recall">Active recall</a><a href="#compare">Compare</a><a href="#faq">FAQ</a><a href="https://github.com/abd1442/A14-Pomodoro">GitHub</a></div>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1>The free Pomodoro study timer that helps you remember.</h1>
+    <p class="lead">Time each subject in a small floating timer. When the session ends, write or draw what you recall, then come back to it later. Everything stays on your computer.</p>
+    <ul class="chips"><li>Pomodoro · Flow · Adaptive</li><li>Active-recall notes</li><li>Study stats</li><li>No account</li><li>Works offline</li><li>7 languages, including Arabic</li></ul>
+    <div class="btns">
+      <a class="btn" href="https://github.com/abd1442/A14-Pomodoro/releases/latest">⬇ Download for Windows</a>
+      <a class="btn ghost" href="https://github.com/abd1442/A14-Pomodoro">View on GitHub</a>
+    </div>
+    <p class="fine">Free and open source (GPL-3.0) · Windows 10 and 11 (64-bit) · Beta 0.0.1</p>
+  </div>
+  <div class="shot"><img src="img/hero.png" alt="A14 Pomodoro Home screen with subjects, timer options and the floating circular timer" width="2400" height="1480"></div>
+</header>
+
+<section id="features">
+  <h2>More than a timer</h2>
+  <p class="sub">Most Pomodoro apps only count minutes. A14 Pomodoro is built around the whole study session: plan, focus, recall, reflect and rest.</p>
+  <div class="grid3">
+    <div class="card"><h3>Three timers</h3><p><b>Flow</b> counts up so you can keep going while it's working. <b>Fixed</b> counts down from 15 to 45 minutes or your own length. <b>Adaptive</b> sets its own length from your best recent sessions.</p></div>
+    <div class="card"><h3>Floating timer</h3><p>A small panel stays on top of your work. Mark a distraction, switch subject or finish without leaving your window.</p></div>
+    <div class="card"><h3>Active-recall notes</h3><p>After each session, type or draw what you remember before checking your notes. Mark weak spots for later review.</p></div>
+    <div class="card"><h3>Track every subject</h3><p>Group subjects by category, see time per subject, and watch a study calendar fill up day by day.</p></div>
+    <div class="card"><h3>Honest study stats</h3><p>Time, sessions and patterns, with a clear note of how much evidence stands behind each one.</p></div>
+    <div class="card"><h3>Private by design</h3><p>No account, no cloud, no ads, no telemetry. Your records stay on your PC, with one-click verified backups.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="split">
+    <div class="txt">
+      <h2>Two ways to study</h2>
+      <p class="sub">Use <b>Quick Mode</b> for a simple timer: pick a subject, press Start. Switch to <b>Full Mode</b> for the complete study cycle with goals, recall, reflection and timed rest. Change any time in Settings.</p>
+    </div>
+    <div class="shot"><img src="img/modes.png" alt="Quick Mode launcher next to Full Mode Home" loading="lazy" width="2400" height="1000"></div>
+  </div>
+</section>
+
+<section id="recall">
+  <div class="split rev">
+    <div class="txt">
+      <h2>Built on active recall</h2>
+      <p class="sub">Trying to remember is one of the best-supported ways to learn. A14 Pomodoro makes it part of every session.</p>
+      <ul class="tick">
+        <li><b>Plan</b> a subject and an optional goal.</li>
+        <li><b>Focus</b> with the floating timer.</li>
+        <li><b>Recall</b> the main idea in your own words, typed or drawn.</li>
+        <li><b>Reflect</b> with a few optional questions.</li>
+        <li><b>Rest</b> with a break timer that never counts as study.</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="img/workflow.png" alt="The five stages of a Full Mode session: plan, focus, recall, reflect and rest" loading="lazy" width="2400" height="2680"></div>
+  </div>
+</section>
+
+<section>
+  <div class="split">
+    <div class="txt">
+      <h2>History, notes and reviews</h2>
+      <p class="sub">Every session keeps its goal, recall notes and log. Search your notes, filter by subject or date, and work through your <b>To review</b> list.</p>
+    </div>
+    <div class="shot"><img src="img/history.png" alt="History grouped by day with recall-note excerpts and a To review list" loading="lazy" width="2400" height="1460"></div>
+  </div>
+</section>
+
+<section>
+  <div class="split rev">
+    <div class="txt">
+      <h2>Light, dark and your language</h2>
+      <p class="sub">Light and dark themes that can follow Windows, adjustable text size and high contrast. Available in English, العربية (right-to-left), Español, Français, Deutsch, Português and 简体中文.</p>
+    </div>
+    <div class="shot"><img src="img/themes.png" alt="Home in a light theme and a dark theme" loading="lazy" width="2400" height="1480"></div>
+  </div>
+</section>
+
+<section id="compare">
+  <h2>How it compares</h2>
+  <p class="sub">Great general timers already exist. A14 Pomodoro is for students who want to track subjects and remember what they studied.</p>
+  <table>
+    <tr><th></th><th>A14 Pomodoro</th><th>Typical Pomodoro timer</th></tr>
+    <tr><td>Focus timer and breaks</td><td class="yes">Yes</td><td>Yes</td></tr>
+    <tr><td>Floating always-on-top timer</td><td class="yes">Yes</td><td>Sometimes</td></tr>
+    <tr><td>Time per subject</td><td class="yes">Yes</td><td>Rarely</td></tr>
+    <tr><td>Recall notes after each session</td><td class="yes">Typed or drawn</td><td>No</td></tr>
+    <tr><td>Adaptive session length</td><td class="yes">Yes</td><td>No</td></tr>
+    <tr><td>Account or cloud needed</td><td class="yes">No</td><td>Varies</td></tr>
+    <tr><td>Price</td><td class="yes">Free, open source</td><td>Free to paid</td></tr>
+  </table>
+</section>
+
+<section id="faq">
+  <h2>Questions</h2>
+  <details><summary>Is A14 Pomodoro free?</summary><p>Yes. It's free and open source under GPL-3.0, with no ads or paid tier.</p></details>
+  <details><summary>Does it need an internet connection or an account?</summary><p>No. It works fully offline, and your study records are stored only on your computer.</p></details>
+  <details><summary>Why does Windows show a SmartScreen warning?</summary><p>The installer isn't code-signed yet, so Windows doesn't recognise it. The full source, checksums and matching source package are published with every release so you can check what you install.</p></details>
+  <details><summary>Does it work on Mac or Linux?</summary><p>This beta is for Windows 10 and 11 (64-bit) only.</p></details>
+  <details><summary>What is active recall?</summary><p>Active recall means trying to remember what you studied before looking at your notes. Research shows that retrieving information strengthens memory more than re-reading it.</p></details>
+  <details><summary>Can I use it as a plain Pomodoro timer?</summary><p>Yes. Choose Quick Mode: pick a subject, press Start, and finish when you're done.</p></details>
+</section>
+
+<div class="cta">
+  <h2>Start your next study session</h2>
+  <p>Free for Windows 10 and 11. No account needed.</p>
+  <a class="btn" href="https://github.com/abd1442/A14-Pomodoro/releases/latest">⬇ Download A14 Pomodoro</a>
+</div>
+
+<footer>
+  A14 Pomodoro · Free and open source (GPL-3.0) · <a href="https://github.com/abd1442/A14-Pomodoro">Source on GitHub</a> · <a href="https://github.com/abd1442/A14-Pomodoro/blob/main/PRIVACY.md">Privacy</a> · <a href="https://github.com/abd1442/A14-Pomodoro/issues">Report a problem</a>
+</footer>
+</div>
+</body>
+</html>
