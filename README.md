@@ -5,7 +5,7 @@
   </picture>
 </p>
 
-<h3 align="center">A study timer with recall notes and a private record of your study.</h3>
+<h3 align="center">A free Pomodoro study timer for Windows, with active-recall notes and a private record of your study.</h3>
 
 <p align="center">
   Time a subject in a small floating panel, write down what you remember, and come back to it later.<br>
@@ -14,6 +14,10 @@
 
 <p align="center">
   <sub><b>Windows</b> &nbsp;·&nbsp; <b>Beta 1 · 0.0.1-beta.1</b> &nbsp;·&nbsp; <b>7 languages</b> &nbsp;·&nbsp; <b>GPL-3.0-only</b></sub>
+</p>
+
+<p align="center">
+  <a href="https://github.com/abd1442/A14-Pomodoro/releases/latest"><b>⬇ Download for Windows (free)</b></a>
 </p>
 
 <p align="center">
